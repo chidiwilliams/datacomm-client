@@ -6,6 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import MessageInput from './MessageInput/MessageInput';
 import Encoder from './Encoder/Encoder';
 import { withStyles } from '@material-ui/core/styles';
+import Modulator from './Modulator/Modulator';
 
 const styles = (theme) => ({
   appHeader: {
@@ -28,6 +29,7 @@ class Simulator extends Component {
     freq: 2048,
     bits: '0000',
     enc: 'hamm',
+    mod: 'bpsk',
   };
 
   changeMsg = (item, val) => {
@@ -36,6 +38,10 @@ class Simulator extends Component {
 
   changeEnc = (val) => {
     this.setState({ enc: val });
+  };
+
+  changeMod = (val) => {
+    this.setState({ mod: val });
   };
 
   render() {
@@ -80,6 +86,18 @@ class Simulator extends Component {
                       initType={this.state.enc}
                     />
                   </div>
+                  <div className={classes.formSection}>
+                    <Typography
+                      variant="subheading"
+                      className={classes.subheader}
+                    >
+                      {'Modulator'}
+                    </Typography>
+                    <Modulator
+                      handleModChange={this.changeMod}
+                      initMod={this.state.mod}
+                    />
+                  </div>
                 </form>
               </Paper>
             </Grid>
@@ -97,6 +115,10 @@ class Simulator extends Component {
                   <tr>
                     <td>Encoder</td>
                     <td>{this.state.enc}</td>
+                  </tr>
+                  <tr>
+                    <td>Modulator</td>
+                    <td>{this.state.mod}</td>
                   </tr>
                 </table>
               </Paper>

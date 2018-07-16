@@ -14,7 +14,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListSubheader from '@material-ui/core/ListSubheader';
 import ListItemText from '@material-ui/core/ListItemText';
 import Paper from '@material-ui/core/Paper';
-import Simulator from './Simulator';
+import Simulator from './simulator/Simulator';
 import Grid from '@material-ui/core/Grid';
 
 const drawerWidth = 240;

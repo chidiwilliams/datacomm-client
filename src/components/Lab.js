@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import Simulator from './simulator/Simulator';
+import Simulator from './Simulator/Simulator';
 import Header from './Header/Header';
 
 const styles = (theme) => ({
@@ -17,16 +17,10 @@ const styles = (theme) => ({
     position: 'absolute',
   },
   toolbar: theme.mixins.toolbar,
-  drawerPaper: {
-    width: 240,
-    [theme.breakpoints.up('md')]: {
-      position: 'relative',
-    },
-  },
   content: {
     flexGrow: 1,
     backgroundColor: theme.palette.background.default,
-    padding: theme.spacing.unit * 3,
+    padding: [[0, theme.spacing.unit * 2, theme.spacing.unit * 3]],
   },
   paper: {
     padding: theme.spacing.unit * 2,

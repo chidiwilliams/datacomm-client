@@ -4,7 +4,7 @@ import Chart from 'chart.js';
 
 class Graph extends Component {
   componentDidMount = () => {
-    const ctx = document.getElementById('myChart').getContext('2d');
+    const ctx = document.getElementById(this.props.id).getContext('2d');
     new Chart(ctx, {
       type: 'line',
       data: {
@@ -40,7 +40,7 @@ class Graph extends Component {
   render() {
     return (
       <div>
-        <canvas id="myChart" />
+        <canvas id={this.props.id} />
       </div>
     );
   }
@@ -48,6 +48,7 @@ class Graph extends Component {
 
 Graph.propTypes = {
   title: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
   xinput: PropTypes.array.isRequired,
   yinput: PropTypes.array.isRequired,
 };

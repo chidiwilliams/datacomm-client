@@ -3,15 +3,25 @@ import PropTypes from 'prop-types';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import MessageInput from './MessageInput/MessageInput';
+import Paper from '@material-ui/core/Paper';
+import LaunchIcon from '@material-ui/icons/Launch';
+import IconButton from '@material-ui/core/IconButton';
 import Encoder from './Encoder/Encoder';
 import Modulator from './Modulator/Modulator';
 
 const styles = (theme) => ({
   formSection: {
-    marginBottom: theme.spacing.unit * 4,
+    marginBottom: theme.spacing.unit * 2,
+    padding: theme.spacing.unit * 2,
+    position: 'relative',
   },
   subheader: {
     fontWeight: 'bold',
+  },
+  launchIcon: {
+    position: 'absolute',
+    top: 0,
+    right: 0,
   },
 });
 
@@ -23,12 +33,8 @@ class SimulatorInput extends Component {
     mod: 'bpsk',
   };
 
-  changeMsg = (item, val) => {
-    this.setState({ [item]: val });
-  };
-
-  changeMod = (val) => {
-    this.setState({ mod: val });
+  updateGraph = (sect) => {
+    this.props.updateGraph(sect);
   };
 
   render() {
@@ -37,18 +43,24 @@ class SimulatorInput extends Component {
     return (
       <div>
         <form className={classes.root} autoComplete="off">
-          <div className={classes.formSection}>
+          <Paper className={classes.formSection}>
             <Typography variant="subheading" className={classes.subheader}>
               {'Message Input'}
             </Typography>
+            <IconButton
+              className={classes.launchIcon}
+              onClick={() => this.updateGraph('message')}
+            >
+              <LaunchIcon />
+            </IconButton>
             <MessageInput
               setFreq={(freq) => this.props.setFreq(freq)}
               setBits={(bits) => this.props.setBits(bits)}
               initFreq={this.state.freq}
               initBits={this.state.bits}
             />
-          </div>
-          <div className={classes.formSection}>
+          </Paper>
+          <Paper className={classes.formSection}>
             <Typography variant="subheading" className={classes.subheader}>
               {'Encoder'}
             </Typography>
@@ -56,16 +68,16 @@ class SimulatorInput extends Component {
               handleEncChange={(enc) => this.props.setEnc(enc)}
               initType={this.state.enc}
             />
-          </div>
-          <div className={classes.formSection}>
+          </Paper>
+          <Paper className={classes.formSection}>
             <Typography variant="subheading" className={classes.subheader}>
               {'Modulator'}
             </Typography>
             <Modulator
-              handleModChange={this.changeMod}
+              handleModChange={(mod) => this.props.setMod(mod)}
               initMod={this.state.mod}
             />
-          </div>
+          </Paper>
         </form>
       </div>
     );
@@ -79,6 +91,7 @@ SimulatorInput.propTypes = {
   setBits: PropTypes.func,
   setEnc: PropTypes.func,
   setMod: PropTypes.func,
+  updateGraph: PropTypes.func.isRequired,
 };
 
 export default withStyles(styles, { withTheme: true })(SimulatorInput);

@@ -3,14 +3,13 @@ import PropTypes from 'prop-types';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
-import MessageInput from './MessageInput/MessageInput';
-import Encoder from './Encoder/Encoder';
 import { withStyles } from '@material-ui/core/styles';
-import Modulator from './Modulator/Modulator';
+import Graph from './Graph/Graph';
+import SimulatorInput from './SimulatorInput/SimulatorInput';
 
 const styles = (theme) => ({
   appHeader: {
-    marginTop: theme.spacing.unit * 6,
+    marginTop: theme.spacing.unit * 4,
     marginBottom: theme.spacing.unit * 3,
   },
   paddedBox: {
@@ -22,6 +21,9 @@ const styles = (theme) => ({
   subheader: {
     fontWeight: 'bold',
   },
+  rightIcon: {
+    marginLeft: theme.spacing.unit,
+  },
 });
 
 class Simulator extends Component {
@@ -32,96 +34,68 @@ class Simulator extends Component {
     mod: 'bpsk',
   };
 
-  changeMsg = (item, val) => {
-    this.setState({ [item]: val });
-  };
-
-  changeEnc = (val) => {
-    this.setState({ enc: val });
-  };
-
-  changeMod = (val) => {
-    this.setState({ mod: val });
-  };
-
   render() {
     const { classes } = this.props;
 
     return (
       <div>
         <Grid container spacing={24} justify="center">
-          <Grid container md={10} spacing={24}>
-            <Grid item xs={12}>
-              <Typography variant="display1" className={classes.appHeader}>
-                {'Simulator'}
-              </Typography>
-            </Grid>
-          </Grid>
-          <Grid container md={10} spacing={24}>
-            <Grid item md={6} xs={12}>
-              <Paper className={classes.paddedBox}>
-                <form className={classes.root} autoComplete="off">
-                  <div className={classes.formSection}>
+          <Grid item md={10} xs={12}>
+            <Typography variant="display1" className={classes.appHeader}>
+              {'Simulator'}
+            </Typography>
+            <Grid container spacing={24} justify="center">
+              <Grid item md={6} xs={12}>
+                <Paper className={classes.paddedBox}>
+                  <SimulatorInput
+                    setFreq={(freq) => this.setState({ freq })}
+                    setBits={(bits) => this.setState({ bits })}
+                    setEnc={(enc) => this.setState({ enc })}
+                    setMod={(mod) => this.setState({ mod })}
+                  />
+                </Paper>
+              </Grid>
+              <Grid item md={6} xs={12}>
+                <Paper className={classes.paddedBox}>
+                  <div>
                     <Typography
                       variant="subheading"
                       className={classes.subheader}
                     >
-                      {'Message Input'}
+                      {'Oscilloscope'}
                     </Typography>
-                    <MessageInput
-                      handleMsgChange={this.changeMsg}
-                      initFreq={this.state.freq}
-                      initBits={this.state.bits}
+                    <Graph
+                      title={'Noise signal'}
+                      xinput={Array.apply(null, Array(1024)).map(
+                        (x, i, a) => i / a.length
+                      )}
+                      yinput={Array.apply(null, Array(1024)).map(
+                        (x, i) => Math.random() - 0.5
+                      )}
                     />
                   </div>
-                  <div className={classes.formSection}>
-                    <Typography
-                      variant="subheading"
-                      className={classes.subheader}
-                    >
-                      {'Encoder'}
-                    </Typography>
-                    <Encoder
-                      handleEncChange={this.changeEnc}
-                      initType={this.state.enc}
-                    />
-                  </div>
-                  <div className={classes.formSection}>
-                    <Typography
-                      variant="subheading"
-                      className={classes.subheader}
-                    >
-                      {'Modulator'}
-                    </Typography>
-                    <Modulator
-                      handleModChange={this.changeMod}
-                      initMod={this.state.mod}
-                    />
-                  </div>
-                </form>
-              </Paper>
-            </Grid>
-            <Grid item md={6} xs={12}>
-              <Paper className={classes.paddedBox}>
-                <table>
-                  <tr>
-                    <td>Freq</td>
-                    <td>{this.state.freq}</td>
-                  </tr>
-                  <tr>
-                    <td>Bits</td>
-                    <td>{this.state.bits}</td>
-                  </tr>
-                  <tr>
-                    <td>Encoder</td>
-                    <td>{this.state.enc}</td>
-                  </tr>
-                  <tr>
-                    <td>Modulator</td>
-                    <td>{this.state.mod}</td>
-                  </tr>
-                </table>
-              </Paper>
+                  <table>
+                    <tbody>
+                      <tr>
+                        <td>Freq</td>
+                        <td>{this.state.freq}</td>
+                      </tr>
+                      <tr>
+                        <td>Bits</td>
+                        <td>{this.state.bits}</td>
+                      </tr>
+                      <tr>
+                        <td>Encoder</td>
+                        <td>{this.state.enc}</td>
+                      </tr>
+                      <tr>
+                        <td>Modulator</td>
+                        <td>{this.state.mod}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </Paper>
+              </Grid>
             </Grid>
           </Grid>
         </Grid>

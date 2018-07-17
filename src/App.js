@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import './App.css';
-import ResponsiveDrawer from './components/ResponsiveDrawer';
+import Lab from './components/Lab';
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <ResponsiveDrawer />
+        <Lab />
       </div>
     );
   }

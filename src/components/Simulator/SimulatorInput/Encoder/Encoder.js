@@ -4,7 +4,6 @@ import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
-import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 
 const styles = (theme) => ({
@@ -58,7 +57,7 @@ class Encoder extends Component {
 Encoder.propTypes = {
   classes: PropTypes.object.isRequired,
   theme: PropTypes.object.isRequired,
-  handleEncChange: PropTypes.object,
+  handleEncChange: PropTypes.func,
 };
 
 export default withStyles(styles, { withTheme: true })(Encoder);

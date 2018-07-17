@@ -45,7 +45,7 @@ class Bit4Input extends Component {
       <div>
         <div className={classes.formSpace}>
           {Array.apply(null, Array(4)).map((x, i) => (
-            <FormControl className={classes.inputbit}>
+            <FormControl className={classes.inputbit} key={i}>
               <InputLabel htmlFor="bit1">Bit {i + 1}</InputLabel>
               <Select
                 value={this.state[`bit${i + 1}`]}
@@ -69,7 +69,7 @@ class Bit4Input extends Component {
 Bit4Input.propTypes = {
   classes: PropTypes.object.isRequired,
   theme: PropTypes.object.isRequired,
-  onChangeBits: PropTypes.object,
+  onChangeBits: PropTypes.func,
 };
 
 export default withStyles(styles, { withTheme: true })(Bit4Input);

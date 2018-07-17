@@ -5,6 +5,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 import { withStyles } from '@material-ui/core/styles';
+import Bit4Input from './Bit4Input/Bit4Input';
 
 const styles = (theme) => ({
   formControl: {
@@ -17,16 +18,22 @@ const styles = (theme) => ({
   },
 });
 
-class Modulator extends Component {
+const freqs = [128, 256, 512, 1024, 2048];
+
+class MessageInput extends Component {
   state = {
-    type: this.props.initType || 'bpsk',
+    freq: this.props.initFreq || 128,
+    bits: this.props.initBits || '0000',
   };
 
   handleSelectChange = (evt) => {
-    const val = evt.target.value;
-    this.setState({ type: val }, () => {
-      this.props.handleModChange(val);
-    });
+    this.setState({ freq: evt.target.value }, () =>
+      this.props.setFreq(evt.target.value)
+    );
+  };
+
+  handleBitsChange = (bits) => {
+    this.setState({ bits: bits }, () => this.props.setBits(bits));
   };
 
   render() {
@@ -34,18 +41,24 @@ class Modulator extends Component {
 
     return (
       <div>
+        <Bit4Input onChangeBits={this.handleBitsChange} />
+
         <div className={classes.formSpace}>
           <FormControl className={classes.formControl}>
-            <InputLabel htmlFor="freq">Modulation scheme</InputLabel>
+            <InputLabel htmlFor="freq">Sampling frequency</InputLabel>
             <Select
-              value={this.state.type}
+              value={this.state.freq}
               onChange={this.handleSelectChange}
               inputProps={{
-                name: 'mod',
-                id: 'mod',
+                name: 'freq',
+                id: 'freq',
               }}
             >
-              <MenuItem value={'bpsk'}>BPSK</MenuItem>
+              {freqs.slice(0).map((x, i) => (
+                <MenuItem value={x} key={i}>
+                  {x}
+                </MenuItem>
+              ))}
             </Select>
           </FormControl>
         </div>
@@ -54,10 +67,13 @@ class Modulator extends Component {
   }
 }
 
-Modulator.propTypes = {
+MessageInput.propTypes = {
   classes: PropTypes.object.isRequired,
   theme: PropTypes.object.isRequired,
-  handleModChange: PropTypes.object,
+  setFreq: PropTypes.func,
+  setBits: PropTypes.func,
+  initFreq: PropTypes.number,
+  initBits: PropTypes.string,
 };
 
-export default withStyles(styles, { withTheme: true })(Modulator);
+export default withStyles(styles, { withTheme: true })(MessageInput);

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
@@ -7,27 +7,14 @@ import Toolbar from '@material-ui/core/Toolbar';
 import List from '@material-ui/core/List';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
-import Hidden from '@material-ui/core/Hidden';
 import MenuIcon from '@material-ui/icons/Menu';
 import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListSubheader from '@material-ui/core/ListSubheader';
 import ListItemText from '@material-ui/core/ListItemText';
-import Paper from '@material-ui/core/Paper';
-import Simulator from './simulator/Simulator';
-import Grid from '@material-ui/core/Grid';
 
 const drawerWidth = 240;
 
 const styles = (theme) => ({
-  root: {
-    flexGrow: 1,
-    zIndex: 1,
-    overflow: 'hidden',
-    position: 'relative',
-    display: 'flex',
-    width: '100%',
-  },
   appBar: {
     position: 'absolute',
   },
@@ -38,58 +25,27 @@ const styles = (theme) => ({
       position: 'relative',
     },
   },
-  content: {
-    flexGrow: 1,
-    backgroundColor: theme.palette.background.default,
-    padding: theme.spacing.unit * 3,
-  },
-  paper: {
-    padding: theme.spacing.unit * 2,
-    textAlign: 'center',
-    color: theme.palette.text.secondary,
-  },
+  // paper: {
+  //   padding: theme.spacing.unit * 2,
+  //   textAlign: 'center',
+  //   color: theme.palette.text.secondary,
+  // },
 });
 
-class ResponsiveDrawer extends React.Component {
+class Header extends Component {
   state = {
-    mobileOpen: false,
+    open: false,
   };
 
   handleDrawerToggle = () => {
-    this.setState((state) => ({ mobileOpen: !state.mobileOpen }));
+    this.setState((state) => ({ open: !state.open }));
   };
 
   render() {
-    const { classes, theme } = this.props;
-
-    const drawer = (
-      <div>
-        <List
-          component="nav"
-          subheader={<ListSubheader component="div">Apps</ListSubheader>}
-        >
-          <ListItem button>
-            <ListItemText primary="Simulator" />
-          </ListItem>
-          <ListItem button>
-            <ListItemText primary="Spectrometer" />
-          </ListItem>
-          <ListItem button>
-            <ListItemText primary="Convolutional encoder" />
-          </ListItem>
-        </List>
-      </div>
-    );
-
-    const main = (
-      <div>
-        <div className={classes.toolbar} />
-        <Simulator />
-      </div>
-    );
+    const { classes } = this.props;
 
     return (
-      <div className={classes.root}>
+      <div>
         <AppBar className={classes.appBar}>
           <Toolbar>
             <IconButton
@@ -107,7 +63,7 @@ class ResponsiveDrawer extends React.Component {
         <Drawer
           variant="temporary"
           anchor="left"
-          open={this.state.mobileOpen}
+          open={this.state.open}
           onClose={this.handleDrawerToggle}
           classes={{
             paper: classes.drawerPaper,
@@ -116,17 +72,30 @@ class ResponsiveDrawer extends React.Component {
             keepMounted: true, // Better open performance on mobile.
           }}
         >
-          {drawer}
+          <div className={classes.toolbar} />
+          <List
+            component="nav"
+            subheader={<ListSubheader component="div">Apps</ListSubheader>}
+          >
+            <ListItem button>
+              <ListItemText primary="Simulator" />
+            </ListItem>
+            <ListItem button>
+              <ListItemText primary="Spectrometer" />
+            </ListItem>
+            <ListItem button>
+              <ListItemText primary="Convolutional encoder" />
+            </ListItem>
+          </List>
         </Drawer>
-        <main className={classes.content}>{main}</main>
       </div>
     );
   }
 }
 
-ResponsiveDrawer.propTypes = {
+Header.propTypes = {
   classes: PropTypes.object.isRequired,
   theme: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles, { withTheme: true })(ResponsiveDrawer);
+export default withStyles(styles, { withTheme: true })(Header);

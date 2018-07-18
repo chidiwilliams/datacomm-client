@@ -26,16 +26,31 @@ const styles = (theme) => ({
 });
 
 class SimulatorInput extends Component {
+  initFreq = 2048;
+  initBits = '0000';
+
   state = {
-    freq: 2048,
-    bits: '0000',
-    enc: 'hamm',
-    mod: 'bpsk',
+    isMsgGraphDisabled: true,
+    isEncGraphDisabled: true,
+    isModGraphDisabled: true,
   };
 
-  switchGraph = (sect) => {
-    this.props.switchGraph(sect);
+  handleModTypeChange = (type) => {
+    this.props.update('mod', type);
+    this.props.switchGraph('mod');
   };
+
+  componentWillUpdate(prevProps) {
+    if (this.props.currentGraph !== prevProps.currentGraph) {
+      if (this.props.currentGraph === 'message') {
+        this.setState({ isMsgGraphDisabled: true });
+      } else if (this.props.currentGraph === 'enc') {
+        this.setState({ isEncGraphDisabled: true });
+      } else if (this.props.currentGraph === 'mod') {
+        this.setState({ isModGraphDisabled: true });
+      }
+    }
+  }
 
   render() {
     const { classes } = this.props;
@@ -49,34 +64,43 @@ class SimulatorInput extends Component {
             </Typography>
             <IconButton
               className={classes.launchIcon}
-              onClick={() => this.switchGraph('message')}
+              onClick={() => this.props.switchGraph('message')}
+              disabled={this.state.isMsgGraphDisabled}
             >
               <LaunchIcon />
             </IconButton>
             <MessageInput
               setFreq={(freq) => this.props.update('freq', freq)}
               setBits={(bits) => this.props.update('bits', bits)}
-              initFreq={this.state.freq}
-              initBits={this.state.bits}
+              initFreq={this.initFreq}
+              initBits={this.initBits}
             />
           </Paper>
           <Paper className={classes.formSection}>
             <Typography variant="subheading" className={classes.subheader}>
               {'Encoder'}
             </Typography>
-            <Encoder
-              handleEncChange={(enc) => this.props.update('enc', enc)}
-              initType={this.state.enc}
-            />
+            <IconButton
+              className={classes.launchIcon}
+              onClick={() => this.props.switchGraph('enc')}
+              disabled={this.state.isEncGraphDisabled}
+            >
+              <LaunchIcon />
+            </IconButton>
+            <Encoder handleEncChange={(enc) => this.props.update('enc', enc)} />
           </Paper>
           <Paper className={classes.formSection}>
             <Typography variant="subheading" className={classes.subheader}>
               {'Modulator'}
             </Typography>
-            <Modulator
-              handleModChange={(mod) => this.props.update('mod', mod)}
-              initMod={this.state.mod}
-            />
+            <IconButton
+              className={classes.launchIcon}
+              onClick={() => this.props.switchGraph('mod')}
+              disabled={this.state.isModGraphDisabled}
+            >
+              <LaunchIcon />
+            </IconButton>
+            <Modulator handleModChange={this.handleModTypeChange} />
           </Paper>
         </form>
       </div>
@@ -89,6 +113,7 @@ SimulatorInput.propTypes = {
   theme: PropTypes.object.isRequired,
   update: PropTypes.func,
   switchGraph: PropTypes.func.isRequired,
+  currentGraph: PropTypes.string,
 };
 
 export default withStyles(styles, { withTheme: true })(SimulatorInput);

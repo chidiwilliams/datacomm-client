@@ -19,7 +19,7 @@ const styles = (theme) => ({
 
 class Modulator extends Component {
   state = {
-    type: this.props.initType || 'bpsk',
+    type: '',
   };
 
   handleSelectChange = (evt) => {

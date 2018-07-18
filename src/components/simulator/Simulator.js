@@ -18,20 +18,19 @@ class Simulator extends Component {
   state = {
     freq: 2048,
     bits: '0000',
-    enc: 'hamm',
-    mod: 'bpsk',
+    hammed: '',
     currentGraph: 'message',
   };
 
-  switchGraph = (sect) => {
-    alert(sect);
+  switchGraph = (name) => {
+    this.setState({ currentGraph: name });
   };
 
   updateSimulator = (key, val) => {
     this.setState({ [key]: val });
   };
 
-  getMessageGraph() {
+  getMessageGraphs() {
     // Compute time response
     // Get input bits
     const bi = new Signal(4);
@@ -63,16 +62,15 @@ class Simulator extends Component {
     };
   }
 
-  getGraph() {
-    return this.state.currentGraph === 'message'
-      ? this.getMessageGraph()
-      : null;
+  getGraphs() {
+    return this.getMessageGraphs();
+    // return this.state.currentGraph === 'message'
+    // ? this.getMessageGraphs()
+    // : null;
   }
 
   render() {
     const { classes } = this.props;
-    const tGraph = this.getGraph().t;
-    const fGraph = this.getGraph().f;
 
     return (
       <div>
@@ -89,7 +87,10 @@ class Simulator extends Component {
                 />
               </Grid>
               <Grid item md={6} xs={12}>
-                <SimulatorGraphs tGraph={tGraph} fGraph={fGraph} />
+                <SimulatorGraphs
+                  tGraph={this.getGraphs().t}
+                  fGraph={this.getGraphs().f}
+                />
               </Grid>
             </Grid>
           </Grid>

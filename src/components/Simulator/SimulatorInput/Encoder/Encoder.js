@@ -19,7 +19,7 @@ const styles = (theme) => ({
 
 class Encoder extends Component {
   state = {
-    type: this.props.initType || 'hamm',
+    type: '',
   };
 
   handleSelectChange = (evt) => {

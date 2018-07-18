@@ -3,14 +3,17 @@ import PropTypes from 'prop-types';
 import Chart from 'chart.js';
 
 class Graph extends Component {
-  componentDidMount = () => {
+  state = {
+    chart: null,
+  };
+
+  drawChart() {
     const ctx = document.getElementById(this.props.id).getContext('2d');
-    new Chart(ctx, {
+    const chart = new Chart(ctx, {
       type: 'line',
       data: {
         datasets: [
           {
-            label: 'Noise Sample',
             fill: false,
             borderColor: 'rgb(200, 0, 0)',
             borderWidth: 1,
@@ -33,9 +36,40 @@ class Graph extends Component {
         legend: {
           display: false,
         },
+        scales: {
+          xAxes: [
+            {
+              ticks: {
+                min: this.props.xmin || null,
+                max: this.props.xmas || null,
+              },
+            },
+          ],
+        },
       },
     });
-  };
+
+    this.setState({
+      chart: chart,
+    });
+  }
+
+  componentDidMount() {
+    this.drawChart();
+  }
+
+  componentDidUpdate(prevProps) {
+    if (
+      JSON.stringify(this.props.xinput) !== JSON.stringify(prevProps.xinput) ||
+      JSON.stringify(this.props.yinput) !== JSON.stringify(prevProps.yinput) ||
+      JSON.stringify(this.props.title) !== JSON.stringify(prevProps.title)
+    ) {
+      // This should be changed to updating the chart instead of redrawing,
+      // but I can't get the chart to respond to updating of the chart state.
+      // Redraw for now.
+      this.drawChart();
+    }
+  }
 
   render() {
     return (
@@ -48,9 +82,10 @@ class Graph extends Component {
 
 Graph.propTypes = {
   title: PropTypes.string.isRequired,
-  id: PropTypes.string.isRequired,
+  id: PropTypes.number.isRequired,
   xinput: PropTypes.array.isRequired,
   yinput: PropTypes.array.isRequired,
+  xmas: PropTypes.number,
 };
 
 export default Graph;

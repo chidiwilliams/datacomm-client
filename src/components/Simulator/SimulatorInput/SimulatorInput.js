@@ -33,8 +33,8 @@ class SimulatorInput extends Component {
     mod: 'bpsk',
   };
 
-  updateGraph = (sect) => {
-    this.props.updateGraph(sect);
+  switchGraph = (sect) => {
+    this.props.switchGraph(sect);
   };
 
   render() {
@@ -49,13 +49,13 @@ class SimulatorInput extends Component {
             </Typography>
             <IconButton
               className={classes.launchIcon}
-              onClick={() => this.updateGraph('message')}
+              onClick={() => this.switchGraph('message')}
             >
               <LaunchIcon />
             </IconButton>
             <MessageInput
-              setFreq={(freq) => this.props.setFreq(freq)}
-              setBits={(bits) => this.props.setBits(bits)}
+              setFreq={(freq) => this.props.update('freq', freq)}
+              setBits={(bits) => this.props.update('bits', bits)}
               initFreq={this.state.freq}
               initBits={this.state.bits}
             />
@@ -65,7 +65,7 @@ class SimulatorInput extends Component {
               {'Encoder'}
             </Typography>
             <Encoder
-              handleEncChange={(enc) => this.props.setEnc(enc)}
+              handleEncChange={(enc) => this.props.update('enc', enc)}
               initType={this.state.enc}
             />
           </Paper>
@@ -74,7 +74,7 @@ class SimulatorInput extends Component {
               {'Modulator'}
             </Typography>
             <Modulator
-              handleModChange={(mod) => this.props.setMod(mod)}
+              handleModChange={(mod) => this.props.update('mod', mod)}
               initMod={this.state.mod}
             />
           </Paper>
@@ -87,11 +87,8 @@ class SimulatorInput extends Component {
 SimulatorInput.propTypes = {
   classes: PropTypes.object.isRequired,
   theme: PropTypes.object.isRequired,
-  setFreq: PropTypes.func,
-  setBits: PropTypes.func,
-  setEnc: PropTypes.func,
-  setMod: PropTypes.func,
-  updateGraph: PropTypes.func.isRequired,
+  update: PropTypes.func,
+  switchGraph: PropTypes.func.isRequired,
 };
 
 export default withStyles(styles, { withTheme: true })(SimulatorInput);

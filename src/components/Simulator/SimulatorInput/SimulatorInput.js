@@ -26,44 +26,20 @@ const styles = (theme) => ({
 });
 
 class SimulatorInput extends Component {
-  state = {
-    // isMsgGraphDisabled: false,
-    // isEncGraphDisabled: false,
-    // isModGraphDisabled: false,
-  };
-
   handleMsgChange = (type, val) => {
     this.props.update(type, val);
-    // this.setState({ isMsgGraphDisabled: false }, () =>
-    //   this.props.switchGraph(0)
-    // );
+    this.props.switchGraph(0);
   };
 
   handleEncChange = (enc) => {
     this.props.update('enc', enc);
-    // this.setState({ isEncGraphDisabled: false }, () =>
-    //   this.props.switchGraph(1)
-    // );
+    this.props.switchGraph(1);
   };
 
   handleModTypeChange = (type) => {
     this.props.update('mod', type);
-    // this.setState({ isModGraphDisabled: false }, () =>
-    //   this.props.switchGraph(2)
-    // );
+      this.props.switchGraph(2)
   };
-
-  componentWillUpdate(prevProps) {
-    // if (this.props.currentGraph !== prevProps.currentGraph) {
-    //   if (this.props.currentGraph === 0) {
-    //     this.setState({ isMsgGraphDisabled: true });
-    //   } else if (this.props.currentGraph === 1) {
-    //     this.setState({ isEncGraphDisabled: true });
-    //   } else if (this.props.currentGraph === 2) {
-    //     this.setState({ isModGraphDisabled: true });
-    //   }
-    // }
-  }
 
   render() {
     const { classes } = this.props;
@@ -78,7 +54,6 @@ class SimulatorInput extends Component {
             <IconButton
               className={classes.launchIcon}
               onClick={() => this.props.switchGraph(0)}
-              // disabled={this.state.isMsgGraphDisabled}
             >
               <LaunchIcon />
             </IconButton>
@@ -91,7 +66,6 @@ class SimulatorInput extends Component {
             <IconButton
               className={classes.launchIcon}
               onClick={() => this.props.switchGraph(1)}
-              // disabled={this.state.isEncGraphDisabled}
             >
               <LaunchIcon />
             </IconButton>
@@ -103,8 +77,7 @@ class SimulatorInput extends Component {
             </Typography>
             <IconButton
               className={classes.launchIcon}
-              // onClick={() => this.props.switchGraph(2)}
-              // disabled={this.state.isModGraphDisabled}
+              onClick={() => this.props.switchGraph(2)}
             >
               <LaunchIcon />
             </IconButton>

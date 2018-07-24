@@ -20,7 +20,7 @@ class Simulator extends Component {
     bits: '1010',
     hammed: '',
     enc: '',
-    currentGraph: -1,
+    currentGraph: 0,
     graphs: null,
   };
 

@@ -22,18 +22,11 @@ const freqs = [128, 256, 512, 1024, 2048];
 
 class MessageInput extends Component {
   state = {
-    freq: this.props.initFreq || 128,
-    bits: this.props.initBits || '0000',
+    freq: 2048,
   };
 
-  handleSelectChange = (evt) => {
-    this.setState({ freq: evt.target.value }, () =>
-      this.props.setFreq(evt.target.value)
-    );
-  };
-
-  handleBitsChange = (bits) => {
-    this.setState({ bits: bits }, () => this.props.setBits(bits));
+  updateMsg = (type, val) => {
+    this.setState({ [type]: val }, () => this.props.updateMsg(type, val));
   };
 
   render() {
@@ -41,14 +34,16 @@ class MessageInput extends Component {
 
     return (
       <div>
-        <Bit4Input onChangeBits={this.handleBitsChange} />
+        <Bit4Input
+          onChangeBits={(bits) => this.updateMsg('bits', bits)}
+        />
 
         <div className={classes.formSpace}>
           <FormControl className={classes.formControl}>
             <InputLabel htmlFor="freq">Sampling frequency</InputLabel>
             <Select
               value={this.state.freq}
-              onChange={this.handleSelectChange}
+              onChange={(evt) => this.updateMsg('freq', evt.target.value)}
               inputProps={{
                 name: 'freq',
                 id: 'freq',
@@ -70,10 +65,7 @@ class MessageInput extends Component {
 MessageInput.propTypes = {
   classes: PropTypes.object.isRequired,
   theme: PropTypes.object.isRequired,
-  setFreq: PropTypes.func,
-  setBits: PropTypes.func,
-  initFreq: PropTypes.number,
-  initBits: PropTypes.string,
+  updateMsg: PropTypes.func,
 };
 
 export default withStyles(styles, { withTheme: true })(MessageInput);

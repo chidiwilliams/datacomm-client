@@ -19,9 +19,9 @@ const styles = (theme) => ({
 
 class Bit4Input extends Component {
   state = {
-    bit1: 0,
+    bit1: 1,
     bit2: 0,
-    bit3: 0,
+    bit3: 1,
     bit4: 0,
   };
 
@@ -70,6 +70,7 @@ Bit4Input.propTypes = {
   classes: PropTypes.object.isRequired,
   theme: PropTypes.object.isRequired,
   onChangeBits: PropTypes.func,
+  initBits: PropTypes.string,
 };
 
 export default withStyles(styles, { withTheme: true })(Bit4Input);

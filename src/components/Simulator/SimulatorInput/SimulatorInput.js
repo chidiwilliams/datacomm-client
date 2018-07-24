@@ -26,30 +26,43 @@ const styles = (theme) => ({
 });
 
 class SimulatorInput extends Component {
-  initFreq = 2048;
-  initBits = '0000';
-
   state = {
-    isMsgGraphDisabled: true,
-    isEncGraphDisabled: true,
-    isModGraphDisabled: true,
+    // isMsgGraphDisabled: false,
+    // isEncGraphDisabled: false,
+    // isModGraphDisabled: false,
+  };
+
+  handleMsgChange = (type, val) => {
+    this.props.update(type, val);
+    // this.setState({ isMsgGraphDisabled: false }, () =>
+    //   this.props.switchGraph(0)
+    // );
+  };
+
+  handleEncChange = (enc) => {
+    this.props.update('enc', enc);
+    // this.setState({ isEncGraphDisabled: false }, () =>
+    //   this.props.switchGraph(1)
+    // );
   };
 
   handleModTypeChange = (type) => {
     this.props.update('mod', type);
-    this.props.switchGraph('mod');
+    // this.setState({ isModGraphDisabled: false }, () =>
+    //   this.props.switchGraph(2)
+    // );
   };
 
   componentWillUpdate(prevProps) {
-    if (this.props.currentGraph !== prevProps.currentGraph) {
-      if (this.props.currentGraph === 'message') {
-        this.setState({ isMsgGraphDisabled: true });
-      } else if (this.props.currentGraph === 'enc') {
-        this.setState({ isEncGraphDisabled: true });
-      } else if (this.props.currentGraph === 'mod') {
-        this.setState({ isModGraphDisabled: true });
-      }
-    }
+    // if (this.props.currentGraph !== prevProps.currentGraph) {
+    //   if (this.props.currentGraph === 0) {
+    //     this.setState({ isMsgGraphDisabled: true });
+    //   } else if (this.props.currentGraph === 1) {
+    //     this.setState({ isEncGraphDisabled: true });
+    //   } else if (this.props.currentGraph === 2) {
+    //     this.setState({ isModGraphDisabled: true });
+    //   }
+    // }
   }
 
   render() {
@@ -64,17 +77,12 @@ class SimulatorInput extends Component {
             </Typography>
             <IconButton
               className={classes.launchIcon}
-              onClick={() => this.props.switchGraph('message')}
-              disabled={this.state.isMsgGraphDisabled}
+              onClick={() => this.props.switchGraph(0)}
+              // disabled={this.state.isMsgGraphDisabled}
             >
               <LaunchIcon />
             </IconButton>
-            <MessageInput
-              setFreq={(freq) => this.props.update('freq', freq)}
-              setBits={(bits) => this.props.update('bits', bits)}
-              initFreq={this.initFreq}
-              initBits={this.initBits}
-            />
+            <MessageInput updateMsg={this.handleMsgChange} />
           </Paper>
           <Paper className={classes.formSection}>
             <Typography variant="subheading" className={classes.subheader}>
@@ -82,12 +90,12 @@ class SimulatorInput extends Component {
             </Typography>
             <IconButton
               className={classes.launchIcon}
-              onClick={() => this.props.switchGraph('enc')}
-              disabled={this.state.isEncGraphDisabled}
+              onClick={() => this.props.switchGraph(1)}
+              // disabled={this.state.isEncGraphDisabled}
             >
               <LaunchIcon />
             </IconButton>
-            <Encoder handleEncChange={(enc) => this.props.update('enc', enc)} />
+            <Encoder handleEncChange={this.handleEncChange} />
           </Paper>
           <Paper className={classes.formSection}>
             <Typography variant="subheading" className={classes.subheader}>
@@ -95,8 +103,8 @@ class SimulatorInput extends Component {
             </Typography>
             <IconButton
               className={classes.launchIcon}
-              onClick={() => this.props.switchGraph('mod')}
-              disabled={this.state.isModGraphDisabled}
+              // onClick={() => this.props.switchGraph(2)}
+              // disabled={this.state.isModGraphDisabled}
             >
               <LaunchIcon />
             </IconButton>
@@ -113,7 +121,7 @@ SimulatorInput.propTypes = {
   theme: PropTypes.object.isRequired,
   update: PropTypes.func,
   switchGraph: PropTypes.func.isRequired,
-  currentGraph: PropTypes.string,
+  currentGraph: PropTypes.number,
 };
 
 export default withStyles(styles, { withTheme: true })(SimulatorInput);

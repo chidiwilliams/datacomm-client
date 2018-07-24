@@ -97,6 +97,10 @@ class Simulator extends Component {
 
       const hammed = new Signal(8);
       hammed.signal = new Hamming4().encode(bi.signal, true);
+
+      // Save Hamming-encoded signal to state for use for other functions
+      this.setState({ hammed: hammed.signal.join('') });
+
       const hamm = new Signal(this.state.freq);
       hamm.signal = hammed.sample(this.state.freq);
       const hammedx = Array.apply(null, Array(this.state.freq)).map(

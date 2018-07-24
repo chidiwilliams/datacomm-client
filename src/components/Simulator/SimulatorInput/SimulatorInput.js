@@ -38,7 +38,7 @@ class SimulatorInput extends Component {
 
   handleModTypeChange = (type) => {
     this.props.update('mod', type);
-      this.props.switchGraph(2)
+    this.props.switchGraph(2);
   };
 
   render() {

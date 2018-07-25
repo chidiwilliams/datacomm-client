@@ -15,7 +15,7 @@ export const doBPSK = (hammed, freq) => {
 
   // Get frequency response
   const bb = new lab.Signal(freq);
-  bb.signal = bpsk;
+  bb.signal = bpsk.modulated;
 
   const fres = getFRes(bb.signal);
 

@@ -92,6 +92,20 @@ class Simulator extends Component {
 
   getModGraphs() {
     const mod = doBPSK(this.state.hammed, this.state.freq);
+
+    return {
+      t: {
+        x: mod.tx,
+        y: mod.ty,
+        tit: 'Modulated signal time response',
+      },
+      f: {
+        x: mod.fx,
+        y: mod.fy,
+        tit: 'Modulated signal frequency response',
+        xmas: 128,
+      },
+    };
   }
 
   getGraphs() {

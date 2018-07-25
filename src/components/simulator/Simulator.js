@@ -4,8 +4,9 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import SimulatorInput from './SimulatorInput/SimulatorInput';
-import { Signal, Hamming4 } from 'datacomm-lab';
+import * as lab from 'datacomm-lab';
 import SimulatorGraphs from './SimulatorGraphs/SimulatorGraphs';
+import hammingEncode from '../../functions/hammingEncode';
 
 const styles = (theme) => ({
   appHeader: {
@@ -24,46 +25,35 @@ class Simulator extends Component {
     graphs: null,
   };
 
-  componentWillMount() {
+  saveGraphs() {
     try {
-      const graphs = this.getGraphs();
-      this.setState({ graphs: graphs });
+      this.setState({ graphs: this.getGraphs() });
     } catch (error) {
+      console.log(error);
       this.setState({ graphs: null });
     }
   }
 
+  componentWillMount() {
+    this.saveGraphs();
+  }
+
   switchGraph = (name) => {
-    this.setState({ currentGraph: name }, () => {
-      try {
-        const graphs = this.getGraphs();
-        console.log('Trying...', graphs);
-        this.setState({ graphs: graphs });
-      } catch (error) {
-        this.setState({ graphs: null });
-      }
-    });
+    this.setState({ currentGraph: name });
   };
 
   updateSimulator = (key, val) => {
-    this.setState({ [key]: val }, () => {
-      try {
-        const graphs = this.getGraphs();
-        this.setState({ graphs: graphs });
-      } catch (error) {
-        this.setState({ graphs: null });
-      }
-    });
+    this.setState({ [key]: val }, () => this.saveGraphs());
   };
 
-  getMessageGraphs() {
+  getMsgGraphs() {
     // Compute time response
     // Get input bits
-    const bi = new Signal(4);
+    const bi = new lab.Signal(4);
     bi.signal = this.state.bits.split('').map(parseFloat);
 
     // Sample bits by provided Fs
-    const ins = new Signal(this.state.freq);
+    const ins = new lab.Signal(this.state.freq);
     ins.signal = bi.sample(this.state.freq);
     const insx = Array.apply(null, Array(this.state.freq)).map((x, i) => i);
 
@@ -90,38 +80,20 @@ class Simulator extends Component {
 
   getEncGraphs() {
     if (this.state.enc === 'hamm') {
-      // Hamming encoding
-      // Get time response
-      const bi = new Signal(4);
-      bi.signal = this.state.bits.split('').map(parseFloat);
-
-      const hammed = new Signal(8);
-      hammed.signal = new Hamming4().encode(bi.signal, true);
+      const enc = hammingEncode(this.state.bits, this.state.freq);
 
       // Save Hamming-encoded signal to state for use for other functions
-      this.setState({ hammed: hammed.signal.join('') });
-
-      const hamm = new Signal(this.state.freq);
-      hamm.signal = hammed.sample(this.state.freq);
-      const hammedx = Array.apply(null, Array(this.state.freq)).map(
-        (x, i) => i
-      );
-
-      // Get frequency response
-      const hammedfr = hamm.getFrequencyResponse();
-      const hammedfrx = Array.apply(null, Array(this.state.freq / 2 + 1)).map(
-        (x, i) => i
-      );
+      this.setState({ hammed: enc.hammed });
 
       return {
         t: {
-          x: hammedx,
-          y: hamm.signal,
+          x: enc.tx,
+          y: enc.ty,
           tit: 'Encoded signal time response',
         },
         f: {
-          x: hammedfrx,
-          y: hammedfr,
+          x: enc.fx,
+          y: enc.fy,
           tit: 'Encoded signal frequency response',
           xmas: 128,
         },
@@ -129,12 +101,31 @@ class Simulator extends Component {
     }
   }
 
+  getModGraphs() {
+    // Get message signal
+    const hammed = new lab.Signal(8);
+    hammed.signal = this.state.hammed.split('').map(parseFloat);
+
+    const msg = new lab.Signal(this.state.freq);
+    msg.signal = hammed.sample(this.state.freq);
+
+    const carr = new lab.WaveSignal(
+      lab.WaveSignalType.SINE,
+      this.state.freq,
+      8
+    );
+
+    const bpsk = new lab.BPSK(msg.signal, carr.signal);
+  }
+
   getGraphs() {
     switch (this.state.currentGraph) {
       case 0:
-        return this.getMessageGraphs();
+        return this.getMsgGraphs();
       case 1:
         return this.getEncGraphs();
+      case 2:
+        return this.getModGraphs();
       default:
         throw new Error('Invalid current graph number.');
     }

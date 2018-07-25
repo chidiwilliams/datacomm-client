@@ -1,6 +1,8 @@
 import * as lab from 'datacomm-lab';
+import getFRes from './graphing/getFRes';
+import getXAxis from './graphing/getXAxis';
 
-export default (bits, freq) => {
+export const doHamming = (bits, freq) => {
   // Hamming encoding
   // Get time response
   const bi = new lab.Signal(bits.length);
@@ -11,17 +13,14 @@ export default (bits, freq) => {
 
   const hamm = new lab.Signal(freq);
   hamm.signal = hammed.sample(freq);
-  const hammedx = Array.apply(null, Array(freq)).map((x, i) => i);
 
-  // Get frequency response
-  const hammedfr = hamm.getFrequencyResponse();
-  const hammedfrx = Array.apply(null, Array(freq / 2 + 1)).map((x, i) => i);
+  const fres = getFRes(hamm.signal);
 
   return {
     hammed: hammed.signal.join(''),
-    tx: hammedx,
+    tx: getXAxis(freq),
     ty: hamm.signal,
-    fx: hammedfrx,
-    fy: hammedfr,
+    fx: fres.fx,
+    fy: fres.fy,
   };
 };

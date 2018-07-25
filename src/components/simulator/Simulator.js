@@ -4,9 +4,10 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import SimulatorInput from './SimulatorInput/SimulatorInput';
-import * as lab from 'datacomm-lab';
 import SimulatorGraphs from './SimulatorGraphs/SimulatorGraphs';
-import hammingEncode from '../../functions/hammingEncode';
+import { doHamming } from '../../functions/encode';
+import sampleMsg from '../../functions/sampleMsg';
+import { doBPSK } from '../../functions/modulate';
 
 const styles = (theme) => ({
   appHeader: {
@@ -47,31 +48,17 @@ class Simulator extends Component {
   };
 
   getMsgGraphs() {
-    // Compute time response
-    // Get input bits
-    const bi = new lab.Signal(4);
-    bi.signal = this.state.bits.split('').map(parseFloat);
-
-    // Sample bits by provided Fs
-    const ins = new lab.Signal(this.state.freq);
-    ins.signal = bi.sample(this.state.freq);
-    const insx = Array.apply(null, Array(this.state.freq)).map((x, i) => i);
-
-    // Compute frequency response
-    const insfr = ins.getFrequencyResponse();
-    const insfrx = Array.apply(null, Array(this.state.freq / 2 + 1)).map(
-      (x, i) => i
-    );
+    const msg = sampleMsg(this.state.bits, this.state.freq);
 
     return {
       t: {
-        x: insx,
-        y: ins.signal,
+        x: msg.tx,
+        y: msg.ty,
         tit: 'Input signal time response',
       },
       f: {
-        x: insfrx,
-        y: insfr,
+        x: msg.fx,
+        y: msg.fy,
         tit: 'Input signal frequency response',
         xmas: 128,
       },
@@ -79,43 +66,32 @@ class Simulator extends Component {
   }
 
   getEncGraphs() {
-    if (this.state.enc === 'hamm') {
-      const enc = hammingEncode(this.state.bits, this.state.freq);
-
-      // Save Hamming-encoded signal to state for use for other functions
-      this.setState({ hammed: enc.hammed });
-
-      return {
-        t: {
-          x: enc.tx,
-          y: enc.ty,
-          tit: 'Encoded signal time response',
-        },
-        f: {
-          x: enc.fx,
-          y: enc.fy,
-          tit: 'Encoded signal frequency response',
-          xmas: 128,
-        },
-      };
+    if (this.state.enc !== 'hamm') {
+      throw new Error('Invalid encoding type given.');
     }
+
+    const enc = doHamming(this.state.bits, this.state.freq);
+
+    // Save Hamming-encoded signal to state for use for other functions
+    this.setState({ hammed: enc.hammed });
+
+    return {
+      t: {
+        x: enc.tx,
+        y: enc.ty,
+        tit: 'Encoded signal time response',
+      },
+      f: {
+        x: enc.fx,
+        y: enc.fy,
+        tit: 'Encoded signal frequency response',
+        xmas: 128,
+      },
+    };
   }
 
   getModGraphs() {
-    // Get message signal
-    const hammed = new lab.Signal(8);
-    hammed.signal = this.state.hammed.split('').map(parseFloat);
-
-    const msg = new lab.Signal(this.state.freq);
-    msg.signal = hammed.sample(this.state.freq);
-
-    const carr = new lab.WaveSignal(
-      lab.WaveSignalType.SINE,
-      this.state.freq,
-      8
-    );
-
-    const bpsk = new lab.BPSK(msg.signal, carr.signal);
+    const mod = doBPSK(this.state.hammed, this.state.freq);
   }
 
   getGraphs() {

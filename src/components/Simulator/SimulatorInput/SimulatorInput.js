@@ -28,17 +28,14 @@ const styles = (theme) => ({
 class SimulatorInput extends Component {
   handleMsgChange = (type, val) => {
     this.props.update(type, val);
-    this.props.switchGraph(0);
   };
 
   handleEncChange = (enc) => {
     this.props.update('enc', enc);
-    this.props.switchGraph(1);
   };
 
   handleModTypeChange = (type) => {
     this.props.update('mod', type);
-    this.props.switchGraph(2);
   };
 
   render() {
@@ -54,6 +51,7 @@ class SimulatorInput extends Component {
             <IconButton
               className={classes.launchIcon}
               onClick={() => this.props.switchGraph(0)}
+              title={'Show graph'}
             >
               <LaunchIcon />
             </IconButton>
@@ -66,6 +64,7 @@ class SimulatorInput extends Component {
             <IconButton
               className={classes.launchIcon}
               onClick={() => this.props.switchGraph(1)}
+              title={'Show graph'}
             >
               <LaunchIcon />
             </IconButton>
@@ -78,6 +77,7 @@ class SimulatorInput extends Component {
             <IconButton
               className={classes.launchIcon}
               onClick={() => this.props.switchGraph(2)}
+              title={'Show graph'}
             >
               <LaunchIcon />
             </IconButton>

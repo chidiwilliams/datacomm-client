@@ -26,7 +26,7 @@ class Simulator extends Component {
     graphs: null,
   };
 
-  saveGraphs() {
+  storeGraphs() {
     try {
       this.setState({ graphs: this.getGraphs() });
     } catch (error) {
@@ -36,15 +36,15 @@ class Simulator extends Component {
   }
 
   componentWillMount() {
-    this.saveGraphs();
+    this.storeGraphs();
   }
 
   switchGraph = (name) => {
-    this.setState({ currentGraph: name });
+    this.setState({ currentGraph: name }, () => this.storeGraphs());
   };
 
   updateSimulator = (key, val) => {
-    this.setState({ [key]: val }, () => this.saveGraphs());
+    this.setState({ [key]: val }, () => this.storeGraphs());
   };
 
   getMsgGraphs() {
@@ -91,8 +91,11 @@ class Simulator extends Component {
   }
 
   getModGraphs() {
-    const mod = doBPSK(this.state.hammed, this.state.freq);
+    if (this.state.mod !== 'bpsk') {
+      throw new Error('Invalid modulation type given.');
+    }
 
+    const mod = doBPSK(this.state.hammed, this.state.freq);
     return {
       t: {
         x: mod.tx,

@@ -8,6 +8,7 @@ class Graph extends Component {
   };
 
   drawChart() {
+    console.log(this.props.ylabel);
     const ctx = document.getElementById(this.props.id).getContext('2d');
     const chart = new Chart(ctx, {
       type: 'line',
@@ -19,11 +20,13 @@ class Graph extends Component {
             borderWidth: 1,
             pointRadius: 0,
             data: this.props.yinput,
+            label: this.props.ylabel || null,
           },
         ],
         labels: this.props.xinput,
       },
       options: {
+        animation: 0,
         elements: {
           line: {
             tension: 0,
@@ -85,6 +88,7 @@ Graph.propTypes = {
   id: PropTypes.number.isRequired,
   xinput: PropTypes.array.isRequired,
   yinput: PropTypes.array.isRequired,
+  ylabel: PropTypes.string,
   xmas: PropTypes.number,
 };
 

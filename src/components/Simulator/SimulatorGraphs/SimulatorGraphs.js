@@ -22,15 +22,18 @@ class SimulatorGraphs extends Component {
             title={this.props.tGraph.tit}
             xinput={this.props.tGraph.x}
             yinput={this.props.tGraph.y}
+            ylabel={'Amplitude (V)'}
             id={1}
           />
         </Paper>
+
         <Paper className={classes.formSection}>
           <Graph
             title={this.props.fGraph.tit}
             xinput={this.props.fGraph.x}
             yinput={this.props.fGraph.y}
             xmas={this.props.fGraph.xmas}
+            ylabel={'Magnitude'}
             id={2}
           />
         </Paper>

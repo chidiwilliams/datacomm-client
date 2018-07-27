@@ -3,14 +3,9 @@ import PropTypes from 'prop-types';
 import Chart from 'chart.js';
 
 class Graph extends Component {
-  state = {
-    chart: null,
-  };
-
   drawChart() {
-    console.log(this.props.ylabel);
     const ctx = document.getElementById(this.props.id).getContext('2d');
-    const chart = new Chart(ctx, {
+    new Chart(ctx, {
       type: 'line',
       data: {
         datasets: [
@@ -50,10 +45,6 @@ class Graph extends Component {
           ],
         },
       },
-    });
-
-    this.setState({
-      chart: chart,
     });
   }
 

@@ -51,7 +51,7 @@ class Header extends Component {
               <MenuIcon />
             </IconButton>
             <Typography variant="title" color="inherit" noWrap>
-              DataComm Lab
+              DataComm Laboratory
             </Typography>
           </Toolbar>
         </AppBar>

@@ -38,7 +38,9 @@ class Lab extends React.Component {
         <Header />
         <main className={classes.content}>
           <div className={classes.toolbar} />
-          <Simulator />
+          {
+            // <Simulator />
+          }
         </main>
       </div>
     );

@@ -75,10 +75,10 @@ class Header extends Component {
             <ListItem button>
               <ListItemText primary="Simulator" />
             </ListItem>
-            <ListItem button >
+            <ListItem button disabled>
               <ListItemText primary="Spectrometer" />
             </ListItem>
-            <ListItem button>
+            <ListItem button disabled>
               <ListItemText primary="Convolutional encoder" />
             </ListItem>
           </List>

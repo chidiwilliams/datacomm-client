@@ -8,6 +8,7 @@ import IconButton from '@material-ui/core/IconButton';
 import MessageInput from './MessageInput';
 import Encoder from './Encoder';
 import Modulator from './Modulator';
+import Grid from '@material-ui/core/Grid';
 
 const styles = (theme) => ({
   formSection: {
@@ -57,32 +58,39 @@ class SimulatorInput extends Component {
             </IconButton>
             <MessageInput updateMsg={this.handleMsgChange} />
           </Paper>
-          <Paper className={classes.formSection}>
-            <Typography variant="subheading" className={classes.subheader}>
-              {'Encoder'}
-            </Typography>
-            <IconButton
-              className={classes.launchIcon}
-              onClick={() => this.props.switchGraph(1)}
-              title={'Show graph'}
-            >
-              <LaunchIcon />
-            </IconButton>
-            <Encoder handleEncChange={this.handleEncChange} />
-          </Paper>
-          <Paper className={classes.formSection}>
-            <Typography variant="subheading" className={classes.subheader}>
-              {'Modulator'}
-            </Typography>
-            <IconButton
-              className={classes.launchIcon}
-              onClick={() => this.props.switchGraph(2)}
-              title={'Show graph'}
-            >
-              <LaunchIcon />
-            </IconButton>
-            <Modulator handleModChange={this.handleModTypeChange} />
-          </Paper>
+
+          <Grid container spacing={16} justify="center">
+            <Grid item sm={6} xs={12}>
+              <Paper className={classes.formSection}>
+                <Typography variant="subheading" className={classes.subheader}>
+                  {'Encoder'}
+                </Typography>
+                <IconButton
+                  className={classes.launchIcon}
+                  onClick={() => this.props.switchGraph(1)}
+                  title={'Show graph'}
+                >
+                  <LaunchIcon />
+                </IconButton>
+                <Encoder handleEncChange={this.handleEncChange} />
+              </Paper>
+            </Grid>
+            <Grid item sm={6} xs={12}>
+              <Paper className={classes.formSection}>
+                <Typography variant="subheading" className={classes.subheader}>
+                  {'Modulator'}
+                </Typography>
+                <IconButton
+                  className={classes.launchIcon}
+                  onClick={() => this.props.switchGraph(2)}
+                  title={'Show graph'}
+                >
+                  <LaunchIcon />
+                </IconButton>
+                <Modulator handleModChange={this.handleModTypeChange} />
+              </Paper>
+            </Grid>
+          </Grid>
         </form>
       </div>
     );

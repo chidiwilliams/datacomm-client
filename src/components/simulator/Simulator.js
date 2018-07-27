@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
-import SimulatorInput from './SimulatorInput/SimulatorInput';
-import SimulatorGraphs from './SimulatorGraphs/SimulatorGraphs';
+// import SimulatorInput from './SimulatorInput/SimulatorInput';
+// import SimulatorGraphs from './SimulatorGraphs/SimulatorGraphs';
 import { doHamming } from '../../functions/encode';
 import sampleMsg from '../../functions/sampleMsg';
 import { doBPSK } from '../../functions/modulate';
@@ -136,21 +136,25 @@ class Simulator extends Component {
             </Typography>
             <Grid container spacing={24} justify="center">
               <Grid item md={6} xs={12}>
-                <SimulatorInput
-                  update={this.updateSimulator}
-                  switchGraph={this.switchGraph}
-                  currentGraph={this.state.currentGraph}
-                />
+                {
+                  // <SimulatorInput
+                  //   update={this.updateSimulator}
+                  //   switchGraph={this.switchGraph}
+                  //   currentGraph={this.state.currentGraph}
+                  // />
+                }
               </Grid>
               <Grid item md={6} xs={12}>
-                {this.state.graphs ? (
-                  <SimulatorGraphs
-                    tGraph={this.state.graphs.t}
-                    fGraph={this.state.graphs.f}
-                  />
-                ) : (
-                  <div>Cannot plot graph.</div>
-                )}
+                {
+                  // {this.state.graphs ? (
+                  //   <SimulatorGraphs
+                  //     tGraph={this.state.graphs.t}
+                  //     fGraph={this.state.graphs.f}
+                  //   />
+                  // ) : (
+                  //   <div>Cannot plot graph.</div>
+                  // )}
+                }
               </Grid>
             </Grid>
           </Grid>

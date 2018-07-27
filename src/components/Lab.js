@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import Simulator from './Simulator/Simulator';
+// import Simulator from './Simulator/Simulator';
 import Header from './Header/Header';
 
 const styles = (theme) => ({

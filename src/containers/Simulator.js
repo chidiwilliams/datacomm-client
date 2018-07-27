@@ -1,22 +1,45 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
+import Header from './Header';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
-import { withStyles } from '@material-ui/core/styles';
-import SimulatorInput from './SimulatorInput/SimulatorInput';
-import SimulatorGraphs from './SimulatorGraphs/SimulatorGraphs';
-import { doHamming } from '../../functions/encode';
-import sampleMsg from '../../functions/sampleMsg';
-import { doBPSK } from '../../functions/modulate';
+import SimulatorInput from './SimulatorInput';
+import SimulatorGraphs from '../components/SimulatorGraphs';
+import { doHamming } from '../utils/encode';
+import sampleMsg from '../utils/sampleMsg';
+import { doBPSK } from '../utils/modulate';
 
 const styles = (theme) => ({
+  root: {
+    flexGrow: 1,
+    zIndex: 1,
+    overflow: 'hidden',
+    position: 'relative',
+    display: 'flex',
+    width: '100%',
+  },
+  appBar: {
+    position: 'absolute',
+  },
+  toolbar: theme.mixins.toolbar,
+  content: {
+    flexGrow: 1,
+    backgroundColor: theme.palette.background.default,
+    padding: [[0, theme.spacing.unit * 2, theme.spacing.unit * 3]],
+  },
+  paper: {
+    padding: theme.spacing.unit * 2,
+    textAlign: 'center',
+    color: theme.palette.text.secondary,
+  },
   appHeader: {
     marginTop: theme.spacing.unit * 7,
     marginBottom: theme.spacing.unit * 3,
   },
 });
 
-class Simulator extends Component {
+class Simulator extends React.Component {
   state = {
     freq: 2048,
     bits: '1010',
@@ -72,7 +95,7 @@ class Simulator extends Component {
 
     const enc = doHamming(this.state.bits, this.state.freq);
 
-    // Save Hamming-encoded signal to state for use for other functions
+    // Save Hamming-encoded signal to state for use for other utils
     this.setState({ hammed: enc.hammed });
 
     return {
@@ -128,33 +151,37 @@ class Simulator extends Component {
     const { classes } = this.props;
 
     return (
-      <div>
-        <Grid container spacing={24} justify="center">
-          <Grid item md={10} xs={12}>
-            <Typography variant="display1" className={classes.appHeader}>
-              {'Simulator'}
-            </Typography>
-            <Grid container spacing={24} justify="center">
-              <Grid item md={6} xs={12}>
-                <SimulatorInput
-                  update={this.updateSimulator}
-                  switchGraph={this.switchGraph}
-                  currentGraph={this.state.currentGraph}
-                />
-              </Grid>
-              <Grid item md={6} xs={12}>
-                {this.state.graphs ? (
-                  <SimulatorGraphs
-                    tGraph={this.state.graphs.t}
-                    fGraph={this.state.graphs.f}
+      <div className={classes.root}>
+        <Header />
+        <main className={classes.content}>
+          <div className={classes.toolbar} />
+          <Grid container spacing={24} justify="center">
+            <Grid item md={10} xs={12}>
+              <Typography variant="display1" className={classes.appHeader}>
+                {'Simulator'}
+              </Typography>
+              <Grid container spacing={24} justify="center">
+                <Grid item md={6} xs={12}>
+                  <SimulatorInput
+                    update={this.updateSimulator}
+                    switchGraph={this.switchGraph}
+                    currentGraph={this.state.currentGraph}
                   />
-                ) : (
-                  <div>Cannot plot graph.</div>
-                )}
+                </Grid>
+                <Grid item md={6} xs={12}>
+                  {this.state.graphs ? (
+                    <SimulatorGraphs
+                      tGraph={this.state.graphs.t}
+                      fGraph={this.state.graphs.f}
+                    />
+                  ) : (
+                    <div>Cannot plot graph.</div>
+                  )}
+                </Grid>
               </Grid>
             </Grid>
           </Grid>
-        </Grid>
+        </main>
       </div>
     );
   }

@@ -5,7 +5,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 import { withStyles } from '@material-ui/core/styles';
-import Bit4Input from './Bit4Input/Bit4Input';
+import Bit4Input from './Bit4Input';
 
 const styles = (theme) => ({
   formControl: {

@@ -25,11 +25,6 @@ const styles = (theme) => ({
       position: 'relative',
     },
   },
-  // paper: {
-  //   padding: theme.spacing.unit * 2,
-  //   textAlign: 'center',
-  //   color: theme.palette.text.secondary,
-  // },
 });
 
 class Header extends Component {
@@ -80,7 +75,7 @@ class Header extends Component {
             <ListItem button>
               <ListItemText primary="Simulator" />
             </ListItem>
-            <ListItem button>
+            <ListItem button >
               <ListItemText primary="Spectrometer" />
             </ListItem>
             <ListItem button>

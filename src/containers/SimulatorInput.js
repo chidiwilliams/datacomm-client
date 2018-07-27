@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
-import MessageInput from './MessageInput/MessageInput';
 import Paper from '@material-ui/core/Paper';
 import LaunchIcon from '@material-ui/icons/Launch';
 import IconButton from '@material-ui/core/IconButton';
-import Encoder from './Encoder/Encoder';
-import Modulator from './Modulator/Modulator';
+import MessageInput from './MessageInput';
+import Encoder from './Encoder';
+import Modulator from './Modulator';
 
 const styles = (theme) => ({
   formSection: {

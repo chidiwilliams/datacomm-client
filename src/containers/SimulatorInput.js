@@ -9,6 +9,7 @@ import MessageInput from './MessageInput';
 import Encoder from './Encoder';
 import Modulator from './Modulator';
 import Grid from '@material-ui/core/Grid';
+import Channel from './Channel';
 
 const styles = (theme) => ({
   formSection: {
@@ -24,6 +25,7 @@ const styles = (theme) => ({
     top: 0,
     right: 0,
   },
+
 });
 
 class SimulatorInput extends Component {
@@ -91,6 +93,19 @@ class SimulatorInput extends Component {
               </Paper>
             </Grid>
           </Grid>
+          <Paper className={classes.formSection}>
+            <Typography variant="subheading" className={classes.subheader}>
+              {'Channel Impairment'}
+            </Typography>
+            <IconButton
+              className={classes.launchIcon}
+              onClick={() => this.props.switchGraph(3)}
+              title={'Show graph'}
+            >
+              <LaunchIcon />
+            </IconButton>
+            <Channel />
+          </Paper>
         </form>
       </div>
     );

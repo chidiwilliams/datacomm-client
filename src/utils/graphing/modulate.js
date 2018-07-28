@@ -1,6 +1,6 @@
 import * as lab from 'datacomm-lab';
-import getXAxis from './graphing/getXAxis';
-import getFRes from './graphing/getFRes';
+import getXAxis from './getXAxis';
+import getFRes from './getFRes';
 
 export const doBPSK = (hammed, freq) => {
   // Get message signal

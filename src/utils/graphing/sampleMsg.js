@@ -1,12 +1,12 @@
 import * as lab from 'datacomm-lab';
-import getFRes from './graphing/getFRes';
-import getXAxis from './graphing/getXAxis';
+import getFRes from './getFRes';
+import getXAxis from './getXAxis';
 
 export default (bits, freq) => {
   // Compute time response
   // Get input bits
   const bi = new lab.Signal(4);
-  bi.signal = bits.split('').map(parseFloat);
+  bi.signal = bits;
 
   // Sample bits by provided Fs
   const ins = new lab.Signal(freq);

@@ -34,9 +34,7 @@ class MessageInput extends Component {
 
     return (
       <div>
-        <Bit4Input
-          onChangeBits={(bits) => this.updateMsg('bits', bits)}
-        />
+        <Bit4Input onChangeBits={(bits) => this.updateMsg('bits', bits)} />
 
         <div className={classes.formSpace}>
           <FormControl className={classes.formControl}>

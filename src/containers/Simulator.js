@@ -6,9 +6,9 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import SimulatorInput from './SimulatorInput';
 import SimulatorGraphs from '../components/SimulatorGraphs';
-import { doHamming } from '../utils/encode';
-import sampleMsg from '../utils/sampleMsg';
-import { doBPSK } from '../utils/modulate';
+import { doHamming } from '../utils/graphing/encode';
+import sampleMsg from '../utils/graphing/sampleMsg';
+import { doBPSK } from '../utils/graphing/modulate';
 
 const styles = (theme) => ({
   root: {
@@ -42,7 +42,7 @@ const styles = (theme) => ({
 class Simulator extends React.Component {
   state = {
     freq: 2048,
-    bits: '1010',
+    bits: [1, 0, 1, 0],
     hammed: '',
     enc: '',
     currentGraph: 0,
@@ -95,6 +95,8 @@ class Simulator extends React.Component {
 
     const enc = doHamming(this.state.bits, this.state.freq);
 
+    // Separate Hamming fn
+
     // Save Hamming-encoded signal to state for use for other utils
     this.setState({ hammed: enc.hammed });
 
@@ -117,6 +119,8 @@ class Simulator extends React.Component {
     if (this.state.mod !== 'bpsk') {
       throw new Error('Invalid modulation type given.');
     }
+
+    // Recalculate Hamming encoding
 
     const mod = doBPSK(this.state.hammed, this.state.freq);
     return {

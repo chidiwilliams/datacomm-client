@@ -25,7 +25,6 @@ const styles = (theme) => ({
     top: 0,
     right: 0,
   },
-
 });
 
 class SimulatorInput extends Component {

@@ -27,14 +27,12 @@ class Bit4Input extends Component {
 
   handleChange = (event) => {
     this.setState({ [event.target.name]: event.target.value }, () => {
-      this.props.onChangeBits(
-        [
-          this.state.bit1,
-          this.state.bit2,
-          this.state.bit3,
-          this.state.bit4,
-        ].join('')
-      );
+      this.props.onChangeBits([
+        this.state.bit1,
+        this.state.bit2,
+        this.state.bit3,
+        this.state.bit4,
+      ]);
     });
   };
 

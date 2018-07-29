@@ -5,7 +5,7 @@ export default (arr) => {
   sig.signal = arr;
 
   return {
-    fx: Array.apply(null, Array(arr.length / 2 + 1)).map((x, i) => i),
+    fx: Array.apply(null, Array(arr.length / 2 + 1)).map((x, i) => +i),
     fy: sig.getFrequencyResponse(),
   };
 };

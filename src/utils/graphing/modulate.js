@@ -13,11 +13,7 @@ export const doBPSK = (hammed, freq) => {
   const carr = new lab.WaveSignal(lab.WaveSignalType.SINE, freq, 8);
   const bpsk = new lab.BPSK(msg.signal, carr.signal);
 
-  // Get frequency response
-  const bb = new lab.Signal(freq);
-  bb.signal = bpsk.modulated;
-
-  const fres = getFRes(bb.signal);
+  const fres = getFRes(bpsk.modulated);
 
   return {
     tx: getXAxis(freq),

@@ -70,22 +70,25 @@ class Simulator extends React.Component {
     this.setState({ [key]: val }, () => this.storeGraphs());
   };
 
-  getMsgGraphs() {
-    const msg = sampleMsg(this.state.bits, this.state.freq);
-
+  getGraphObj(obj, name) {
     return {
       t: {
-        x: msg.tx,
-        y: msg.ty,
-        tit: 'Input signal time response',
+        x: obj.tx,
+        y: obj.ty,
+        tit: name + ' signal time response',
       },
       f: {
-        x: msg.fx,
-        y: msg.fy,
-        tit: 'Input signal frequency response',
-        xmas: 128,
+        x: obj.fx,
+        y: obj.fy,
+        tit: name + ' signal frequency response',
+        xmas: 128
       },
     };
+  }
+
+  getMsgGraphs() {
+    const msg = sampleMsg(this.state.bits, this.state.freq);
+    return this.getGraphObj(msg, 'Input');
   }
 
   getEncGraphs() {
@@ -99,20 +102,7 @@ class Simulator extends React.Component {
 
     // Save Hamming-encoded signal to state for use for other utils
     this.setState({ hammed: enc.hammed });
-
-    return {
-      t: {
-        x: enc.tx,
-        y: enc.ty,
-        tit: 'Encoded signal time response',
-      },
-      f: {
-        x: enc.fx,
-        y: enc.fy,
-        tit: 'Encoded signal frequency response',
-        xmas: 128,
-      },
-    };
+    return this.getGraphObj(enc, 'Encoded')
   }
 
   getModGraphs() {
@@ -120,22 +110,8 @@ class Simulator extends React.Component {
       throw new Error('Invalid modulation type given.');
     }
 
-    // Recalculate Hamming encoding
-
     const mod = doBPSK(this.state.hammed, this.state.freq);
-    return {
-      t: {
-        x: mod.tx,
-        y: mod.ty,
-        tit: 'Modulated signal time response',
-      },
-      f: {
-        x: mod.fx,
-        y: mod.fy,
-        tit: 'Modulated signal frequency response',
-        xmas: 128,
-      },
-    };
+    return this.getGraphObj(mod, 'Modulated')
   }
 
   getGraphs() {

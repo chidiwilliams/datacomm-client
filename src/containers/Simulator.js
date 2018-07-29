@@ -9,6 +9,7 @@ import SimulatorGraphs from '../components/SimulatorGraphs';
 import { doHamming } from '../utils/graphing/encode';
 import sampleMsg from '../utils/graphing/sampleMsg';
 import { doBPSK } from '../utils/graphing/modulate';
+import returner from '../utils/returner';
 
 const styles = (theme) => ({
   root: {
@@ -44,7 +45,10 @@ class Simulator extends React.Component {
     freq: 2048,
     bits: [1, 0, 1, 0],
     hammed: '',
-    enc: '',
+    encType: '',
+    enc: [],
+    modType: '',
+    mod: [],
     currentGraph: 0,
     graphs: null,
   };
@@ -81,37 +85,50 @@ class Simulator extends React.Component {
         x: obj.fx,
         y: obj.fy,
         tit: name + ' signal frequency response',
-        xmas: 128
+        xmas: 128,
       },
     };
   }
 
+  doSample() {
+    const samped = sampleMsg(this.state.bits, this.state.freq);
+    this.setState({ samped: samped });
+    return samped;
+  }
+
+  doHamming() {
+    const enc = doHamming(this.state.bits, this.state.freq);
+    this.setState({ enc: enc });
+    return enc;
+  }
+
+  doBPSK() {
+    const mod = doBPSK(this.doHamming());
+    this.setState({ mod: mod });
+    return mod;
+  }
+
   getMsgGraphs() {
-    const msg = sampleMsg(this.state.bits, this.state.freq);
-    return this.getGraphObj(msg, 'Input');
+    const samped = this.doSample();
+    return this.getGraphObj(returner(samped), 'Input');
   }
 
   getEncGraphs() {
-    if (this.state.enc !== 'hamm') {
+    if (this.state.encType !== 'hamm') {
       throw new Error('Invalid encoding type given.');
     }
 
-    const enc = doHamming(this.state.bits, this.state.freq);
-
-    // Separate Hamming fn
-
-    // Save Hamming-encoded signal to state for use for other utils
-    this.setState({ hammed: enc.hammed });
-    return this.getGraphObj(enc, 'Encoded')
+    const hammed = this.doHamming();
+    return this.getGraphObj(returner(hammed), 'Encoded');
   }
 
   getModGraphs() {
-    if (this.state.mod !== 'bpsk') {
+    if (this.state.modType !== 'bpsk') {
       throw new Error('Invalid modulation type given.');
     }
 
-    const mod = doBPSK(this.state.hammed, this.state.freq);
-    return this.getGraphObj(mod, 'Modulated')
+    const mod = this.doBPSK();
+    return this.getGraphObj(returner(mod), 'Modulated');
   }
 
   getGraphs() {

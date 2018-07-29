@@ -33,11 +33,11 @@ class SimulatorInput extends Component {
   };
 
   handleEncChange = (enc) => {
-    this.props.update('enc', enc);
+    this.props.update('encType', enc);
   };
 
   handleModTypeChange = (type) => {
-    this.props.update('mod', type);
+    this.props.update('modType', type);
   };
 
   render() {

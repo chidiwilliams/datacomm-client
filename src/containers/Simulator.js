@@ -6,10 +6,10 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import SimulatorInput from './SimulatorInput';
 import SimulatorGraphs from '../components/SimulatorGraphs';
-import { doHamming } from '../utils/graphing/encode';
-import sampleMsg from '../utils/graphing/sampleMsg';
-import { doBPSK } from '../utils/graphing/modulate';
-import returner from '../utils/returner';
+import { doHamming } from '../utils/encode';
+import sampleMsg from '../utils/sampleMsg';
+import { doBPSK } from '../utils/modulate';
+import getGraphParams from '../utils/getGraphParams';
 
 const styles = (theme) => ({
   root: {
@@ -74,28 +74,6 @@ class Simulator extends React.Component {
     this.setState({ [key]: val }, () => this.storeGraphs());
   };
 
-  getGraphObj(obj, name) {
-    return {
-      t: {
-        x: obj.tx,
-        y: obj.ty,
-        tit: name + ' signal time response',
-      },
-      f: {
-        x: obj.fx,
-        y: obj.fy,
-        tit: name + ' signal frequency response',
-        xmas: 128,
-      },
-    };
-  }
-
-  doSample() {
-    const samped = sampleMsg(this.state.bits, this.state.freq);
-    this.setState({ samped: samped });
-    return samped;
-  }
-
   doHamming() {
     const enc = doHamming(this.state.bits, this.state.freq);
     this.setState({ enc: enc });
@@ -109,8 +87,9 @@ class Simulator extends React.Component {
   }
 
   getMsgGraphs() {
-    const samped = this.doSample();
-    return this.getGraphObj(returner(samped), 'Input');
+    const samped = sampleMsg(this.state.bits, this.state.freq);
+    this.setState({ samped: samped });
+    return getGraphParams(samped, 'Input');
   }
 
   getEncGraphs() {
@@ -118,8 +97,7 @@ class Simulator extends React.Component {
       throw new Error('Invalid encoding type given.');
     }
 
-    const hammed = this.doHamming();
-    return this.getGraphObj(returner(hammed), 'Encoded');
+    return getGraphParams(this.doHamming(), 'Encoded');
   }
 
   getModGraphs() {
@@ -127,8 +105,7 @@ class Simulator extends React.Component {
       throw new Error('Invalid modulation type given.');
     }
 
-    const mod = this.doBPSK();
-    return this.getGraphObj(returner(mod), 'Modulated');
+    return getGraphParams(this.doBPSK(), 'Modulated');
   }
 
   getGraphs() {

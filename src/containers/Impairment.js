@@ -67,7 +67,7 @@ class Impairment extends Component {
     return (
       <div>
         <Grid container spacing={16} justify="center">
-          <Grid item xs={8}>
+          <Grid item xs={7}>
             <div className={classes.formSpace}>
               <FormControl className={classes.formControl}>
                 <InputLabel htmlFor="freq">Impairment type</InputLabel>
@@ -84,11 +84,11 @@ class Impairment extends Component {
               </FormControl>
             </div>
           </Grid>
-          <Grid item xs={4}>
+          <Grid item xs={5}>
             <div className={classes.formSpace}>
               <TextField
                 id={'power'}
-                label={'Impairment power'}
+                label={'Power'}
                 className={classes.textField}
                 error={this.state.powerError}
                 defaultValue={defaultNoisePower}

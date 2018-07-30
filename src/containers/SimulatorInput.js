@@ -10,6 +10,7 @@ import Encoder from './Encoder';
 import Modulator from './Modulator';
 import Grid from '@material-ui/core/Grid';
 import Impairment from './Impairment';
+import { Button } from '@material-ui/core';
 
 const styles = (theme) => ({
   formSection: {
@@ -100,22 +101,41 @@ class SimulatorInput extends Component {
               </Paper>
             </Grid>
           </Grid>
-          <Paper className={classes.formSection}>
-            <Typography variant="subheading" className={classes.subheader}>
-              {'Channel Impairment'}
-            </Typography>
-            <IconButton
-              className={classes.launchIcon}
-              onClick={() => this.props.switchGraph(3)}
-              title={'Show graph'}
-            >
-              <LaunchIcon />
-            </IconButton>
-            <Impairment
-              handleImpPowerChange={this.handleImpPowerChange}
-              handleImpTypeChange={this.handleImpTypeChange}
-            />
-          </Paper>
+
+          <Grid container spacing={16} justify="center">
+            <Grid item sm={7} xs={12}>
+              <Paper className={classes.formSection}>
+                <Typography variant="subheading" className={classes.subheader}>
+                  {'Channel Impairment'}
+                </Typography>
+                <IconButton
+                  className={classes.launchIcon}
+                  onClick={() => this.props.switchGraph(3)}
+                  title={'Show graph'}
+                >
+                  <LaunchIcon />
+                </IconButton>
+                <Impairment
+                  handleImpPowerChange={this.handleImpPowerChange}
+                  handleImpTypeChange={this.handleImpTypeChange}
+                />
+              </Paper>
+            </Grid>
+            <Grid item sm={5} xs={12}>
+              <Paper className={classes.formSection}>
+                <Typography variant="subheading" className={classes.subheader}>
+                  {'Demodulator'}
+                </Typography>
+                <IconButton
+                  className={classes.launchIcon}
+                  onClick={() => this.props.switchGraph(4)}
+                  title={'Show graph'}
+                >
+                  <LaunchIcon />
+                </IconButton>
+              </Paper>
+            </Grid>
+          </Grid>
         </form>
       </div>
     );

@@ -52,6 +52,10 @@ class SimulatorInput extends Component {
     this.props.update('cutoff', freq);
   };
 
+  handleTapsChange = (taps) => {
+    this.props.update('taps', taps);
+  };
+
   render() {
     const { classes } = this.props;
 
@@ -126,7 +130,10 @@ class SimulatorInput extends Component {
                 heading: 'Low Pass Filter',
                 id: 5,
                 component: (
-                  <Filter handleCutoffChange={this.handleCutoffChange} />
+                  <Filter
+                    handleCutoffChange={this.handleCutoffChange}
+                    handleTapsChange={this.handleTapsChange}
+                  />
                 ),
               })}
             </Grid>

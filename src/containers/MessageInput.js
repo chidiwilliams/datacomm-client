@@ -6,6 +6,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 import { withStyles } from '@material-ui/core/styles';
 import Bit4Input from './Bit4Input';
+import defaults from '../config/defaults';
 
 const styles = (theme) => ({
   formControl: {
@@ -18,11 +19,9 @@ const styles = (theme) => ({
   },
 });
 
-const freqs = [128, 256, 512, 1024, 2048];
-
 class MessageInput extends Component {
   state = {
-    freq: 2048,
+    freq: defaults.Fs,
   };
 
   updateMsg = (type, val) => {
@@ -47,7 +46,7 @@ class MessageInput extends Component {
                 id: 'freq',
               }}
             >
-              {freqs.slice(0).map((x, i) => (
+              {defaults.allFs.slice(0).map((x, i) => (
                 <MenuItem value={x} key={i}>
                   {x}
                 </MenuItem>

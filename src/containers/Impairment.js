@@ -9,6 +9,7 @@ import {
   MenuItem,
   TextField,
 } from '@material-ui/core';
+import defaults from '../config/defaults';
 
 const styles = (theme) => ({
   formControl: {
@@ -25,13 +26,11 @@ const styles = (theme) => ({
   },
 });
 
-const defaultNoisePower = 1;
-
 class Impairment extends Component {
   state = {
-    type: '',
+    type: defaults.impType,
     powerError: false,
-    power: defaultNoisePower,
+    power: defaults.impPower,
   };
 
   handleSelectChange = (evt) => {
@@ -91,7 +90,7 @@ class Impairment extends Component {
                 label={'Power'}
                 className={classes.textField}
                 error={this.state.powerError}
-                defaultValue={defaultNoisePower}
+                value={this.state.power}
                 onChange={this.handlePowerChange}
               />
             </div>

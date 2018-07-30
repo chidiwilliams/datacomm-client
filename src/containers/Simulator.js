@@ -12,6 +12,8 @@ import { modBPSK } from '../utils/modulate';
 import getGraphParams from '../utils/getGraphParams';
 import { doAWGN } from '../utils/impairment';
 import { demodBPSK } from '../utils/demodulate';
+import { lowPass } from '../utils/filter';
+import defaults from '../config/defaults';
 
 const styles = (theme) => ({
   root: {
@@ -44,17 +46,18 @@ const styles = (theme) => ({
 
 class Simulator extends React.Component {
   state = {
-    freq: 2048,
-    bits: [1, 0, 1, 0],
-    encType: '',
-    enc: [],
-    modType: '',
-    mod: [],
+    bits: defaults.bits,
     currentGraph: 0,
+    cutoff: defaults.cutoff,
+    enc: [],
+    encType: defaults.encType,
+    freq: defaults.Fs,
     graphs: null,
-    impType: '',
-    impPower: 1,
-    cutoff: 8,
+    impPower: defaults.impPower,
+    impType: defaults.impType,
+    mod: [],
+    modType: defaults.modType,
+    taps: defaults.taps,
   };
 
   storeGraphs() {
@@ -106,6 +109,12 @@ class Simulator extends React.Component {
     }
   }
 
+  filter() {
+    const filtered = lowPass(this.demod(), this.state.taps, this.state.cutoff);
+    this.setState({ filtered: filtered });
+    return filtered;
+  }
+
   getMsgGraphs() {
     const samped = sampleMsg(this.state.bits, this.state.freq);
     this.setState({ samped: samped });
@@ -148,6 +157,14 @@ class Simulator extends React.Component {
     return getGraphParams(this.demod(), 'Demodulated');
   }
 
+  getFiltGraphs() {
+    if (Number.isNaN(+this.state.taps) || Number.isNaN(this.state.cutoff)) {
+      throw new Error('Invalid filter parameters given.');
+    }
+
+    return getGraphParams(this.filter(), 'Filtered');
+  }
+
   getGraphs() {
     switch (this.state.currentGraph) {
       case 0:
@@ -160,6 +177,8 @@ class Simulator extends React.Component {
         return this.getRecGraphs();
       case 4:
         return this.getDemodGraphs();
+      case 5:
+        return this.getFiltGraphs();
       default:
         throw new Error('Invalid current graph number.');
     }

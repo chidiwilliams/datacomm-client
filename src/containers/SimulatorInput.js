@@ -105,7 +105,7 @@ class SimulatorInput extends Component {
               })}
             </Grid>
 
-            <Grid item md={7} xs={12}>
+            <Grid item sm={7} xs={12}>
               {getSimulatorInput({
                 heading: 'Channel Impairment',
                 id: 3,
@@ -118,14 +118,14 @@ class SimulatorInput extends Component {
               })}
             </Grid>
 
-            <Grid item md={5} sm={6} xs={6}>
+            <Grid item sm={5} xs={12}>
               {getSimulatorInput({
                 heading: 'Demodulator',
                 id: 4,
               })}
             </Grid>
 
-            <Grid item md={7} sm={6} xs={6}>
+            <Grid item lg={7} xs={12}>
               {getSimulatorInput({
                 heading: 'Low Pass Filter',
                 id: 5,
@@ -136,6 +136,14 @@ class SimulatorInput extends Component {
                   />
                 ),
               })}
+            </Grid>
+
+            <Grid item xs={6}>
+              {getSimulatorInput({ heading: 'Threshold Detector', id: 6 })}
+            </Grid>
+
+            <Grid item xs={6}>
+              {getSimulatorInput({ heading: 'Decoder', id: 7 })}
             </Grid>
           </Grid>
         </form>

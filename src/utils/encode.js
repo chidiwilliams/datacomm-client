@@ -1,6 +1,6 @@
 import * as lab from 'datacomm-lab';
 
-export const doHamming = (bits, freq) => {
+export const encHamming = (bits, freq) => {
   // Hamming encoding
   // Get time response
   const bi = new lab.Signal(bits.length);

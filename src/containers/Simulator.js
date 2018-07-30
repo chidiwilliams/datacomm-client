@@ -6,7 +6,8 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import SimulatorInput from './SimulatorInput';
 import SimulatorGraphs from '../components/SimulatorGraphs';
-import { doHamming } from '../utils/encode';
+import { encHamming } from '../utils/encode';
+import { decHamming } from '../utils/decode';
 import sampleMsg from '../utils/sampleMsg';
 import { modBPSK } from '../utils/modulate';
 import getGraphParams from '../utils/getGraphParams';
@@ -14,6 +15,7 @@ import { doAWGN } from '../utils/impairment';
 import { demodBPSK } from '../utils/demodulate';
 import { lowPass } from '../utils/filter';
 import defaults from '../config/defaults';
+import threshold from '../utils/threshold';
 
 const styles = (theme) => ({
   root: {
@@ -94,7 +96,9 @@ class Simulator extends React.Component {
   };
 
   doHamming() {
-    const enc = doHamming(this.state.bits, this.state.freq);
+    const enc = encHamming(this.state.bits, this.state.freq);
+    // TODO: Remove all these set states, put them in parent
+    // fn. Refactor fns.
     this.setState({ enc: enc });
     return enc;
   }
@@ -125,6 +129,18 @@ class Simulator extends React.Component {
     const filtered = lowPass(this.demod(), this.state.taps, this.state.cutoff);
     this.setState({ filtered: filtered });
     return filtered;
+  }
+
+  thresh() {
+    const thresh = threshold(this.filter());
+    this.setState({ thresh: thresh });
+    return thresh;
+  }
+
+  decode() {
+    const dec = decHamming(this.thresh());
+    this.setState({ dec: dec });
+    return dec;
   }
 
   getMsgGraphs = () => {
@@ -177,9 +193,15 @@ class Simulator extends React.Component {
     return getGraphParams(this.filter(), 'Filtered');
   };
 
-  getThreshGraphs = () => {};
+  getThreshGraphs = () => getGraphParams(this.thresh(), 'Threshold');
 
-  getDecGraphs = () => {};
+  getDecGraphs = () => {
+    if (this.state.modType !== 'bpsk') {
+      throw new Error('Invalid modulation type given.');
+    }
+
+    return getGraphParams(this.decode(), 'Decoded');
+  };
 
   render() {
     const { classes, theme } = this.props;

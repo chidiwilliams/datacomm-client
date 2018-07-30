@@ -8,4 +8,5 @@ export default {
   cutoff: 8,
   taps: 200,
   allFs: [128, 256, 512, 1024, 2048],
+  encLength: 8,
 };

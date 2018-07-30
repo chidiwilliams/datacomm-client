@@ -95,53 +95,13 @@ class Simulator extends React.Component {
     this.setState({ [key]: val }, () => this.computeGraphs());
   };
 
-  doHamming() {
-    const enc = encHamming(this.state.bits, this.state.freq);
-    // TODO: Remove all these set states, put them in parent
-    // fn. Refactor fns.
-    this.setState({ enc: enc });
-    return enc;
-  }
-
-  mod() {
-    if (this.state.modType === 'bpsk') {
-      const mod = modBPSK(this.doHamming());
-      this.setState({ mod: mod });
-      return mod;
-    }
-  }
-
-  addImp() {
-    const rec = doAWGN(this.mod(), this.state.impPower);
-    this.setState({ rec: rec });
-    return rec;
-  }
-
-  demod() {
-    if (this.state.modType === 'bpsk') {
-      const demod = demodBPSK(this.doHamming(), this.addImp());
-      this.setState({ demod: demod });
-      return demod;
-    }
-  }
-
-  filter() {
-    const filtered = lowPass(this.demod(), this.state.taps, this.state.cutoff);
-    this.setState({ filtered: filtered });
-    return filtered;
-  }
-
-  thresh() {
-    const thresh = threshold(this.filter());
-    this.setState({ thresh: thresh });
-    return thresh;
-  }
-
-  decode() {
-    const dec = decHamming(this.thresh());
-    this.setState({ dec: dec });
-    return dec;
-  }
+  doHamming = () => encHamming(this.state.bits, this.state.freq);
+  modBPSK = () => modBPSK(this.doHamming());
+  addImp = () => doAWGN(this.modBPSK(), this.state.impPower);
+  demod = () => demodBPSK(this.doHamming(), this.addImp());
+  filter = () => lowPass(this.demod(), this.state.taps, this.state.cutoff);
+  thresh = () => threshold(this.filter());
+  decode = () => decHamming(this.thresh());
 
   getMsgGraphs = () => {
     const samped = sampleMsg(this.state.bits, this.state.freq);
@@ -154,7 +114,9 @@ class Simulator extends React.Component {
       throw new Error('Invalid encoding type given.');
     }
 
-    return getGraphParams(this.doHamming(), 'Encoded');
+    const enc = this.doHamming();
+    this.setState({ enc: enc });
+    return getGraphParams(enc, 'Encoded');
   };
 
   getModGraphs = () => {
@@ -162,7 +124,9 @@ class Simulator extends React.Component {
       throw new Error('Invalid modulation type given.');
     }
 
-    return getGraphParams(this.mod(), 'Modulated');
+    const mod = this.modBPSK();
+    this.setState({ mod: mod });
+    return getGraphParams(mod, 'Modulated');
   };
 
   getRecGraphs = () => {
@@ -174,7 +138,9 @@ class Simulator extends React.Component {
       throw new Error('Invalid impairment power given.');
     }
 
-    return getGraphParams(this.addImp(), 'Received');
+    const rec = this.addImp();
+    this.setState({ rec: rec });
+    return getGraphParams(rec, 'Received');
   };
 
   getDemodGraphs = () => {
@@ -182,7 +148,10 @@ class Simulator extends React.Component {
       throw new Error('Invalid modulation type given.');
     }
 
-    return getGraphParams(this.demod(), 'Demodulated');
+    const demod = this.demod();
+    this.setState({ demod: demod });
+
+    return getGraphParams(demod, 'Demodulated');
   };
 
   getFiltGraphs = () => {
@@ -190,20 +159,30 @@ class Simulator extends React.Component {
       throw new Error('Invalid filter parameters given.');
     }
 
-    return getGraphParams(this.filter(), 'Filtered');
+    const filtered = this.filter();
+    this.setState({ filtered: filtered });
+    return getGraphParams(filtered, 'Filtered');
   };
 
-  getThreshGraphs = () => getGraphParams(this.thresh(), 'Threshold');
+  getThreshGraphs = () => {
+    const thresh = this.thresh();
+    this.setState({ thresh: thresh });
+    getGraphParams(this.thresh(), 'Threshold');
+  };
 
   getDecGraphs = () => {
     if (this.state.modType !== 'bpsk') {
       throw new Error('Invalid modulation type given.');
     }
 
+    const dec = this.decode();
+    this.setState({ dec: dec })
+
     return getGraphParams(this.decode(), 'Decoded');
   };
 
   render() {
+    console.log('Rendering simulator...');
     const { classes, theme } = this.props;
 
     return (

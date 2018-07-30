@@ -60,9 +60,21 @@ class Simulator extends React.Component {
     taps: defaults.taps,
   };
 
-  storeGraphs() {
+  computeGraphs() {
     try {
-      this.setState({ graphs: this.getGraphs() });
+      // Get desired graphs from selected graph number
+      const graphs = {
+        0: this.getMsgGraphs,
+        1: this.getEncGraphs,
+        2: this.getModGraphs,
+        3: this.getRecGraphs,
+        4: this.getDemodGraphs,
+        5: this.getFiltGraphs,
+        6: this.getThreshGraphs,
+        7: this.getDecGraphs,
+      }[this.state.currentGraph]();
+
+      this.setState({ graphs: graphs });
     } catch (error) {
       console.log(error);
       this.setState({ graphs: null });
@@ -70,15 +82,15 @@ class Simulator extends React.Component {
   }
 
   componentWillMount() {
-    this.storeGraphs();
+    this.computeGraphs();
   }
 
   switchGraph = (name) => {
-    this.setState({ currentGraph: name }, () => this.storeGraphs());
+    this.setState({ currentGraph: name }, () => this.computeGraphs());
   };
 
   updateSimulator = (key, val) => {
-    this.setState({ [key]: val }, () => this.storeGraphs());
+    this.setState({ [key]: val }, () => this.computeGraphs());
   };
 
   doHamming() {
@@ -115,29 +127,29 @@ class Simulator extends React.Component {
     return filtered;
   }
 
-  getMsgGraphs() {
+  getMsgGraphs = () => {
     const samped = sampleMsg(this.state.bits, this.state.freq);
     this.setState({ samped: samped });
     return getGraphParams(samped, 'Input');
-  }
+  };
 
-  getEncGraphs() {
+  getEncGraphs = () => {
     if (this.state.encType !== 'hamm') {
       throw new Error('Invalid encoding type given.');
     }
 
     return getGraphParams(this.doHamming(), 'Encoded');
-  }
+  };
 
-  getModGraphs() {
+  getModGraphs = () => {
     if (this.state.modType !== 'bpsk') {
       throw new Error('Invalid modulation type given.');
     }
 
     return getGraphParams(this.mod(), 'Modulated');
-  }
+  };
 
-  getRecGraphs() {
+  getRecGraphs = () => {
     if (this.state.impType !== 'awgn') {
       throw new Error('Invalid impairment type given.');
     }
@@ -147,42 +159,27 @@ class Simulator extends React.Component {
     }
 
     return getGraphParams(this.addImp(), 'Received');
-  }
+  };
 
-  getDemodGraphs() {
+  getDemodGraphs = () => {
     if (this.state.modType !== 'bpsk') {
       throw new Error('Invalid modulation type given.');
     }
 
     return getGraphParams(this.demod(), 'Demodulated');
-  }
+  };
 
-  getFiltGraphs() {
+  getFiltGraphs = () => {
     if (Number.isNaN(+this.state.taps) || Number.isNaN(this.state.cutoff)) {
       throw new Error('Invalid filter parameters given.');
     }
 
     return getGraphParams(this.filter(), 'Filtered');
-  }
+  };
 
-  getGraphs() {
-    switch (this.state.currentGraph) {
-      case 0:
-        return this.getMsgGraphs();
-      case 1:
-        return this.getEncGraphs();
-      case 2:
-        return this.getModGraphs();
-      case 3:
-        return this.getRecGraphs();
-      case 4:
-        return this.getDemodGraphs();
-      case 5:
-        return this.getFiltGraphs();
-      default:
-        throw new Error('Invalid current graph number.');
-    }
-  }
+  getThreshGraphs = () => {};
+
+  getDecGraphs = () => {};
 
   render() {
     const { classes, theme } = this.props;

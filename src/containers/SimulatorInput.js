@@ -9,7 +9,7 @@ import MessageInput from './MessageInput';
 import Encoder from './Encoder';
 import Modulator from './Modulator';
 import Grid from '@material-ui/core/Grid';
-import Channel from './Channel';
+import Impairment from './Impairment';
 
 const styles = (theme) => ({
   formSection: {
@@ -38,6 +38,14 @@ class SimulatorInput extends Component {
 
   handleModTypeChange = (type) => {
     this.props.update('modType', type);
+  };
+
+  handleImpPowerChange = (pow) => {
+    this.props.update('impPower', pow);
+  };
+
+  handleImpTypeChange = (type) => {
+    this.props.update('impType', type);
   };
 
   render() {
@@ -103,7 +111,10 @@ class SimulatorInput extends Component {
             >
               <LaunchIcon />
             </IconButton>
-            <Channel />
+            <Impairment
+              handleImpPowerChange={this.handleImpPowerChange}
+              handleImpTypeChange={this.handleImpTypeChange}
+            />
           </Paper>
         </form>
       </div>

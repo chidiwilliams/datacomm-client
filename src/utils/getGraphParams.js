@@ -1,5 +1,3 @@
-import getXAxis from './getXAxis';
-import getFRes from './getFRes';
 import * as lab from 'datacomm-lab';
 
 export default (arr, name) => {

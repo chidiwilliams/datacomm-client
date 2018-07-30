@@ -8,6 +8,5 @@ export const doHamming = (bits, freq) => {
 
   const hammed = new lab.Signal(8);
   hammed.signal = new lab.Hamming4().encode(bi.signal, true);
-
   return hammed.sample(freq);
 };

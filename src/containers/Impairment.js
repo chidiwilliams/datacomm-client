@@ -25,21 +25,24 @@ const styles = (theme) => ({
   },
 });
 
-class Channel extends Component {
+const defaultNoisePower = 1;
+
+class Impairment extends Component {
   state = {
     type: '',
     powerError: false,
-    impower: null,
+    power: defaultNoisePower,
   };
 
   handleSelectChange = (evt) => {
-    this.setState({ type: evt.target.value });
+    const type = evt.target.value;
+    this.setState({ type: type }, () => this.props.handleImpTypeChange(type));
   };
 
   handlePowerChange = (evt) => {
     // If the power is not a float, reject and add error to
     // text input
-    if (!/^\d+(.\d+)?$/.exec(evt.target.value)) {
+    if (Number.isNaN(+evt.target.value)) {
       this.setState({ powerError: true });
       return;
     }
@@ -50,8 +53,12 @@ class Channel extends Component {
       this.setState({ powerError: false });
     }
 
+    const power = +evt.target.value;
+
     // Save power
-    this.setState({ impower: parseFloat(evt.target.value) });
+    this.setState({ power: power }, () =>
+      this.props.handleImpPowerChange(power)
+    );
   };
 
   render() {
@@ -80,11 +87,11 @@ class Channel extends Component {
           <Grid item xs={4}>
             <div className={classes.formSpace}>
               <TextField
-                id={'impower'}
+                id={'power'}
                 label={'Impairment power'}
                 className={classes.textField}
                 error={this.state.powerError}
-                defaultValue={1}
+                defaultValue={defaultNoisePower}
                 onChange={this.handlePowerChange}
               />
             </div>
@@ -95,9 +102,11 @@ class Channel extends Component {
   }
 }
 
-Channel.propTypes = {
+Impairment.propTypes = {
   classes: PropTypes.object.isRequired,
   theme: PropTypes.object.isRequired,
+  handleImpTypeChange: PropTypes.func,
+  handleImpPowerChange: PropTypes.func,
 };
 
-export default withStyles(styles, { withTheme: true })(Channel);
+export default withStyles(styles, { withTheme: true })(Impairment);

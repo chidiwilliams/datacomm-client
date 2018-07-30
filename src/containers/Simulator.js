@@ -10,6 +10,7 @@ import { doHamming } from '../utils/encode';
 import sampleMsg from '../utils/sampleMsg';
 import { doBPSK } from '../utils/modulate';
 import getGraphParams from '../utils/getGraphParams';
+import { doAWGN } from '../utils/impairment';
 
 const styles = (theme) => ({
   root: {
@@ -44,13 +45,14 @@ class Simulator extends React.Component {
   state = {
     freq: 2048,
     bits: [1, 0, 1, 0],
-    hammed: '',
     encType: '',
     enc: [],
     modType: '',
     mod: [],
     currentGraph: 0,
     graphs: null,
+    impType: '',
+    impPower: 1,
   };
 
   storeGraphs() {
@@ -86,6 +88,12 @@ class Simulator extends React.Component {
     return mod;
   }
 
+  addImp() {
+    const rec = doAWGN(this.doBPSK(), this.state.impPower);
+    this.setState({ rec: rec });
+    return rec;
+  }
+
   getMsgGraphs() {
     const samped = sampleMsg(this.state.bits, this.state.freq);
     this.setState({ samped: samped });
@@ -108,6 +116,18 @@ class Simulator extends React.Component {
     return getGraphParams(this.doBPSK(), 'Modulated');
   }
 
+  getRecGraphs() {
+    if (this.state.impType !== 'awgn') {
+      throw new Error('Invalid impairment type given.');
+    }
+
+    if (Number.isNaN(+this.state.impPower)) {
+      throw new Error('Invalid impairment power given.');
+    }
+
+    return getGraphParams(this.addImp(), 'Received');
+  }
+
   getGraphs() {
     switch (this.state.currentGraph) {
       case 0:
@@ -116,6 +136,8 @@ class Simulator extends React.Component {
         return this.getEncGraphs();
       case 2:
         return this.getModGraphs();
+      case 3:
+        return this.getRecGraphs();
       default:
         throw new Error('Invalid current graph number.');
     }

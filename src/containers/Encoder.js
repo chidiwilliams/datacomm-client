@@ -36,13 +36,13 @@ class Encoder extends Component {
       <div>
         <div className={classes.formSpace}>
           <FormControl className={classes.formControl}>
-            <InputLabel htmlFor="freq">Encoding type</InputLabel>
+            <InputLabel htmlFor="enc">Scheme</InputLabel>
             <Select
               value={this.state.type}
               onChange={this.handleSelectChange}
               inputProps={{
-                name: 'freq',
-                id: 'freq',
+                name: 'enc',
+                id: 'enc',
               }}
             >
               <MenuItem value={'hamm'}>Hamming (7,4)</MenuItem>

@@ -70,7 +70,7 @@ class Impairment extends Component {
           <Grid item xs={7}>
             <div className={classes.formSpace}>
               <FormControl className={classes.formControl}>
-                <InputLabel htmlFor="freq">Impairment type</InputLabel>
+                <InputLabel htmlFor="freq">Type</InputLabel>
                 <Select
                   value={this.state.type}
                   onChange={this.handleSelectChange}

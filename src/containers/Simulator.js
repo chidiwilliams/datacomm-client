@@ -54,6 +54,7 @@ class Simulator extends React.Component {
     graphs: null,
     impType: '',
     impPower: 1,
+    cutoff: 8,
   };
 
   storeGraphs() {
@@ -96,7 +97,7 @@ class Simulator extends React.Component {
     this.setState({ rec: rec });
     return rec;
   }
-  
+
   demod() {
     if (this.state.modType === 'bpsk') {
       const demod = demodBPSK(this.doHamming(), this.addImp());
@@ -165,19 +166,19 @@ class Simulator extends React.Component {
   }
 
   render() {
-    const { classes } = this.props;
+    const { classes, theme } = this.props;
 
     return (
       <div className={classes.root}>
         <Header />
         <main className={classes.content}>
           <div className={classes.toolbar} />
-          <Grid container spacing={24} justify="center">
+          <Grid container justify="center">
             <Grid item md={10} xs={12}>
               <Typography variant="display1" className={classes.appHeader}>
                 {'Simulator'}
               </Typography>
-              <Grid container spacing={24} justify="center">
+              <Grid container spacing={theme.spacing.unit * 2} justify="center">
                 <Grid item md={6} xs={12}>
                   <SimulatorInput
                     update={this.updateSimulator}

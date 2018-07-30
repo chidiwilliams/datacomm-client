@@ -36,7 +36,7 @@ class Modulator extends Component {
       <div>
         <div className={classes.formSpace}>
           <FormControl className={classes.formControl}>
-            <InputLabel htmlFor="freq">Modulation scheme</InputLabel>
+            <InputLabel htmlFor="freq">Scheme</InputLabel>
             <Select
               value={this.state.type}
               onChange={this.handleSelectChange}

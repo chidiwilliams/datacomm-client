@@ -8,9 +8,10 @@ import SimulatorInput from './SimulatorInput';
 import SimulatorGraphs from '../components/SimulatorGraphs';
 import { doHamming } from '../utils/encode';
 import sampleMsg from '../utils/sampleMsg';
-import { doBPSK } from '../utils/modulate';
+import { modBPSK } from '../utils/modulate';
 import getGraphParams from '../utils/getGraphParams';
 import { doAWGN } from '../utils/impairment';
+import { demodBPSK } from '../utils/demodulate';
 
 const styles = (theme) => ({
   root: {
@@ -82,16 +83,26 @@ class Simulator extends React.Component {
     return enc;
   }
 
-  doBPSK() {
-    const mod = doBPSK(this.doHamming());
-    this.setState({ mod: mod });
-    return mod;
+  mod() {
+    if (this.state.modType === 'bpsk') {
+      const mod = modBPSK(this.doHamming());
+      this.setState({ mod: mod });
+      return mod;
+    }
   }
 
   addImp() {
-    const rec = doAWGN(this.doBPSK(), this.state.impPower);
+    const rec = doAWGN(this.mod(), this.state.impPower);
     this.setState({ rec: rec });
     return rec;
+  }
+  
+  demod() {
+    if (this.state.modType === 'bpsk') {
+      const demod = demodBPSK(this.doHamming(), this.addImp());
+      this.setState({ demod: demod });
+      return demod;
+    }
   }
 
   getMsgGraphs() {
@@ -113,7 +124,7 @@ class Simulator extends React.Component {
       throw new Error('Invalid modulation type given.');
     }
 
-    return getGraphParams(this.doBPSK(), 'Modulated');
+    return getGraphParams(this.mod(), 'Modulated');
   }
 
   getRecGraphs() {
@@ -128,6 +139,14 @@ class Simulator extends React.Component {
     return getGraphParams(this.addImp(), 'Received');
   }
 
+  getDemodGraphs() {
+    if (this.state.modType !== 'bpsk') {
+      throw new Error('Invalid modulation type given.');
+    }
+
+    return getGraphParams(this.demod(), 'Demodulated');
+  }
+
   getGraphs() {
     switch (this.state.currentGraph) {
       case 0:
@@ -138,6 +157,8 @@ class Simulator extends React.Component {
         return this.getModGraphs();
       case 3:
         return this.getRecGraphs();
+      case 4:
+        return this.getDemodGraphs();
       default:
         throw new Error('Invalid current graph number.');
     }

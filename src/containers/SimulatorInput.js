@@ -8,12 +8,14 @@ import IconButton from '@material-ui/core/IconButton';
 import MessageInput from './MessageInput';
 import Encoder from './Encoder';
 import Modulator from './Modulator';
+import Grid from '@material-ui/core/Grid';
+import Impairment from './Impairment';
+import Filter from './Filter';
 
 const styles = (theme) => ({
   formSection: {
-    marginBottom: theme.spacing.unit * 2,
     padding: theme.spacing.unit * 2,
-    position: 'relative',
+    position: 'relative', // helps to position the 'show graph' btn
   },
   subheader: {
     fontWeight: 'bold',
@@ -31,58 +33,119 @@ class SimulatorInput extends Component {
   };
 
   handleEncChange = (enc) => {
-    this.props.update('enc', enc);
+    this.props.update('encType', enc);
   };
 
   handleModTypeChange = (type) => {
-    this.props.update('mod', type);
+    this.props.update('modType', type);
+  };
+
+  handleImpPowerChange = (pow) => {
+    this.props.update('impPower', pow);
+  };
+
+  handleImpTypeChange = (type) => {
+    this.props.update('impType', type);
+  };
+
+  handleCutoffChange = (freq) => {
+    this.props.update('cutoff', freq);
+  };
+
+  handleTapsChange = (taps) => {
+    this.props.update('taps', taps);
   };
 
   render() {
     const { classes } = this.props;
 
+    const getSimulatorInput = ({ heading, id, component }) => (
+      <Paper className={classes.formSection}>
+        <Typography variant="subheading" className={classes.subheader}>
+          {heading}
+        </Typography>
+        <IconButton
+          className={classes.launchIcon}
+          onClick={() => this.props.switchGraph(id)}
+          title={'Show graph'}
+        >
+          <LaunchIcon />
+        </IconButton>
+        {component}
+      </Paper>
+    );
+
     return (
       <div>
         <form className={classes.root} autoComplete="off">
-          <Paper className={classes.formSection}>
-            <Typography variant="subheading" className={classes.subheader}>
-              {'Message Input'}
-            </Typography>
-            <IconButton
-              className={classes.launchIcon}
-              onClick={() => this.props.switchGraph(0)}
-              title={'Show graph'}
-            >
-              <LaunchIcon />
-            </IconButton>
-            <MessageInput updateMsg={this.handleMsgChange} />
-          </Paper>
-          <Paper className={classes.formSection}>
-            <Typography variant="subheading" className={classes.subheader}>
-              {'Encoder'}
-            </Typography>
-            <IconButton
-              className={classes.launchIcon}
-              onClick={() => this.props.switchGraph(1)}
-              title={'Show graph'}
-            >
-              <LaunchIcon />
-            </IconButton>
-            <Encoder handleEncChange={this.handleEncChange} />
-          </Paper>
-          <Paper className={classes.formSection}>
-            <Typography variant="subheading" className={classes.subheader}>
-              {'Modulator'}
-            </Typography>
-            <IconButton
-              className={classes.launchIcon}
-              onClick={() => this.props.switchGraph(2)}
-              title={'Show graph'}
-            >
-              <LaunchIcon />
-            </IconButton>
-            <Modulator handleModChange={this.handleModTypeChange} />
-          </Paper>
+          <Grid container spacing={16} justify="center">
+            <Grid item lg={7} xs={12}>
+              {getSimulatorInput({
+                heading: 'Message Input',
+                id: 0,
+                component: <MessageInput updateMsg={this.handleMsgChange} />,
+              })}
+            </Grid>
+
+            <Grid item lg={5} xs={6}>
+              {getSimulatorInput({
+                heading: 'Encoder',
+                id: 1,
+                component: <Encoder handleEncChange={this.handleEncChange} />,
+              })}
+            </Grid>
+
+            <Grid item lg={5} xs={6}>
+              {getSimulatorInput({
+                heading: 'Modulator',
+                id: 2,
+                component: (
+                  <Modulator handleModChange={this.handleModTypeChange} />
+                ),
+              })}
+            </Grid>
+
+            <Grid item sm={7} xs={12}>
+              {getSimulatorInput({
+                heading: 'Channel Impairment',
+                id: 3,
+                component: (
+                  <Impairment
+                    handleImpPowerChange={this.handleImpPowerChange}
+                    handleImpTypeChange={this.handleImpTypeChange}
+                  />
+                ),
+              })}
+            </Grid>
+
+            <Grid item sm={5} xs={12}>
+              {getSimulatorInput({
+                heading: 'Demodulator',
+                id: 4,
+              })}
+            </Grid>
+
+            <Grid item lg={7} xs={12}>
+              {getSimulatorInput({
+                heading: 'Low Pass Filter',
+                id: 5,
+                component: (
+                  <Filter
+                    handleCutoffChange={this.handleCutoffChange}
+                    handleTapsChange={this.handleTapsChange}
+                  />
+                ),
+              })}
+            </Grid>
+
+            <Grid item xs={6}>
+              {getSimulatorInput({ heading: 'Threshold Detector', id: 6 })}
+            </Grid>
+
+            <Grid item xs={6}>
+              {getSimulatorInput({ heading: 'Decoder', id: 7 })}
+            </Grid>
+          </Grid>
         </form>
       </div>
     );

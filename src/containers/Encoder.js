@@ -5,6 +5,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 import { withStyles } from '@material-ui/core/styles';
+import defaults from '../config/defaults';
 
 const styles = (theme) => ({
   formControl: {
@@ -19,7 +20,7 @@ const styles = (theme) => ({
 
 class Encoder extends Component {
   state = {
-    type: '',
+    type: defaults.encType,
   };
 
   handleSelectChange = (evt) => {
@@ -33,22 +34,20 @@ class Encoder extends Component {
     const { classes } = this.props;
 
     return (
-      <div>
-        <div className={classes.formSpace}>
-          <FormControl className={classes.formControl}>
-            <InputLabel htmlFor="freq">Encoding type</InputLabel>
-            <Select
-              value={this.state.type}
-              onChange={this.handleSelectChange}
-              inputProps={{
-                name: 'freq',
-                id: 'freq',
-              }}
-            >
-              <MenuItem value={'hamm'}>Hamming (7,4)</MenuItem>
-            </Select>
-          </FormControl>
-        </div>
+      <div className={classes.formSpace}>
+        <FormControl className={classes.formControl}>
+          <InputLabel htmlFor="enc">Scheme</InputLabel>
+          <Select
+            value={this.state.type}
+            onChange={this.handleSelectChange}
+            inputProps={{
+              name: 'enc',
+              id: 'enc',
+            }}
+          >
+            <MenuItem value={'hamm'}>Hamming (7,4)</MenuItem>
+          </Select>
+        </FormControl>
       </div>
     );
   }

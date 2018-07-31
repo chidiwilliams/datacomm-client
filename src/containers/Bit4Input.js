@@ -5,6 +5,7 @@ import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
+import defaults from '../config/defaults';
 
 const styles = (theme) => ({
   inputbit: {
@@ -19,22 +20,20 @@ const styles = (theme) => ({
 
 class Bit4Input extends Component {
   state = {
-    bit1: 1,
-    bit2: 0,
-    bit3: 1,
-    bit4: 0,
+    bit1: defaults.bits[0],
+    bit2: defaults.bits[1],
+    bit3: defaults.bits[2],
+    bit4: defaults.bits[3],
   };
 
   handleChange = (event) => {
     this.setState({ [event.target.name]: event.target.value }, () => {
-      this.props.onChangeBits(
-        [
-          this.state.bit1,
-          this.state.bit2,
-          this.state.bit3,
-          this.state.bit4,
-        ].join('')
-      );
+      this.props.onChangeBits([
+        this.state.bit1,
+        this.state.bit2,
+        this.state.bit3,
+        this.state.bit4,
+      ]);
     });
   };
 

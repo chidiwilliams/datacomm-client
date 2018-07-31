@@ -6,9 +6,16 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import SimulatorInput from './SimulatorInput';
 import SimulatorGraphs from '../components/SimulatorGraphs';
-import { doHamming } from '../utils/encode';
+import { encHamming } from '../utils/encode';
+import { decHamming } from '../utils/decode';
 import sampleMsg from '../utils/sampleMsg';
-import { doBPSK } from '../utils/modulate';
+import { modBPSK } from '../utils/modulate';
+import getGraphParams from '../utils/getGraphParams';
+import { doAWGN } from '../utils/impairment';
+import { demodBPSK } from '../utils/demodulate';
+import { lowPass } from '../utils/filter';
+import defaults from '../config/defaults';
+import threshold from '../utils/threshold';
 
 const styles = (theme) => ({
   root: {
@@ -41,17 +48,35 @@ const styles = (theme) => ({
 
 class Simulator extends React.Component {
   state = {
-    freq: 2048,
-    bits: '1010',
-    hammed: '',
-    enc: '',
+    bits: defaults.bits,
     currentGraph: 0,
+    cutoff: defaults.cutoff,
+    enc: [],
+    encType: defaults.encType,
+    freq: defaults.Fs,
     graphs: null,
+    impPower: defaults.impPower,
+    impType: defaults.impType,
+    mod: [],
+    modType: defaults.modType,
+    taps: defaults.taps,
   };
 
-  storeGraphs() {
+  computeGraphs() {
     try {
-      this.setState({ graphs: this.getGraphs() });
+      // Get desired graphs from selected graph number
+      const graphs = {
+        0: this.getMsgGraphs,
+        1: this.getEncGraphs,
+        2: this.getModGraphs,
+        3: this.getRecGraphs,
+        4: this.getDemodGraphs,
+        5: this.getFiltGraphs,
+        6: this.getThreshGraphs,
+        7: this.getDecGraphs,
+      }[this.state.currentGraph]();
+
+      this.setState({ graphs: graphs });
     } catch (error) {
       console.log(error);
       this.setState({ graphs: null });
@@ -59,108 +84,116 @@ class Simulator extends React.Component {
   }
 
   componentWillMount() {
-    this.storeGraphs();
+    this.computeGraphs();
   }
 
   switchGraph = (name) => {
-    this.setState({ currentGraph: name }, () => this.storeGraphs());
+    this.setState({ currentGraph: name }, () => this.computeGraphs());
   };
 
   updateSimulator = (key, val) => {
-    this.setState({ [key]: val }, () => this.storeGraphs());
+    this.setState({ [key]: val }, () => this.computeGraphs());
   };
 
-  getMsgGraphs() {
-    const msg = sampleMsg(this.state.bits, this.state.freq);
+  doHamming = () => encHamming(this.state.bits, this.state.freq);
+  modBPSK = () => modBPSK(this.doHamming());
+  addImp = () => doAWGN(this.modBPSK(), this.state.impPower);
+  demod = () => demodBPSK(this.doHamming(), this.addImp());
+  filter = () => lowPass(this.demod(), this.state.taps, this.state.cutoff);
+  thresh = () => threshold(this.filter());
+  decode = () => decHamming(this.thresh());
 
-    return {
-      t: {
-        x: msg.tx,
-        y: msg.ty,
-        tit: 'Input signal time response',
-      },
-      f: {
-        x: msg.fx,
-        y: msg.fy,
-        tit: 'Input signal frequency response',
-        xmas: 128,
-      },
-    };
-  }
+  getMsgGraphs = () => {
+    const samped = sampleMsg(this.state.bits, this.state.freq);
+    this.setState({ samped: samped });
+    return getGraphParams(samped, 'Input');
+  };
 
-  getEncGraphs() {
-    if (this.state.enc !== 'hamm') {
+  getEncGraphs = () => {
+    if (this.state.encType !== 'hamm') {
       throw new Error('Invalid encoding type given.');
     }
 
-    const enc = doHamming(this.state.bits, this.state.freq);
+    const enc = this.doHamming();
+    this.setState({ enc: enc });
+    return getGraphParams(enc, 'Encoded');
+  };
 
-    // Save Hamming-encoded signal to state for use for other utils
-    this.setState({ hammed: enc.hammed });
-
-    return {
-      t: {
-        x: enc.tx,
-        y: enc.ty,
-        tit: 'Encoded signal time response',
-      },
-      f: {
-        x: enc.fx,
-        y: enc.fy,
-        tit: 'Encoded signal frequency response',
-        xmas: 128,
-      },
-    };
-  }
-
-  getModGraphs() {
-    if (this.state.mod !== 'bpsk') {
+  getModGraphs = () => {
+    if (this.state.modType !== 'bpsk') {
       throw new Error('Invalid modulation type given.');
     }
 
-    const mod = doBPSK(this.state.hammed, this.state.freq);
-    return {
-      t: {
-        x: mod.tx,
-        y: mod.ty,
-        tit: 'Modulated signal time response',
-      },
-      f: {
-        x: mod.fx,
-        y: mod.fy,
-        tit: 'Modulated signal frequency response',
-        xmas: 128,
-      },
-    };
-  }
+    const mod = this.modBPSK();
+    this.setState({ mod: mod });
+    return getGraphParams(mod, 'Modulated');
+  };
 
-  getGraphs() {
-    switch (this.state.currentGraph) {
-      case 0:
-        return this.getMsgGraphs();
-      case 1:
-        return this.getEncGraphs();
-      case 2:
-        return this.getModGraphs();
-      default:
-        throw new Error('Invalid current graph number.');
+  getRecGraphs = () => {
+    if (this.state.impType !== 'awgn') {
+      throw new Error('Invalid impairment type given.');
     }
-  }
+
+    if (Number.isNaN(+this.state.impPower)) {
+      throw new Error('Invalid impairment power given.');
+    }
+
+    const rec = this.addImp();
+    this.setState({ rec: rec });
+    return getGraphParams(rec, 'Received');
+  };
+
+  getDemodGraphs = () => {
+    if (this.state.modType !== 'bpsk') {
+      throw new Error('Invalid modulation type given.');
+    }
+
+    const demod = this.demod();
+    this.setState({ demod: demod });
+
+    return getGraphParams(demod, 'Demodulated');
+  };
+
+  getFiltGraphs = () => {
+    if (Number.isNaN(+this.state.taps) || Number.isNaN(this.state.cutoff)) {
+      throw new Error('Invalid filter parameters given.');
+    }
+
+    const filtered = this.filter();
+    this.setState({ filtered: filtered });
+    return getGraphParams(filtered, 'Filtered');
+  };
+
+  getThreshGraphs = () => {
+    const thresh = this.thresh();
+    this.setState({ thresh: thresh });
+    return getGraphParams(thresh, 'Threshold');
+  };
+
+  getDecGraphs = () => {
+    if (this.state.modType !== 'bpsk') {
+      throw new Error('Invalid modulation type given.');
+    }
+
+    const dec = this.decode();
+    this.setState({ dec: dec })
+    return getGraphParams(dec, 'Decoded');
+  };
 
   render() {
-    const { classes } = this.props;
+    const { classes, theme } = this.props;
 
     return (
       <div className={classes.root}>
         <Header />
         <main className={classes.content}>
           <div className={classes.toolbar} />
-          <Grid container spacing={24} justify="center">
+          <Grid container justify="center">
             <Grid item md={10} xs={12}>
               <Typography variant="display1" className={classes.appHeader}>
                 {'Simulator'}
               </Typography>
-              <Grid container spacing={24} justify="center">
+              <Grid container spacing={theme.spacing.unit * 2} justify="center">
                 <Grid item md={6} xs={12}>
                   <SimulatorInput
                     update={this.updateSimulator}
@@ -175,6 +208,7 @@ class Simulator extends React.Component {
                       fGraph={this.state.graphs.f}
                     />
                   ) : (
+                    // TODO: Return a cleaner display if no graphs are found.
                     <div>Cannot plot graph.</div>
                   )}
                 </Grid>

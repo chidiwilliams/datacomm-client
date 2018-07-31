@@ -5,6 +5,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 import { withStyles } from '@material-ui/core/styles';
+import defaults from '../config/defaults';
 
 const styles = (theme) => ({
   formControl: {
@@ -19,7 +20,7 @@ const styles = (theme) => ({
 
 class Modulator extends Component {
   state = {
-    type: '',
+    type: defaults.modType,
   };
 
   handleSelectChange = (evt) => {
@@ -36,7 +37,7 @@ class Modulator extends Component {
       <div>
         <div className={classes.formSpace}>
           <FormControl className={classes.formControl}>
-            <InputLabel htmlFor="freq">Modulation scheme</InputLabel>
+            <InputLabel htmlFor="freq">Scheme</InputLabel>
             <Select
               value={this.state.type}
               onChange={this.handleSelectChange}

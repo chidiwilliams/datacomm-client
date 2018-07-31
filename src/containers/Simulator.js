@@ -167,7 +167,7 @@ class Simulator extends React.Component {
   getThreshGraphs = () => {
     const thresh = this.thresh();
     this.setState({ thresh: thresh });
-    getGraphParams(this.thresh(), 'Threshold');
+    return getGraphParams(thresh, 'Threshold');
   };
 
   getDecGraphs = () => {
@@ -177,12 +177,10 @@ class Simulator extends React.Component {
 
     const dec = this.decode();
     this.setState({ dec: dec })
-
-    return getGraphParams(this.decode(), 'Decoded');
+    return getGraphParams(dec, 'Decoded');
   };
 
   render() {
-    console.log('Rendering simulator...');
     const { classes, theme } = this.props;
 
     return (
@@ -210,6 +208,7 @@ class Simulator extends React.Component {
                       fGraph={this.state.graphs.f}
                     />
                   ) : (
+                    // TODO: Return a cleaner display if no graphs are found.
                     <div>Cannot plot graph.</div>
                   )}
                 </Grid>

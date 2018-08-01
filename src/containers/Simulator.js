@@ -1,10 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import Header from './Header';
 import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
-import SimulatorInput from './SimulatorInput';
+import SimulatorInputs from './SimulatorInputs';
 import SimulatorGraphs from '../components/SimulatorGraphs';
 import { encHamming } from '../utils/encode';
 import { decHamming } from '../utils/decode';
@@ -14,37 +12,11 @@ import getGraphParams from '../utils/getGraphParams';
 import { doAWGN } from '../utils/impairment';
 import { demodBPSK } from '../utils/demodulate';
 import { lowPass } from '../utils/filter';
-import defaults from '../config/defaults';
 import threshold from '../utils/threshold';
+import defaults from '../config/defaults';
+import AppHeader from '../components/AppHeader';
 
-const styles = (theme) => ({
-  root: {
-    flexGrow: 1,
-    zIndex: 1,
-    overflow: 'hidden',
-    position: 'relative',
-    display: 'flex',
-    width: '100%',
-  },
-  appBar: {
-    position: 'absolute',
-  },
-  toolbar: theme.mixins.toolbar,
-  content: {
-    flexGrow: 1,
-    backgroundColor: theme.palette.background.default,
-    padding: [[0, theme.spacing.unit * 2, theme.spacing.unit * 3]],
-  },
-  paper: {
-    padding: theme.spacing.unit * 2,
-    textAlign: 'center',
-    color: theme.palette.text.secondary,
-  },
-  appHeader: {
-    marginTop: theme.spacing.unit * 7,
-    marginBottom: theme.spacing.unit * 3,
-  },
-});
+const styles = (theme) => ({});
 
 class Simulator extends React.Component {
   state = {
@@ -176,7 +148,7 @@ class Simulator extends React.Component {
     }
 
     const dec = this.decode();
-    this.setState({ dec: dec })
+    this.setState({ dec: dec });
     return getGraphParams(dec, 'Decoded');
   };
 
@@ -184,38 +156,28 @@ class Simulator extends React.Component {
     const { classes, theme } = this.props;
 
     return (
-      <div className={classes.root}>
-        <Header />
-        <main className={classes.content}>
-          <div className={classes.toolbar} />
-          <Grid container justify="center">
-            <Grid item md={10} xs={12}>
-              <Typography variant="display1" className={classes.appHeader}>
-                {'Simulator'}
-              </Typography>
-              <Grid container spacing={theme.spacing.unit * 2} justify="center">
-                <Grid item md={6} xs={12}>
-                  <SimulatorInput
-                    update={this.updateSimulator}
-                    switchGraph={this.switchGraph}
-                    currentGraph={this.state.currentGraph}
-                  />
-                </Grid>
-                <Grid item md={6} xs={12}>
-                  {this.state.graphs ? (
-                    <SimulatorGraphs
-                      tGraph={this.state.graphs.t}
-                      fGraph={this.state.graphs.f}
-                    />
-                  ) : (
-                    // TODO: Return a cleaner display if no graphs are found.
-                    <div>Cannot plot graph.</div>
-                  )}
-                </Grid>
-              </Grid>
-            </Grid>
+      <div>
+        <AppHeader text={'Simulator'} />
+        <Grid container spacing={theme.spacing.unit * 2} justify="center">
+          <Grid item md={6} xs={12}>
+            <SimulatorInputs
+              update={this.updateSimulator}
+              switchGraph={this.switchGraph}
+              currentGraph={this.state.currentGraph}
+            />
           </Grid>
-        </main>
+          <Grid item md={6} xs={12}>
+            {this.state.graphs ? (
+              <SimulatorGraphs
+                tGraph={this.state.graphs.t}
+                fGraph={this.state.graphs.f}
+              />
+            ) : (
+              // TODO: Return a cleaner display if no graphs are found.
+              <div>Cannot plot graph.</div>
+            )}
+          </Grid>
+        </Grid>
       </div>
     );
   }

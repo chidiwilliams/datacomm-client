@@ -36,6 +36,11 @@ class Header extends Component {
     this.setState((state) => ({ open: !state.open }));
   };
 
+  switchApp = (evt) => {
+    this.handleDrawerToggle();
+    this.props.switchApp(evt.currentTarget.id);
+  };
+
   render() {
     const { classes } = this.props;
 
@@ -72,15 +77,13 @@ class Header extends Component {
             component="nav"
             subheader={<ListSubheader component="div">Apps</ListSubheader>}
           >
-            <ListItem button>
-              <ListItemText primary="Simulator" />
-            </ListItem>
-            <ListItem button disabled>
-              <ListItemText primary="Spectrometer" />
-            </ListItem>
-            <ListItem button disabled>
-              <ListItemText primary="Convolutional encoder" />
-            </ListItem>
+            {['Simulator', 'Spectrometer', 'Convolutional encoder'].map(
+              (x, i) => (
+                <ListItem button onClick={this.switchApp} id={i} key={i}>
+                  <ListItemText primary={x} />
+                </ListItem>
+              )
+            )}
           </List>
         </Drawer>
       </div>
@@ -91,6 +94,7 @@ class Header extends Component {
 Header.propTypes = {
   classes: PropTypes.object.isRequired,
   theme: PropTypes.object.isRequired,
+  switchApp: PropTypes.func.isRequired,
 };
 
 export default withStyles(styles, { withTheme: true })(Header);

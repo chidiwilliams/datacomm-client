@@ -5,12 +5,6 @@ import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import LaunchIcon from '@material-ui/icons/Launch';
 import IconButton from '@material-ui/core/IconButton';
-import MessageInput from './MessageInput';
-import Encoder from './Encoder';
-import Modulator from './Modulator';
-import Grid from '@material-ui/core/Grid';
-import Impairment from './Impairment';
-import Filter from './Filter';
 
 const styles = (theme) => ({
   formSection: {
@@ -28,126 +22,23 @@ const styles = (theme) => ({
 });
 
 class SimulatorInput extends Component {
-  handleMsgChange = (type, val) => {
-    this.props.update(type, val);
-  };
-
-  handleEncChange = (enc) => {
-    this.props.update('encType', enc);
-  };
-
-  handleModTypeChange = (type) => {
-    this.props.update('modType', type);
-  };
-
-  handleImpPowerChange = (pow) => {
-    this.props.update('impPower', pow);
-  };
-
-  handleImpTypeChange = (type) => {
-    this.props.update('impType', type);
-  };
-
-  handleCutoffChange = (freq) => {
-    this.props.update('cutoff', freq);
-  };
-
-  handleTapsChange = (taps) => {
-    this.props.update('taps', taps);
-  };
-
   render() {
     const { classes } = this.props;
 
-    const getSimulatorInput = ({ heading, id, component }) => (
+    return (
       <Paper className={classes.formSection}>
         <Typography variant="subheading" className={classes.subheader}>
-          {heading}
+          {this.props.heading}
         </Typography>
         <IconButton
           className={classes.launchIcon}
-          onClick={() => this.props.switchGraph(id)}
+          onClick={(evt) => this.props.onLaunch(evt)}
           title={'Show graph'}
         >
           <LaunchIcon />
         </IconButton>
-        {component}
+        {this.props.component}
       </Paper>
-    );
-
-    return (
-      <div>
-        <form className={classes.root} autoComplete="off">
-          <Grid container spacing={16} justify="center">
-            <Grid item lg={7} xs={12}>
-              {getSimulatorInput({
-                heading: 'Message Input',
-                id: 0,
-                component: <MessageInput updateMsg={this.handleMsgChange} />,
-              })}
-            </Grid>
-
-            <Grid item lg={5} xs={6}>
-              {getSimulatorInput({
-                heading: 'Encoder',
-                id: 1,
-                component: <Encoder handleEncChange={this.handleEncChange} />,
-              })}
-            </Grid>
-
-            <Grid item lg={5} xs={6}>
-              {getSimulatorInput({
-                heading: 'Modulator',
-                id: 2,
-                component: (
-                  <Modulator handleModChange={this.handleModTypeChange} />
-                ),
-              })}
-            </Grid>
-
-            <Grid item sm={7} xs={12}>
-              {getSimulatorInput({
-                heading: 'Channel Impairment',
-                id: 3,
-                component: (
-                  <Impairment
-                    handleImpPowerChange={this.handleImpPowerChange}
-                    handleImpTypeChange={this.handleImpTypeChange}
-                  />
-                ),
-              })}
-            </Grid>
-
-            <Grid item sm={5} xs={12}>
-              {getSimulatorInput({
-                heading: 'Demodulator',
-                id: 4,
-              })}
-            </Grid>
-
-            <Grid item lg={7} xs={12}>
-              {getSimulatorInput({
-                heading: 'Low Pass Filter',
-                id: 5,
-                component: (
-                  <Filter
-                    handleCutoffChange={this.handleCutoffChange}
-                    handleTapsChange={this.handleTapsChange}
-                  />
-                ),
-              })}
-            </Grid>
-
-            <Grid item xs={6}>
-              {getSimulatorInput({ heading: 'Threshold Detector', id: 6 })}
-            </Grid>
-
-            <Grid item xs={6}>
-              {getSimulatorInput({ heading: 'Decoder', id: 7 })}
-            </Grid>
-          </Grid>
-        </form>
-      </div>
     );
   }
 }
@@ -155,9 +46,9 @@ class SimulatorInput extends Component {
 SimulatorInput.propTypes = {
   classes: PropTypes.object.isRequired,
   theme: PropTypes.object.isRequired,
-  update: PropTypes.func,
-  switchGraph: PropTypes.func.isRequired,
-  currentGraph: PropTypes.number,
+  heading: PropTypes.string,
+  component: PropTypes.node,
+  onLaunch: PropTypes.func,
 };
 
 export default withStyles(styles, { withTheme: true })(SimulatorInput);

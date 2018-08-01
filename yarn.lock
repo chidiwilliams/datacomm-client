@@ -1967,9 +1967,9 @@ dashdash@^1.12.0:
   dependencies:
     assert-plus "^1.0.0"
 
-datacomm-lab@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/datacomm-lab/-/datacomm-lab-1.0.0.tgz#c78b844db9d42a9e1cef2a9a3f18b2b15c2be6e9"
+datacomm-lab@1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/datacomm-lab/-/datacomm-lab-1.2.0.tgz#7958c2e2c2bcb39478564553e219cc94d908a47a"
   dependencies:
     mathjs "^5.0.1"
 

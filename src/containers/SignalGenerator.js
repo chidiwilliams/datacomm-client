@@ -20,13 +20,14 @@ const styles = (theme) => ({
 
 class SignalGenerator extends Component {
   state = {
-    waveshape: defaults.waveshape, // TODO: Switch to defaults value
+    waveshape: defaults.waveshape,
     fs: defaults.Fs,
     fa: defaults.Fa,
   };
 
-  handleSelectChange = (param, val, cb) =>
+  handleSelectChange = (param, val, cb) => {
     this.setState({ [param]: val }, () => cb(val));
+  };
 
   render() {
     const { classes } = this.props;

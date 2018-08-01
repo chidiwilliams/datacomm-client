@@ -14,14 +14,16 @@ const styles = (theme) => ({
 class SimulatorGraphs extends Component {
   render() {
     const { classes } = this.props;
+    const tGraph = this.props.tGraph || { tit: 'Empty graph' };
+    const fGraph = this.props.fGraph || { tit: 'Empty graph' };
 
     return (
       <div>
         <Paper className={classes.formSection}>
           <Graph
-            title={this.props.tGraph.tit}
-            xinput={this.props.tGraph.x}
-            yinput={this.props.tGraph.y}
+            title={tGraph.tit}
+            xinput={tGraph.x}
+            yinput={tGraph.y}
             ylabel={'Amplitude (V)'}
             id={1}
           />
@@ -29,10 +31,10 @@ class SimulatorGraphs extends Component {
 
         <Paper className={classes.formSection}>
           <Graph
-            title={this.props.fGraph.tit}
-            xinput={this.props.fGraph.x}
-            yinput={this.props.fGraph.y}
-            xmas={this.props.fGraph.xmas}
+            title={fGraph.tit}
+            xinput={fGraph.x}
+            yinput={fGraph.y}
+            xmas={fGraph.xmas}
             ylabel={'Magnitude'}
             id={2}
           />

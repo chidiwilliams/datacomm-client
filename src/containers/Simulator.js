@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import SimulatorInputs from './SimulatorInputs';
+import SimulatorControls from './SimulatorControls';
 import SimulatorGraphs from '../components/SimulatorGraphs';
 import { encHamming } from '../utils/encode';
 import { decHamming } from '../utils/decode';
@@ -160,22 +160,17 @@ class Simulator extends React.Component {
         <AppHeader text={'Simulator'} />
         <Grid container spacing={theme.spacing.unit * 2} justify="center">
           <Grid item md={6} xs={12}>
-            <SimulatorInputs
+            <SimulatorControls
               update={this.updateSimulator}
               switchGraph={this.switchGraph}
               currentGraph={this.state.currentGraph}
             />
           </Grid>
           <Grid item md={6} xs={12}>
-            {this.state.graphs ? (
-              <SimulatorGraphs
-                tGraph={this.state.graphs.t}
-                fGraph={this.state.graphs.f}
-              />
-            ) : (
-              // TODO: Return a cleaner display if no graphs are found.
-              <div>Cannot plot graph.</div>
-            )}
+            <SimulatorGraphs
+              tGraph={this.state.graphs.t}
+              fGraph={this.state.graphs.f}
+            />
           </Grid>
         </Grid>
       </div>

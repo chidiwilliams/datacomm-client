@@ -11,7 +11,7 @@ import SimulatorInput from '../components/SimulatorInput';
 
 const styles = (theme) => ({});
 
-class SimulatorInputs extends Component {
+class SimulatorControls extends Component {
   handleMsgChange = (type, val) => {
     this.props.update(type, val);
   };
@@ -126,7 +126,7 @@ class SimulatorInputs extends Component {
   }
 }
 
-SimulatorInputs.propTypes = {
+SimulatorControls.propTypes = {
   classes: PropTypes.object.isRequired,
   theme: PropTypes.object.isRequired,
   update: PropTypes.func,
@@ -134,4 +134,4 @@ SimulatorInputs.propTypes = {
   currentGraph: PropTypes.number,
 };
 
-export default withStyles(styles, { withTheme: true })(SimulatorInputs);
+export default withStyles(styles, { withTheme: true })(SimulatorControls);

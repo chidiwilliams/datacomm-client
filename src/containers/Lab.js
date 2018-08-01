@@ -15,7 +15,7 @@ const styles = (theme) => ({
 
 class Lab extends React.Component {
   state = {
-    selectedApp: 1,
+    selectedApp: 0,
   };
 
   apps = {

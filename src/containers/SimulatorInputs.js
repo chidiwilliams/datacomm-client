@@ -1,32 +1,15 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
-import LaunchIcon from '@material-ui/icons/Launch';
-import IconButton from '@material-ui/core/IconButton';
 import MessageInput from './MessageInput';
 import Encoder from './Encoder';
 import Modulator from './Modulator';
 import Grid from '@material-ui/core/Grid';
 import Impairment from './Impairment';
 import Filter from './Filter';
-import SimulatorInput from './SimulatorInput';
+import SimulatorInput from '../components/SimulatorInput';
 
-const styles = (theme) => ({
-  formSection: {
-    padding: theme.spacing.unit * 2,
-    position: 'relative', // helps to position the 'show graph' btn
-  },
-  subheader: {
-    fontWeight: 'bold',
-  },
-  launchIcon: {
-    position: 'absolute',
-    top: 0,
-    right: 0,
-  },
-});
+const styles = (theme) => ({});
 
 class SimulatorInputs extends Component {
   handleMsgChange = (type, val) => {

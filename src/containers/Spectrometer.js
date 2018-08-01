@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import AppHeader from '../components/AppHeader';
-import SimulatorInput from './SimulatorInput';
+import SimulatorInput from '../components/SimulatorInput';
 
 const styles = (theme) => ({});
 

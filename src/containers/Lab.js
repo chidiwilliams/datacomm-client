@@ -21,7 +21,6 @@ class Lab extends React.Component {
   apps = {
     0: <Simulator />,
     1: <Spectrometer />,
-    2: 'Convolutional encoder',
   };
 
   switchApp = (id) => this.setState({ selectedApp: id });

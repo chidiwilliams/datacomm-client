@@ -77,13 +77,11 @@ class Header extends Component {
             component="nav"
             subheader={<ListSubheader component="div">Apps</ListSubheader>}
           >
-            {['Simulator', 'Spectrometer', 'Convolutional encoder'].map(
-              (x, i) => (
-                <ListItem button onClick={this.switchApp} id={i} key={i}>
-                  <ListItemText primary={x} />
-                </ListItem>
-              )
-            )}
+            {['Simulator', 'Spectrometer'].map((x, i) => (
+              <ListItem button onClick={this.switchApp} id={i} key={i}>
+                <ListItemText primary={x} />
+              </ListItem>
+            ))}
           </List>
         </Drawer>
       </div>

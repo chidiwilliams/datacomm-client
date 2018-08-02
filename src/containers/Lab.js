@@ -5,22 +5,23 @@ import Simulator from './Simulator';
 import Spectrometer from './Spectrometer';
 import Header from './Header';
 import './Lab.css';
+import Test from './Test';
 
 const styles = (theme) => ({
   main: {
-    paddingTop: 100,
-    backgroundColor: theme.palette.background.default,
+    padding: [[30, 0]],
   },
 });
 
 class Lab extends React.Component {
   state = {
-    selectedApp: 0,
+    selectedApp: 2,
   };
 
   apps = {
     0: <Simulator />,
     1: <Spectrometer />,
+    2: <Test />,
   };
 
   switchApp = (id) => this.setState({ selectedApp: id });
@@ -31,7 +32,9 @@ class Lab extends React.Component {
 
     return (
       <div>
-        <Header switchApp={this.switchApp} />
+        {
+          // <Header switchApp={this.switchApp} />
+        }
         <main className={classes.main}>
           <div className="container">{getSelectedApp}</div>
         </main>

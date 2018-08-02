@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Chart from 'chart.js';
+import './Graph.css';
 
 class Graph extends Component {
   drawChart() {
@@ -21,6 +22,7 @@ class Graph extends Component {
         labels: this.props.xinput,
       },
       options: {
+        maintainAspectRatio: false,
         animation: 0,
         elements: {
           line: {
@@ -67,7 +69,15 @@ class Graph extends Component {
 
   render() {
     return (
-      <div>
+      <div
+        className="canvasP"
+        style={{
+          height: this.props.height,
+          width: this.props.width,
+          position: 'relative',
+          margin: 'auto',
+        }}
+      >
         <canvas id={this.props.id} />
       </div>
     );
@@ -81,6 +91,8 @@ Graph.propTypes = {
   yinput: PropTypes.array.isRequired,
   ylabel: PropTypes.string,
   xmas: PropTypes.number,
+  width: PropTypes.number,
+  height: PropTypes.number,
 };
 
 export default Graph;

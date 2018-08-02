@@ -1,0 +1,40 @@
+.osc {
+  background-color: #f7f7f7;
+  height: 500px;
+  border-radius: 5px;
+  margin: 20px;
+  box-shadow: 0 0 0 2px #888, 0 0 0 11px #666, 0 0 0 13px #444, 0 0 0 17px #888,
+    0 0 0 20px #ccc;
+  padding: 15px;
+}
+
+.oscShadow {
+  height: 20px;
+  background-color: #333;
+  margin-top: -20px;
+  margin-bottom: 60px;
+  border-radius: 100%;
+  box-shadow: 0 50px 34px #3337;
+  background-color: transparent;
+}
+
+.graphs {
+  width: 650px;
+  height: 100%;
+  float: left;
+  background-color: #ddd;
+  position: relative;
+}
+
+.controls {
+  width: 420px;
+  height: 100%;
+  float: left;
+  background-color: #ccc;
+}
+
+.graphPad {
+  padding: 15px;
+  background-color: #fff;
+  height: 100%;
+}

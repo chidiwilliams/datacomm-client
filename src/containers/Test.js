@@ -1,39 +1,58 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import Graph from '../components/Graph';
+import SimulatorInput from '../components/SimulatorInput';
+import SignalGenerator from './SignalGenerator';
+import TestGraphs from './TestGraphs';
+import './defaults.css';
 import './Test.css';
 
 const styles = (theme) => ({});
 
-class Spectrometer extends Component {
+class Lab extends Component {
   state = {};
 
   render() {
     const { classes, theme } = this.props;
 
     return (
-      <div>
-        <div className="osc">
-          <div className="graphs">
-            <div style={{ height: '50%' }}>
-              <Graph id={0} height={'100%'} />
-            </div>
-            <div style={{ height: '50%' }}>
-              <Graph id={1} height={'100%'} />
+      <div className="main">
+        <div className="container">
+          <div className="osc">
+            <div className="uprising">
+              <div className="left">
+                <TestGraphs />
+              </div>
+              <div className="right">
+                <div className="labTitle">DataComm Laboratory</div>
+                <div className="labAppTitle">Spectrometer</div>
+                <div>
+                  <SimulatorInput
+                    heading={'Input'}
+                    component={
+                      <SignalGenerator
+                      // handleTypeChange={(val) =>
+                      // this.updateSpectrometer('waveshape', val)
+                      // }
+                      // handleFaChange={(val) => this.updateSpectrometer('fa', val)}
+                      // handleFsChange={(val) => this.updateSpectrometer('fs', val)}
+                      />
+                    }
+                  />
+                </div>
+              </div>
             </div>
           </div>
-          <div className="controls" />
+          <div className="oscShadow" />
         </div>
-        <div className="oscShadow" />
       </div>
     );
   }
 }
 
-Spectrometer.propTypes = {
+Lab.propTypes = {
   classes: PropTypes.object.isRequired,
   theme: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles, { withTheme: true })(Spectrometer);
+export default withStyles(styles, { withTheme: true })(Lab);

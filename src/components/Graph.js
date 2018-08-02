@@ -11,9 +11,10 @@ class Graph extends Component {
       data: {
         datasets: [
           {
-            fill: false,
-            borderColor: 'rgb(200, 0, 0)',
-            borderWidth: 1,
+            // fill: false,
+            borderColor: 'rgba(200, 0, 0, 1)',
+            backgroundColor: 'rgba(200, 0, 0, 0.2)',
+            borderWidth: 2,
             pointRadius: 0,
             data: this.props.yinput,
             label: this.props.ylabel || null,
@@ -30,11 +31,14 @@ class Graph extends Component {
           },
         },
         title: {
-          display: true,
-          text: this.props.title,
+          // display: true,
+          // text: this.props.title,
         },
         legend: {
           display: false,
+          labels: {
+            fontColor: 'rgba(200, 0, 0, 1)',
+          },
         },
         scales: {
           xAxes: [
@@ -43,6 +47,12 @@ class Graph extends Component {
                 min: this.props.xmin || null,
                 max: this.props.xmas || null,
               },
+              gridLines: { color: 'rgba(255, 200, 200, 0.1)' },
+            },
+          ],
+          yAxes: [
+            {
+              gridLines: { color: 'rgba(255, 200, 200, 0.2)' },
             },
           ],
         },

@@ -18,23 +18,45 @@
   background-color: transparent;
 }
 
-.graphs {
-  width: 650px;
+.uprising {
+  height: 100%;
+  box-shadow: 0 2px 3px #0006;
+  border-radius: 5px;
+  border: 2px solid #444444;
+}
+
+.left {
+  width: 60%;
   height: 100%;
   float: left;
-  background-color: #ddd;
   position: relative;
+  background-color: #ddd;
+  padding: 10px;
+  border-radius: 5px 0 0 5px;
+  border-right: 1px solid #444444;
 }
 
-.controls {
-  width: 420px;
+.right {
+  padding: 10px;
+  width: 40%;
+  border-left: 1px solid #444444;
   height: 100%;
   float: left;
-  background-color: #ccc;
+  background-color: #dddddd;
+  border-radius: 0 5px 5px 0;
 }
 
-.graphPad {
-  padding: 15px;
-  background-color: #fff;
-  height: 100%;
+.labTitle {
+  text-align: center;
+  font-weight: 600;
+  margin-top: 20px;
+  font-size: 22px;
+}
+
+.labAppTitle {
+  text-align: center;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 14px;
+  color: #333;
 }

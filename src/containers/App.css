@@ -1,14 +1,3 @@
 * {
   box-sizing: border-box;
 }
-
-html,
-body,
-#root,
-.App {
-  min-height: 100%;
-}
-
-#root {
-  background-color: #c7eacf;
-}

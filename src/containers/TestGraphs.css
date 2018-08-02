@@ -1,0 +1,11 @@
+.graphs {
+  background-color: #101010;
+  border-radius: 5px;
+  height: 100%;
+  border: 2px solid #666;
+}
+
+.graph {
+  padding: 10px;
+  height: 50%;
+}

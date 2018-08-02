@@ -35,34 +35,16 @@ class SignalGenerator extends Component {
 
     return (
       <div>
-        <ButtonSelect />
+        <ButtonSelect
+          onChange={(val) =>
+            this.handleSelectChange(
+              'waveshape',
+              val,
+              this.props.handleTypeChange
+            )
+          }
+        />
         <div className={classes.formSpace}>
-          <FormControl className={classes.formControl}>
-            <InputLabel htmlFor="freq">Wave shape</InputLabel>
-            <Select
-              value={this.state.waveshape}
-              onChange={(evt) =>
-                this.handleSelectChange(
-                  'waveshape',
-                  evt.target.value,
-                  this.props.handleTypeChange
-                )
-              }
-              inputProps={{
-                name: 'waveshape',
-                id: 'waveshape',
-              }}
-            >
-              {defaults.allWaveshapes.slice().map((x, i) => (
-                <MenuItem value={x} key={i}>
-                  {x
-                    .split('')
-                    .map((x, i) => (!i ? x.toUpperCase() : x))
-                    .join('')}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
           <FormControl className={classes.formControl}>
             <InputLabel htmlFor="freq">Sampling frequency</InputLabel>
             <Select

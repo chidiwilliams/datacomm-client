@@ -46,16 +46,17 @@
   border-radius: 0 5px 5px 0;
 }
 
-.labTitle {
+.labHeader {
   text-align: center;
   font-weight: 600;
-  margin-top: 20px;
+  margin: 20px 0;
+}
+
+.labTitle {
   font-size: 22px;
 }
 
 .labAppTitle {
-  text-align: center;
-  font-weight: 600;
   text-transform: uppercase;
   font-size: 14px;
   color: #333;

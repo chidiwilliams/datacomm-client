@@ -1,45 +1,40 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import SimulatorInput from '../components/SimulatorInput';
-import SignalGenerator from './SignalGenerator';
-import TestGraphs from './TestGraphs';
+import LabGraphs from './LabGraphs';
 import './defaults.css';
 import './Test.css';
+import LabInput from './LabInput';
 
-const styles = (theme) => ({});
+const styles = () => ({});
 
 class Lab extends Component {
-  state = {};
+  state = {
+    graphs: {},
+  };
+
+  updateGraphs = (graphs) => {
+    this.setState({ graphs: graphs });
+  };
 
   render() {
-    const { classes, theme } = this.props;
-
     return (
       <div className="main">
         <div className="container">
           <div className="osc">
             <div className="uprising">
               <div className="left">
-                <TestGraphs />
+                <LabGraphs
+                  tGraph={this.state.graphs.t}
+                  fGraph={this.state.graphs.f}
+                />
               </div>
               <div className="right">
-                <div className="labTitle">DataComm Laboratory</div>
-                <div className="labAppTitle">Spectrometer</div>
-                <div>
-                  <SimulatorInput
-                    heading={'Input'}
-                    component={
-                      <SignalGenerator
-                      // handleTypeChange={(val) =>
-                      // this.updateSpectrometer('waveshape', val)
-                      // }
-                      // handleFaChange={(val) => this.updateSpectrometer('fa', val)}
-                      // handleFsChange={(val) => this.updateSpectrometer('fs', val)}
-                      />
-                    }
-                  />
+                <div className="labHeader">
+                  <div className="labTitle">DataComm Laboratory</div>
+                  <div className="labAppTitle">Spectrometer</div>
                 </div>
+                <LabInput updateGraphs={this.updateGraphs} />
               </div>
             </div>
           </div>

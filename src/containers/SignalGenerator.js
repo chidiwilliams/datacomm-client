@@ -6,6 +6,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 import { withStyles } from '@material-ui/core/styles';
 import defaults from '../config/defaults';
+import ButtonSelect from './ButtonSelect';
 
 const styles = (theme) => ({
   formControl: {
@@ -34,6 +35,7 @@ class SignalGenerator extends Component {
 
     return (
       <div>
+        <ButtonSelect />
         <div className={classes.formSpace}>
           <FormControl className={classes.formControl}>
             <InputLabel htmlFor="freq">Wave shape</InputLabel>
@@ -116,9 +118,9 @@ class SignalGenerator extends Component {
 SignalGenerator.propTypes = {
   classes: PropTypes.object.isRequired,
   theme: PropTypes.object.isRequired,
-  handleTypeChange: PropTypes.func,
-  handleFaChange: PropTypes.func,
-  handleFsChange: PropTypes.func,
+  handleTypeChange: PropTypes.func.isRequired,
+  handleFaChange: PropTypes.func.isRequired,
+  handleFsChange: PropTypes.func.isRequired,
 };
 
 export default withStyles(styles, { withTheme: true })(SignalGenerator);

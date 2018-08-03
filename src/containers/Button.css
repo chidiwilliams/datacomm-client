@@ -12,6 +12,7 @@
   outline: none;
   border: 0;
   z-index: 2;
+  margin-bottom: 8px;
 }
 
 .button:active,

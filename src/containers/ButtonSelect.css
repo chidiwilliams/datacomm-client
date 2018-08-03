@@ -3,9 +3,6 @@
   flex-wrap: wrap;
 }
 
-
 .btnP {
   flex: 1;
-  display: inline-block;
-  margin-bottom: 8px;
 }

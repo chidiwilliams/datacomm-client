@@ -1,27 +1,9 @@
-.buttonMain {
+.wrapper {
   display: flex;
-  box-shadow: 1px 1px 3px;
-  border-radius: 3px;
 }
 
-.swbutton {
+.bbtn {
   flex: 1;
-  height: 40px;
-  font-weight: bold;
-  text-transform: uppercase;
-  color: #555555;
-  background: #bbbbbb;
-  width: 100px;
-  cursor: pointer;
-  border: 0;
-}
-
-.swbutton.left {
-  border-radius: 3px 0 0 3px;
-}
-
-.swbutton.right {
-  border-radius: 0 3px 3px 0;
 }
 
 .display {
@@ -31,6 +13,8 @@
   width: 100px;
   background: #101010;
   color: #c80000;
+  box-shadow: 0 7px 0 #060606, 0 8px 3px -1px rgba(0, 0, 0, 0.2);
+  z-index: 3;
   font-weight: bold;
   display: inline-block;
   text-align: center;

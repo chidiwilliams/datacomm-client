@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import './ButtonSwitch.css';
+import Button from './Button';
 
 export default class ButtonSwitch extends Component {
   static propTypes = {
@@ -35,14 +36,14 @@ export default class ButtonSwitch extends Component {
 
   render() {
     return (
-      <div className="buttonMain">
-        <button className="swbutton left" onClick={this.decrement}>
-          -
-        </button>
+      <div className="wrapper">
+        <div className="bbtn">
+          <Button text={'-'} onClick={this.decrement} />
+        </div>
         <div className="display">{this.props.options[this.state.selected]}</div>
-        <button className="swbutton right" onClick={this.increment}>
-          +
-        </button>
+        <div className="bbtn">
+          <Button text={'+'} onClick={this.increment} />
+        </div>
       </div>
     );
   }

@@ -28,9 +28,14 @@ class Lab extends Component {
                   }
                   href="#"
                   key={i}
+                  id={'lab-app-' + i}
                   onClick={(evt) => {
                     evt.preventDefault();
-                    console.log(this.id);
+                    this.setState({
+                      selectedApp: parseInt(
+                        evt.currentTarget.id.split('lab-app-')[1]
+                      ),
+                    });
                   }}
                 >
                   {x}
@@ -54,7 +59,9 @@ class Lab extends Component {
                   />
                 </div>
                 <div className="labHeader">DataComm Laboratory</div>
-                <div className="labAppTitle">Spectrometer</div>
+                <div className="labAppTitle">
+                  {defaults.apps[this.state.selectedApp]}
+                </div>
               </div>
             </div>
           </div>

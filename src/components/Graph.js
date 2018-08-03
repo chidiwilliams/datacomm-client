@@ -27,7 +27,6 @@ class Graph extends Component {
       },
       options: {
         maintainAspectRatio: false,
-        // animation: 0,
         elements: { line: { tension: 0 } },
         title: {},
         legend: { display: false },
@@ -80,7 +79,7 @@ class Graph extends Component {
 
 Graph.propTypes = {
   title: PropTypes.string,
-  id: PropTypes.number.isRequired,
+  id: PropTypes.string.isRequired,
   xinput: PropTypes.array,
   yinput: PropTypes.array,
   ylabel: PropTypes.string,

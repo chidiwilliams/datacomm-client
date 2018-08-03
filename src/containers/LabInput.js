@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import SignalGenerator from './SignalGenerator';
 import SpectrometerInput from './SpectrometerInput';
 import SimulatorInput from './SimulatorInput';
 
@@ -11,7 +10,7 @@ export default class LabInput extends Component {
   };
 
   apps = {
-    0: <SimulatorInput />,
+    0: <SimulatorInput updateGraphs={this.props.updateGraphs} />,
     1: <SpectrometerInput updateGraphs={this.props.updateGraphs} />,
   };
 

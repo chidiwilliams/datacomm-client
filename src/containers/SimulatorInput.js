@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 export default class SimulatorInput extends Component {
   static propTypes = {
-    // prop: PropTypes
+    updateGraphs: PropTypes.func.isRequired,
   };
 
   render() {

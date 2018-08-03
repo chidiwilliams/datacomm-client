@@ -5,6 +5,7 @@ import defaults from '../config/defaults';
 import getGraphParams from '../utils/getGraphParams';
 import sampleMsg from '../utils/sampleMsg';
 import Encoder from './Encoder';
+import { encHamming } from '../utils/encode';
 
 export default class SimulatorInput extends Component {
   static propTypes = {
@@ -33,10 +34,26 @@ export default class SimulatorInput extends Component {
     this.setState({ freq: val }, () => this.updateGraphs());
   };
 
+  handleEncChange = (val) => {
+    this.setState({ encType: val }, () => this.updateGraphs());
+  };
+
+  doHamming = () => encHamming(this.state.bits, this.state.freq);
+
   getMsgGraphs = () => {
     const samped = sampleMsg(this.state.bits, this.state.freq);
     this.setState({ samped: samped });
     return getGraphParams(samped, 'Input');
+  };
+
+  getEncGraphs = () => {
+    if (this.state.encType !== 'hamm') {
+      throw new Error('Invalid encoding type given.');
+    }
+
+    const enc = this.doHamming();
+    this.setState({ enc: enc });
+    return getGraphParams(enc, 'Encoded');
   };
 
   updateGraphs = () => {
@@ -86,7 +103,10 @@ export default class SimulatorInput extends Component {
             />
           </div>
           <div style={{ flex: 1, padding: 2.5 }}>
-            <Encoder onGrpLaunch={() => this.switchGraph(1)} />
+            <Encoder
+              onGrpLaunch={() => this.switchGraph(1)}
+              handleEncChange={this.handleEncChange}
+            />
           </div>
         </div>
       </div>

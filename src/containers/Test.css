@@ -63,10 +63,26 @@
   }
 }
 
+.labHeader,
+.labAppTitle {
+  bottom: 0;
+  position: absolute;
+  color: #777777;
+  padding: 5px 15px;
+  font-size: 14px;
+  text-shadow: 0 1px #ffffff;
+}
+
 .labHeader {
-  text-align: center;
+  text-align: right;
+  right: 0;
+}
+
+.labAppTitle {
+  text-transform: uppercase;
+  font-style: italic;
   font-weight: 600;
-  margin-bottom: 40px;
+  left: 0;
 }
 
 .controls {
@@ -75,16 +91,6 @@
   transform: translate(-50%, -50%);
   width: calc(100% - 30px);
   position: absolute;
-}
-
-.labTitle {
-  font-size: 22px;
-}
-
-.labAppTitle {
-  text-transform: uppercase;
-  font-size: 14px;
-  color: #333;
 }
 
 .main {

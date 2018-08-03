@@ -1,9 +1,21 @@
 .sgInput {
-  margin-bottom: 20px;
+  margin-bottom: 15px;
+  flex: 1;
+}
+
+.flexparent {
+  display: flex;
+  margin: 0 -10px;
+}
+
+.flexparent .sgInput {
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 .selectLabel {
   color: #666;
   font-size: 14px;
-  margin-bottom: 3px;
+  margin-bottom: 5px;
+  text-shadow: 0 1px #f0f0f0;
 }

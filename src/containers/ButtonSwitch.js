@@ -38,11 +38,19 @@ export default class ButtonSwitch extends Component {
     return (
       <div className="wrapper">
         <div className="bbtn">
-          <Button text={'-'} onClick={this.decrement} />
+          <Button
+            text={'-'}
+            onClick={this.decrement}
+            selected={this.state.selected === 0}
+          />
         </div>
         <div className="display">{this.props.options[this.state.selected]}</div>
         <div className="bbtn">
-          <Button text={'+'} onClick={this.increment} />
+          <Button
+            text={'+'}
+            onClick={this.increment}
+            selected={this.state.selected === this.props.options.length - 1}
+          />
         </div>
       </div>
     );

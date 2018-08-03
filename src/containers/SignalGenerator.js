@@ -46,25 +46,27 @@ class SignalGenerator extends Component {
           />
         </div>
 
-        <div className="sgInput">
-          <div className="selectLabel">Signal frequency</div>
-          <ButtonSwitch
-            options={defaults.allFa}
-            startIndex={defaults.allFa.indexOf(defaults.Fa)}
-            handleChange={(val) =>
-              this.handleSelectChange('fa', val, this.props.handleFaChange)
-            }
-          />
-        </div>
-        <div className="sgInput">
-          <div className="selectLabel">Sampling frequency</div>
-          <ButtonSwitch
-            options={defaults.allFs}
-            startIndex={defaults.allFs.indexOf(defaults.Fs)}
-            handleChange={(val) =>
-              this.handleSelectChange('fs', val, this.props.handleFsChange)
-            }
-          />
+        <div className="flexparent">
+          <div className="sgInput">
+            <div className="selectLabel">Signal frequency</div>
+            <ButtonSwitch
+              options={defaults.allFa}
+              startIndex={defaults.allFa.indexOf(defaults.Fa)}
+              handleChange={(val) =>
+                this.handleSelectChange('fa', val, this.props.handleFaChange)
+              }
+            />
+          </div>
+          <div className="sgInput">
+            <div className="selectLabel">Sampling frequency</div>
+            <ButtonSwitch
+              options={defaults.allFs}
+              startIndex={defaults.allFs.indexOf(defaults.Fs)}
+              handleChange={(val) =>
+                this.handleSelectChange('fs', val, this.props.handleFsChange)
+              }
+            />
+          </div>
         </div>
       </div>
     );

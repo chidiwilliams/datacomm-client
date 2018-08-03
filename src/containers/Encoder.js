@@ -2,14 +2,14 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import defaults from '../config/defaults';
 import LabGroup from '../components/LabGroup';
+import ButtonCrement from './ButtonCrement';
 
 class Encoder extends Component {
   state = {
     type: defaults.encType,
   };
 
-  handleSelectChange = (evt) => {
-    const val = evt.target.value;
+  handleSelectChange = (val) => {
     this.setState({ type: val }, () => {
       this.props.handleEncChange(val);
     });
@@ -18,26 +18,15 @@ class Encoder extends Component {
   render() {
     return (
       <div>
-        <LabGroup title="Encoder" />
-        {
-          // <div className="specGrp">
-          //   <div className="specGrpLabel">Message input</div>
-          //   <button className="specGrpTrigger">>></button>
-          //   <FormControl className="">
-          //     <InputLabel htmlFor="enc">Scheme</InputLabel>
-          //     <Select
-          //       value={this.state.type}
-          //       onChange={this.handleSelectChange}
-          //       inputProps={{
-          //         name: 'enc',
-          //         id: 'enc',
-          //       }}
-          //     >
-          //       <MenuItem value={'hamm'}>Hamming (7,4)</MenuItem>
-          //     </Select>
-          //   </FormControl>
-          // </div>
-        }
+        <LabGroup
+          title="Encoder"
+          inputs={[
+            {
+              label: 'Scheme',
+              component: <ButtonCrement options={defaults.allEnc} handleChange={(idx) => this.handleSelectChange(defaults.allEnc[idx])} />,
+            },
+          ]}
+        />
       </div>
     );
   }

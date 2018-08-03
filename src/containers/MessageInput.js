@@ -7,8 +7,6 @@ import LabGroup from '../components/LabGroup';
 
 class MessageInput extends Component {
   static propTypes = {
-    classes: PropTypes.object.isRequired,
-    theme: PropTypes.object.isRequired,
     updateBits: PropTypes.func,
     updateFreq: PropTypes.func,
   };

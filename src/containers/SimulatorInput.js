@@ -66,12 +66,18 @@ export default class SimulatorInput extends Component {
   render() {
     return (
       <div>
-        <div style={{ display: 'flex', marginLeft: -2.5, marginRight: -2.5 }}>
+        <div
+          style={{
+            display: 'flex',
+            marginLeft: -2.5,
+            marginRight: -2.5,
+            flexWrap: 'wrap',
+          }}
+        >
           <div style={{ flex: 1, padding: 2.5 }}>
             <MessageInput
               updateFreq={this.handleFreqChange}
               updateBits={this.handleBitsChange}
-              // onSelect={this.}
             />
           </div>
           <div style={{ flex: 1, padding: 2.5 }}>

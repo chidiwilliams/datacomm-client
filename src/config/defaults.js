@@ -12,7 +12,8 @@ export default {
   allWaveshapes: ['sine', 'square', 'triangular'],
   allFs: [128, 256, 512, 1024, 2048],
   allFa: [1, 2, 4, 8, 16, 32],
+  allEnc: ['hamming'],
   encLength: 8,
-  apps: ['Simulator', 'Spectrometer'],
+  apps: ['simulator', 'spectrometer'],
   appIndex: 0,
 };

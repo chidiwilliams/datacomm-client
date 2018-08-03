@@ -24,7 +24,6 @@ class SimulatorGraphs extends Component {
             title={tGraph.tit}
             xinput={tGraph.x}
             yinput={tGraph.y}
-            ylabel={'Amplitude (V)'}
             id={1}
           />
         </Paper>
@@ -34,8 +33,7 @@ class SimulatorGraphs extends Component {
             title={fGraph.tit}
             xinput={fGraph.x}
             yinput={fGraph.y}
-            xmas={fGraph.xmas}
-            ylabel={'Magnitude'}
+            xmax={fGraph.xmas}
             id={2}
           />
         </Paper>

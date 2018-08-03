@@ -22,7 +22,7 @@ export default (arr, name) => {
       x: fx,
       y: fy,
       tit: name + ' signal frequency response',
-      xmas: 128,
+      xmax: 128,
     },
   };
 };

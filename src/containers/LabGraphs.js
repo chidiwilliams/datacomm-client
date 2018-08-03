@@ -14,7 +14,7 @@ export default class LabGraphs extends Component {
       x: PropTypes.arrayOf(PropTypes.number).isRequired,
       y: PropTypes.arrayOf(PropTypes.number).isRequired,
       tit: PropTypes.string.isRequired,
-      xmas: PropTypes.number,
+      xmax: PropTypes.number,
     }),
   };
 
@@ -33,7 +33,7 @@ export default class LabGraphs extends Component {
             height={'100%'}
             xinput={fGraph.x}
             yinput={fGraph.y}
-            xmas={fGraph.xmas}
+            xmax={fGraph.xmax}
           />
         </div>
       </div>

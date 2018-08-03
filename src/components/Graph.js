@@ -4,10 +4,14 @@ import Chart from 'chart.js';
 import './Graph.css';
 
 class Graph extends Component {
+  canvas = null;
+  ctx = null;
+  chartInstance = null;
+
   drawChart() {
     this.canvas = document.getElementById(this.props.id);
     this.ctx = this.canvas.getContext('2d');
-    this.chart = new Chart(this.ctx, {
+    this.chartInstance = new Chart(this.ctx, {
       type: 'line',
       data: {
         datasets: [
@@ -17,41 +21,24 @@ class Graph extends Component {
             borderWidth: 2,
             pointRadius: 0,
             data: this.props.yinput,
-            label: this.props.ylabel || null,
           },
         ],
         labels: this.props.xinput,
       },
       options: {
         maintainAspectRatio: false,
-        animation: 0,
-        elements: {
-          line: {
-            tension: 0,
-          },
-        },
-        title: {
-          // display: true,
-          // text: this.props.title,
-        },
-        legend: {
-          display: false,
-        },
+        // animation: 0,
+        elements: { line: { tension: 0 } },
+        title: {},
+        legend: { display: false },
         scales: {
           xAxes: [
             {
-              ticks: {
-                min: this.props.xmin || null,
-                max: this.props.xmas || null,
-              },
+              ticks: { max: this.props.xmas },
               gridLines: { color: 'rgba(255, 200, 200, 0.1)' },
             },
           ],
-          yAxes: [
-            {
-              gridLines: { color: 'rgba(255, 200, 200, 0.2)' },
-            },
-          ],
+          yAxes: [{ gridLines: { color: 'rgba(255, 200, 200, 0.2)' } }],
         },
       },
     });
@@ -67,10 +54,10 @@ class Graph extends Component {
       JSON.stringify(this.props.yinput) !== JSON.stringify(prevProps.yinput) ||
       JSON.stringify(this.props.title) !== JSON.stringify(prevProps.title)
     ) {
-      // This should be changed to updating the chart instead of redrawing,
-      // but I can't get the chart to respond to updating of the chart state.
-      // Redraw for now.
-      this.drawChart();
+      this.chartInstance.data.labels = this.props.xinput;
+      this.chartInstance.data.datasets[0].data = this.props.yinput;
+      this.chartInstance.options.scales.xAxes[0].ticks.max = this.props.xmax;
+      this.chartInstance.update();
     }
   }
 
@@ -97,7 +84,7 @@ Graph.propTypes = {
   xinput: PropTypes.array,
   yinput: PropTypes.array,
   ylabel: PropTypes.string,
-  xmas: PropTypes.number,
+  xmax: PropTypes.number,
   width: PropTypes.string,
   height: PropTypes.string,
 };

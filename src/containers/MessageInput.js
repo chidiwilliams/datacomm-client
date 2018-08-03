@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Bit4Input from './Bit4Input';
 import defaults from '../config/defaults';
 import ButtonCrement from './ButtonCrement';
+import LabGroup from '../components/LabGroup';
 
 class MessageInput extends Component {
   static propTypes = {
@@ -25,15 +26,28 @@ class MessageInput extends Component {
   };
 
   render() {
-    const { classes } = this.props;
-
     return (
       <div>
-        <Bit4Input onChangeBits={(bits) => this.updateBits(bits)} />
-        <ButtonCrement
-          options={defaults.allFs}
-          handleChange={(val) => this.updateFreq(val)}
-          startIndex={defaults.allFs.indexOf(defaults.Fs)}
+        <LabGroup
+          title="Message input"
+          inputs={[
+            {
+              label: 'Input bits',
+              component: (
+                <Bit4Input onChangeBits={(bits) => this.updateBits(bits)} />
+              ),
+            },
+            {
+              label: 'Sampling frequency',
+              component: (
+                <ButtonCrement
+                  options={defaults.allFs}
+                  handleChange={(val) => this.updateFreq(val)}
+                  startIndex={defaults.allFs.indexOf(defaults.Fs)}
+                />
+              ),
+            },
+          ]}
         />
       </div>
     );

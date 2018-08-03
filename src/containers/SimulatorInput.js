@@ -4,6 +4,7 @@ import MessageInput from './MessageInput';
 import defaults from '../config/defaults';
 import getGraphParams from '../utils/getGraphParams';
 import sampleMsg from '../utils/sampleMsg';
+import Encoder from './Encoder';
 
 export default class SimulatorInput extends Component {
   static propTypes = {
@@ -65,10 +66,18 @@ export default class SimulatorInput extends Component {
   render() {
     return (
       <div>
-        <MessageInput
-          updateFreq={this.handleFreqChange}
-          updateBits={this.handleBitsChange}
-        />
+        <div style={{ display: 'flex', marginLeft: -2.5, marginRight: -2.5 }}>
+          <div style={{ flex: 1, padding: 2.5 }}>
+            <MessageInput
+              updateFreq={this.handleFreqChange}
+              updateBits={this.handleBitsChange}
+              // onSelect={this.}
+            />
+          </div>
+          <div style={{ flex: 1, padding: 2.5 }}>
+            <Encoder />
+          </div>
+        </div>
       </div>
     );
   }

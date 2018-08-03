@@ -1,0 +1,45 @@
+.specLabel {
+  color: #666;
+  font-size: 13px;
+  margin-bottom: 3px;
+  text-shadow: 0 1px #f0f0f0;
+}
+
+.specInput {
+  margin-bottom: 10px;
+}
+
+.specInput:nth-last-of-type(1) {
+  margin-bottom: 0;
+}
+
+.specGrpLabel {
+  color: #666;
+  font-size: 14px;
+  margin-bottom: 5px;
+  text-shadow: 0 1px #f0f0f0;
+  font-weight: bold;
+  top: -9px;
+  position: absolute;
+  background: #dddddd;
+  padding: 0 2px;
+}
+
+.specGrpTrigger {
+  position: absolute;
+  top: -9px;
+  right: 5px;
+  border: 0;
+  padding: 2px 6px;
+  box-shadow: 0 2px #777;
+  background: #bbbbbb;
+  font-weight: bold;
+  color: #555555;
+}
+
+.specGrp {
+  padding: 12.5px 5px 5px;
+  position: relative;
+  border-radius: 3px;
+  border: 1px solid #bbbbbb;
+}

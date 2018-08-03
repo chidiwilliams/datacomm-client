@@ -34,18 +34,16 @@ export default class ButtonSelect extends Component {
 
   render() {
     return (
-      <div>
-        <div className="selectMain">
-          {this.opts.map((x, i) => (
-            <div className="btnP" key={i}>
-              <Button
-                text={x.display}
-                onClick={() => this.onChange(x.name)}
-                selected={this.state.selected === x.name}
-              />
-            </div>
-          ))}
-        </div>
+      <div className="selectMain">
+        {this.opts.map((x, i) => (
+          <div className="btnP" key={i}>
+            <Button
+              text={x.display}
+              onClick={() => this.onChange(x.name)}
+              selected={this.state.selected === x.name}
+            />
+          </div>
+        ))}
       </div>
     );
   }

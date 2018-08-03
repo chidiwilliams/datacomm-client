@@ -18,6 +18,8 @@ export default class LabGraphs extends Component {
     }),
   };
 
+  getRandomChartId = () => 'chart-' + parseInt(Math.random() * 100000);
+
   render() {
     const tGraph = this.props.tGraph || {};
     const fGraph = this.props.fGraph || {};
@@ -25,11 +27,16 @@ export default class LabGraphs extends Component {
     return (
       <div className="graphs">
         <div className="graph">
-          <Graph id={0} height={'100%'} xinput={tGraph.x} yinput={tGraph.y} />
+          <Graph
+            id={this.getRandomChartId()}
+            height={'100%'}
+            xinput={tGraph.x}
+            yinput={tGraph.y}
+          />
         </div>
         <div className="graph">
           <Graph
-            id={1}
+            id={this.getRandomChartId()}
             height={'100%'}
             xinput={fGraph.x}
             yinput={fGraph.y}

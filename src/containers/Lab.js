@@ -28,6 +28,10 @@ class Lab extends Component {
                   }
                   href="#"
                   key={i}
+                  onClick={(evt) => {
+                    evt.preventDefault();
+                    console.log(this.id);
+                  }}
                 >
                   {x}
                 </a>
@@ -44,7 +48,10 @@ class Lab extends Component {
               </div>
               <div className="right">
                 <div className="controls">
-                  <LabInput updateGraphs={this.updateGraphs} />
+                  <LabInput
+                    updateGraphs={this.updateGraphs}
+                    app={this.state.selectedApp}
+                  />
                 </div>
                 <div className="labHeader">DataComm Laboratory</div>
                 <div className="labAppTitle">Spectrometer</div>

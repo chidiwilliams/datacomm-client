@@ -22,24 +22,24 @@ class Lab extends Component {
           <div className="header">
             <div className="labApps">
               {defaults.apps.map((x, i) => (
-                <a
+                <button
                   className={
                     this.state.selectedApp === i ? 'labApp selected' : 'labApp'
                   }
-                  href="#"
                   key={i}
                   id={'lab-app-' + i}
                   onClick={(evt) => {
                     evt.preventDefault();
                     this.setState({
                       selectedApp: parseInt(
-                        evt.currentTarget.id.split('lab-app-')[1]
+                        evt.currentTarget.id.split('lab-app-')[1],
+                        10
                       ),
                     });
                   }}
                 >
                   {x}
-                </a>
+                </button>
               ))}
             </div>
           </div>

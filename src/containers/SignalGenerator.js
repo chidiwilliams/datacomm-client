@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import defaults from '../config/defaults';
 import ButtonSelect from './ButtonSelect';
-import ButtonSwitch from './ButtonSwitch';
+import ButtonCrement from './ButtonCrement';
 import './SignalGenerator.css';
 
 const styles = (theme) => ({
@@ -47,7 +47,7 @@ class SignalGenerator extends Component {
         <div className="flexparent">
           <div className="sgInput">
             <div className="selectLabel">Signal frequency</div>
-            <ButtonSwitch
+            <ButtonCrement
               options={defaults.allFa}
               startIndex={defaults.allFa.indexOf(defaults.Fa)}
               handleChange={(val) =>
@@ -57,7 +57,7 @@ class SignalGenerator extends Component {
           </div>
           <div className="sgInput">
             <div className="selectLabel">Sampling frequency</div>
-            <ButtonSwitch
+            <ButtonCrement
               options={defaults.allFs}
               startIndex={defaults.allFs.indexOf(defaults.Fs)}
               handleChange={(val) =>

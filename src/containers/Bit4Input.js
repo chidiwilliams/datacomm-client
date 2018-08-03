@@ -1,75 +1,52 @@
 import React, { Component } from 'react';
-import { withStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
-import FormControl from '@material-ui/core/FormControl';
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import Select from '@material-ui/core/Select';
 import defaults from '../config/defaults';
-
-const styles = (theme) => ({
-  inputbit: {
-    flex: 1,
-    margin: theme.spacing.unit,
-  },
-  formSpace: {
-    display: 'flex',
-    margin: [[theme.spacing.unit, -theme.spacing.unit]],
-  },
-});
+import Button from './Button';
 
 class Bit4Input extends Component {
-  state = {
-    bit1: defaults.bits[0],
-    bit2: defaults.bits[1],
-    bit3: defaults.bits[2],
-    bit4: defaults.bits[3],
+  static propTypes = {
+    onChangeBits: PropTypes.func,
+    initBits: PropTypes.string,
   };
 
-  handleChange = (event) => {
-    this.setState({ [event.target.name]: event.target.value }, () => {
+  state = {
+    bit0: defaults.bits[0],
+    bit1: defaults.bits[1],
+    bit2: defaults.bits[2],
+    bit3: defaults.bits[3],
+  };
+
+  handleChange = (i) => {
+    const bitno = `bit${i}`;
+    // Toggle button state
+    this.setState({ [bitno]: 1 - this.state[bitno] }, () =>
       this.props.onChangeBits([
+        this.state.bit0,
         this.state.bit1,
         this.state.bit2,
         this.state.bit3,
-        this.state.bit4,
-      ]);
-    });
+      ])
+    );
   };
 
   render() {
-    const { classes } = this.props;
-
     return (
-      <div>
-        <div className={classes.formSpace}>
-          {Array.apply(null, Array(4)).map((x, i) => (
-            <FormControl className={classes.inputbit} key={i}>
-              <InputLabel htmlFor="bit1">Bit {i + 1}</InputLabel>
-              <Select
-                value={this.state[`bit${i + 1}`]}
-                onChange={this.handleChange}
-                inputProps={{
-                  name: `bit${i + 1}`,
-                  id: `bit${i + 1}`,
-                }}
-              >
-                <MenuItem value={0}>0</MenuItem>
-                <MenuItem value={1}>1</MenuItem>
-              </Select>
-            </FormControl>
-          ))}
-        </div>
+      <div className="bit4inputs" style={{ display: 'flex', flexWrap: 'wrap' }}>
+        {Array.apply(null, Array(4)).map((x, i) => (
+          <div style={{ flex: '1 50px' }}>
+            <Button
+              key={i}
+              text={`Bit ${i}`}
+              // Check corresponding bit value in state
+              // Convert to opp. boolean
+              selected={!this.state[`bit${i}`]}
+              onClick={() => this.handleChange(i)}
+            />
+          </div>
+        ))}
       </div>
     );
   }
 }
 
-Bit4Input.propTypes = {
-  classes: PropTypes.object.isRequired,
-  theme: PropTypes.object.isRequired,
-  onChangeBits: PropTypes.func,
-  initBits: PropTypes.string,
-};
-
-export default withStyles(styles, { withTheme: true })(Bit4Input);
+export default Bit4Input;

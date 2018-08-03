@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import './ButtonSwitch.css';
+import './ButtonCrement.css';
 import Button from './Button';
 
-export default class ButtonSwitch extends Component {
+export default class ButtonCrement extends Component {
   static propTypes = {
     options: PropTypes.array.isRequired,
     startIndex: PropTypes.any,

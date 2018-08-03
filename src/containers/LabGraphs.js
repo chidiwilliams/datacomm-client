@@ -18,7 +18,7 @@ export default class LabGraphs extends Component {
     }),
   };
 
-  getRandomChartId = () => 'chart-' + parseInt(Math.random() * 100000);
+  getRandomChartId = () => 'chart-' + parseInt(Math.random() * 100000, 10);
 
   render() {
     const tGraph = this.props.tGraph || {};

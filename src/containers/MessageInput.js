@@ -1,31 +1,27 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import FormControl from '@material-ui/core/FormControl';
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import Select from '@material-ui/core/Select';
-import { withStyles } from '@material-ui/core/styles';
 import Bit4Input from './Bit4Input';
 import defaults from '../config/defaults';
-
-const styles = (theme) => ({
-  formControl: {
-    flex: 1,
-    margin: theme.spacing.unit,
-  },
-  formSpace: {
-    display: 'flex',
-    margin: [[theme.spacing.unit, -theme.spacing.unit]],
-  },
-});
+import ButtonCrement from './ButtonCrement';
 
 class MessageInput extends Component {
+  static propTypes = {
+    classes: PropTypes.object.isRequired,
+    theme: PropTypes.object.isRequired,
+    updateBits: PropTypes.func,
+    updateFreq: PropTypes.func,
+  };
+
   state = {
     freq: defaults.Fs,
   };
 
-  updateMsg = (type, val) => {
-    this.setState({ [type]: val }, () => this.props.updateMsg(type, val));
+  updateBits = (val) => {
+    this.setState({ bits: val }, () => this.props.updateBits(val));
+  };
+
+  updateFreq = (val) => {
+    this.setState({ freq: val }, () => this.props.updateFreq(val));
   };
 
   render() {
@@ -33,36 +29,15 @@ class MessageInput extends Component {
 
     return (
       <div>
-        <Bit4Input onChangeBits={(bits) => this.updateMsg('bits', bits)} />
-
-        <div className={classes.formSpace}>
-          <FormControl className={classes.formControl}>
-            <InputLabel htmlFor="freq">Sampling frequency</InputLabel>
-            <Select
-              value={this.state.freq}
-              onChange={(evt) => this.updateMsg('freq', evt.target.value)}
-              inputProps={{
-                name: 'freq',
-                id: 'freq',
-              }}
-            >
-              {defaults.allFs.slice(0).map((x, i) => (
-                <MenuItem value={x} key={i}>
-                  {x}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-        </div>
+        <Bit4Input onChangeBits={(bits) => this.updateBits(bits)} />
+        <ButtonCrement
+          options={defaults.allFs}
+          handleChange={(val) => this.updateFreq(val)}
+          startIndex={defaults.allFs.indexOf(defaults.Fs)}
+        />
       </div>
     );
   }
 }
 
-MessageInput.propTypes = {
-  classes: PropTypes.object.isRequired,
-  theme: PropTypes.object.isRequired,
-  updateMsg: PropTypes.func,
-};
-
-export default withStyles(styles, { withTheme: true })(MessageInput);
+export default MessageInput;

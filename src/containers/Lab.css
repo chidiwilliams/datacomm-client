@@ -19,18 +19,26 @@
   font-size: 14px;
 }
 
-.header .labApps a {
+.header .labApps button {
   text-decoration: none;
   color: currentColor;
-  padding: 0 10px;
-  margin: 0 10px;
+  padding: 0 20px;
+  margin: 0 5px;
   transition: 0.1s all;
   font-style: italic;
+  border: 0;
+  background: transparent;
+  height: 32px;
+  text-transform: uppercase;
+  font-weight: bold;
+  text-shadow: 0 1px #f0f0f0;
+  cursor: pointer;
 }
 
-.header .labApps a:hover,
-.header .labApps a:active,
-.header .labApps a.selected {
+.header .labApps button:hover,
+.header .labApps button:active,
+.header .labApps button.selected {
+  background: #e6e6e6;
   border-bottom: 2px solid #e00000;
 }
 

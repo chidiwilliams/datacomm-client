@@ -14,5 +14,5 @@ export default {
   allFa: [1, 2, 4, 8, 16, 32],
   encLength: 8,
   apps: ['Simulator', 'Spectrometer'],
-  appIndex: 1,
+  appIndex: 0,
 };

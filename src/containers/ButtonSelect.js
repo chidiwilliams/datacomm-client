@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import './ButtonSelect.css';
+import Button from './Button';
 
 export default class ButtonSelect extends Component {
   static propTypes = {
     onChange: PropTypes.func,
-    // prop: PropTypes
   };
 
   state = {
@@ -28,27 +28,24 @@ export default class ButtonSelect extends Component {
     },
   ];
 
-  onChange = (evt) => {
-    const name = evt.currentTarget.name;
+  onChange = (name) => {
     this.setState({ selected: name }, () => this.props.onChange(name));
   };
 
   render() {
     return (
-      <div className="selectMain">
-        {this.opts.map((x, i) => (
-          <div className="btnP">
-            <button
-              className={
-                x.name === this.state.selected ? 'button selected' : 'button'
-              }
-              name={x.name}
-              onClick={this.onChange}
-            >
-              <span>{x.display}</span>
-            </button>
-          </div>
-        ))}
+      <div>
+        <div className="selectMain">
+          {this.opts.map((x, i) => (
+            <div className="btnP" key={i}>
+              <Button
+                text={x.display}
+                onClick={() => this.onChange(x.name)}
+                selected={this.state.selected === x.name}
+              />
+            </div>
+          ))}
+        </div>
       </div>
     );
   }

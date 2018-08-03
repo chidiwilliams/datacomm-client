@@ -1,0 +1,28 @@
+.button {
+  box-shadow: 0 7px 0 #777777, 0 8px 3px -1px rgba(0, 0, 0, 0.2);
+  height: 40px;
+  transition: 0.15s all;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #555555;
+  background: #bbbbbb;
+  width: 100%;
+  position: relative;
+  cursor: pointer;
+  outline: none;
+  border: 0;
+  z-index: 2;
+}
+
+.button:active,
+.button.selected {
+  box-shadow: 0 2px 0 #777777, 0 3px 3px -1px rgba(0, 0, 0, 0.2);
+  top: 5px;
+  z-index: 1;
+  color: #888888;
+}
+
+.button:focus,
+.button:hover {
+  background: #cccccc;
+}

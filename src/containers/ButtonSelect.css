@@ -1,28 +1,11 @@
 .selectMain {
-  margin: 0 -5px;
   display: flex;
   flex-wrap: wrap;
 }
 
-.button {
-  height: 40px;
-  font-weight: bold;
-  text-transform: uppercase;
-  color: #555;
-  background: #bbb;
-  width: 100%;
-  box-shadow: inset 1px 1px 3px;
-  cursor: pointer;
-  border: 1px solid #b3b3b3;
-  border-radius: 3px;
-}
-
-.button.selected {
-  box-shadow: 1px 1px 3px;
-}
 
 .btnP {
   flex: 1;
-  padding: 0 5px;
   display: inline-block;
+  margin-bottom: 8px;
 }

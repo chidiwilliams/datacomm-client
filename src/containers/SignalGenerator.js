@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import FormControl from '@material-ui/core/FormControl';
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import Select from '@material-ui/core/Select';
 import { withStyles } from '@material-ui/core/styles';
 import defaults from '../config/defaults';
 import ButtonSelect from './ButtonSelect';
+import ButtonSwitch from './ButtonSwitch';
+import './SignalGenerator.css';
 
 const styles = (theme) => ({
   formControl: {
@@ -35,62 +33,38 @@ class SignalGenerator extends Component {
 
     return (
       <div>
-        <ButtonSelect
-          onChange={(val) =>
-            this.handleSelectChange(
-              'waveshape',
-              val,
-              this.props.handleTypeChange
-            )
-          }
-        />
-        <div className={classes.formSpace}>
-          <FormControl className={classes.formControl}>
-            <InputLabel htmlFor="freq">Sampling frequency</InputLabel>
-            <Select
-              value={this.state.fs}
-              onChange={(evt) =>
-                this.handleSelectChange(
-                  'fs',
-                  evt.target.value,
-                  this.props.handleFsChange
-                )
-              }
-              inputProps={{
-                name: 'fs',
-                id: 'fs',
-              }}
-            >
-              {defaults.allFs.slice().map((x, i) => (
-                <MenuItem value={x} key={i}>
-                  {x}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-          <FormControl className={classes.formControl}>
-            <InputLabel htmlFor="freq">Signal frequency</InputLabel>
-            <Select
-              value={this.state.fa}
-              onChange={(evt) =>
-                this.handleSelectChange(
-                  'fa',
-                  evt.target.value,
-                  this.props.handleFaChange
-                )
-              }
-              inputProps={{
-                name: 'da',
-                id: 'da',
-              }}
-            >
-              {defaults.allFa.slice().map((x, i) => (
-                <MenuItem value={x} key={i}>
-                  {x}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
+        <div className="sgInput">
+          <div className="selectLabel">Waveshape</div>
+          <ButtonSelect
+            onChange={(val) =>
+              this.handleSelectChange(
+                'waveshape',
+                val,
+                this.props.handleTypeChange
+              )
+            }
+          />
+        </div>
+
+        <div className="sgInput">
+          <div className="selectLabel">Signal frequency</div>
+          <ButtonSwitch
+            options={defaults.allFa}
+            startIndex={defaults.allFa.indexOf(defaults.Fa)}
+            handleChange={(val) =>
+              this.handleSelectChange('fa', val, this.props.handleFaChange)
+            }
+          />
+        </div>
+        <div className="sgInput">
+          <div className="selectLabel">Sampling frequency</div>
+          <ButtonSwitch
+            options={defaults.allFs}
+            startIndex={defaults.allFs.indexOf(defaults.Fs)}
+            handleChange={(val) =>
+              this.handleSelectChange('fs', val, this.props.handleFsChange)
+            }
+          />
         </div>
       </div>
     );

@@ -5,15 +5,15 @@ import './Graph.css';
 
 class Graph extends Component {
   drawChart() {
-    const ctx = document.getElementById(this.props.id).getContext('2d');
-    new Chart(ctx, {
+    this.canvas = document.getElementById(this.props.id);
+    this.ctx = this.canvas.getContext('2d');
+    this.chart = new Chart(this.ctx, {
       type: 'line',
       data: {
         datasets: [
           {
-            // fill: false,
-            borderColor: 'rgba(200, 0, 0, 1)',
-            backgroundColor: 'rgba(200, 0, 0, 0.2)',
+            borderColor: 'rgba(255, 0, 0, 1)',
+            backgroundColor: 'rgba(255, 0, 0, 0.15)',
             borderWidth: 2,
             pointRadius: 0,
             data: this.props.yinput,
@@ -36,9 +36,6 @@ class Graph extends Component {
         },
         legend: {
           display: false,
-          labels: {
-            fontColor: 'rgba(200, 0, 0, 1)',
-          },
         },
         scales: {
           xAxes: [
@@ -95,14 +92,14 @@ class Graph extends Component {
 }
 
 Graph.propTypes = {
-  title: PropTypes.string.isRequired,
+  title: PropTypes.string,
   id: PropTypes.number.isRequired,
-  xinput: PropTypes.array.isRequired,
-  yinput: PropTypes.array.isRequired,
+  xinput: PropTypes.array,
+  yinput: PropTypes.array,
   ylabel: PropTypes.string,
   xmas: PropTypes.number,
-  width: PropTypes.number,
-  height: PropTypes.number,
+  width: PropTypes.string,
+  height: PropTypes.string,
 };
 
 export default Graph;

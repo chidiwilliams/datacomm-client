@@ -30,11 +30,13 @@ class Lab extends Component {
                 />
               </div>
               <div className="right">
-                <div className="labHeader">
-                  <div className="labTitle">DataComm Laboratory</div>
-                  <div className="labAppTitle">Spectrometer</div>
+                <div className="controls">
+                  <div className="labHeader">
+                    <div className="labTitle">DataComm Laboratory</div>
+                    <div className="labAppTitle">Spectrometer</div>
+                  </div>
+                  <LabInput updateGraphs={this.updateGraphs} />
                 </div>
-                <LabInput updateGraphs={this.updateGraphs} />
               </div>
             </div>
           </div>

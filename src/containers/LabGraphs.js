@@ -9,13 +9,13 @@ export default class LabGraphs extends Component {
       x: PropTypes.arrayOf(PropTypes.number).isRequired,
       y: PropTypes.arrayOf(PropTypes.number).isRequired,
       tit: PropTypes.string.isRequired,
-    }).isRequired,
+    }),
     fGraph: PropTypes.shape({
       x: PropTypes.arrayOf(PropTypes.number).isRequired,
       y: PropTypes.arrayOf(PropTypes.number).isRequired,
       tit: PropTypes.string.isRequired,
       xmas: PropTypes.number,
-    }).isRequired,
+    }),
   };
 
   render() {

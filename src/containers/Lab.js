@@ -16,6 +16,9 @@ class Lab extends Component {
   };
 
   render() {
+    // TODO: Add default graph
+    const graphs = this.state.graphs || defaults.graph;
+
     return (
       <div className="main">
         <div className="container">
@@ -46,10 +49,7 @@ class Lab extends Component {
           <div className="osc">
             <div className="uprising">
               <div className="left">
-                <LabGraphs
-                  tGraph={this.state.graphs.t}
-                  fGraph={this.state.graphs.f}
-                />
+                <LabGraphs tGraph={graphs.t} fGraph={graphs.f} />
               </div>
               <div className="right">
                 <div className="controls">

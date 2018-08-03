@@ -16,4 +16,5 @@ export default {
   encLength: 8,
   apps: ['simulator', 'spectrometer'],
   appIndex: 0,
+  graph: { t: { x: [0], y: [0] }, f: { x: [0], y: [0] } },
 };

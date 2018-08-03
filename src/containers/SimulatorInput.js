@@ -59,6 +59,10 @@ export default class SimulatorInput extends Component {
     }
   };
 
+  switchGraph = (id) => {
+    this.setState({ currentGraph: id }, () => this.updateGraphs());
+  };
+
   componentWillMount() {
     this.updateGraphs();
   }
@@ -78,10 +82,11 @@ export default class SimulatorInput extends Component {
             <MessageInput
               updateFreq={this.handleFreqChange}
               updateBits={this.handleBitsChange}
+              onGrpLaunch={() => this.switchGraph(0)}
             />
           </div>
           <div style={{ flex: 1, padding: 2.5 }}>
-            <Encoder />
+            <Encoder onGrpLaunch={() => this.switchGraph(1)} />
           </div>
         </div>
       </div>

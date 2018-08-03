@@ -29,8 +29,6 @@ class SignalGenerator extends Component {
   };
 
   render() {
-    const { classes } = this.props;
-
     return (
       <div>
         <div className="sgInput">

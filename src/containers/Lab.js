@@ -1,51 +1,46 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
-import Simulator from './Simulator';
-import Spectrometer from './Spectrometer';
-import Header from './Header';
+import React, { Component } from 'react';
+import LabGraphs from './LabGraphs';
+import './defaults.css';
 import './Lab.css';
-import Test from './Test';
+import LabInput from './LabInput';
 
-const styles = (theme) => ({
-  main: {
-    padding: [[30, 0]],
-  },
-});
+const styles = () => ({});
 
-class Lab extends React.Component {
+class Lab extends Component {
   state = {
-    selectedApp: 2,
+    graphs: {},
   };
 
-  apps = {
-    0: <Simulator />,
-    1: <Spectrometer />,
-    2: <Test />,
+  updateGraphs = (graphs) => {
+    this.setState({ graphs: graphs });
   };
-
-  switchApp = (id) => this.setState({ selectedApp: id });
 
   render() {
-    const { classes } = this.props;
-    const getSelectedApp = this.apps[this.state.selectedApp];
-
     return (
-      <div>
-        {
-          // <Header switchApp={this.switchApp} />
-        }
-        <main className={classes.main}>
-          <div className="container">{getSelectedApp}</div>
-        </main>
+      <div className="main">
+        <div className="container">
+          <div className="osc">
+            <div className="uprising">
+              <div className="left">
+                <LabGraphs
+                  tGraph={this.state.graphs.t}
+                  fGraph={this.state.graphs.f}
+                />
+              </div>
+              <div className="right">
+                <div className="controls">
+                  <LabInput updateGraphs={this.updateGraphs} />
+                </div>
+                <div className="labHeader">DataComm Laboratory</div>
+                <div className="labAppTitle">Spectrometer</div>
+              </div>
+            </div>
+          </div>
+          <div className="oscShadow" />
+        </div>
       </div>
     );
   }
 }
 
-Lab.propTypes = {
-  classes: PropTypes.object.isRequired,
-  theme: PropTypes.object.isRequired,
-};
-
-export default withStyles(styles, { withTheme: true })(Lab);
+export default Lab;

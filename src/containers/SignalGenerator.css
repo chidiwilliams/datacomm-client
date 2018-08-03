@@ -1,11 +1,12 @@
-.sgInput {
-  margin-bottom: 15px;
-  flex: 1;
-}
-
 .flexparent {
   display: flex;
+  flex-wrap: wrap;
   margin: 0 -10px;
+}
+
+.sgInput {
+  margin-bottom: 20px;
+  flex: 1;
 }
 
 .flexparent .sgInput {

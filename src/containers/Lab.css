@@ -1,10 +1,46 @@
+.main {
+  padding-bottom: 10px;
+  padding-top: 20px;
+  background-color: #eeeeee;
+}
+
+.header {
+  height: 30px;
+  line-height: 30px;
+  margin-bottom: 30px;
+}
+
+.header .labApps {
+  display: flex;
+  float: right;
+  text-transform: uppercase;
+  font-weight: bold;
+  color: #555555;
+  font-size: 14px;
+}
+
+.header .labApps a {
+  text-decoration: none;
+  color: currentColor;
+  padding: 0 10px;
+  margin: 0 10px;
+  transition: 0.1s all;
+  font-style: italic;
+}
+
+.header .labApps a:hover,
+.header .labApps a:active,
+.header .labApps a.selected {
+  border-bottom: 2px solid #e00000;
+}
+
 .osc {
   background-color: #f7f7f7;
   height: 1000px;
   border-radius: 5px;
   margin: 20px;
   box-shadow: 0 0 0 2px #888, 0 0 0 11px #666, 0 0 0 13px #444, 0 0 0 17px #888,
-    0 0 0 20px #ccc;
+    0 0 0 20px #cccccc;
   padding: 15px;
 }
 
@@ -91,10 +127,4 @@
   transform: translate(-50%, -50%);
   width: calc(100% - 30px);
   position: absolute;
-}
-
-.main {
-  padding-top: 40px;
-  padding-bottom: 1px;
-  background-color: #eeeeee;
 }

@@ -3,12 +3,12 @@ import LabGraphs from './LabGraphs';
 import './defaults.css';
 import './Lab.css';
 import LabInput from './LabInput';
-
-const styles = () => ({});
+import defaults from '../config/defaults';
 
 class Lab extends Component {
   state = {
     graphs: {},
+    selectedApp: defaults.appIndex,
   };
 
   updateGraphs = (graphs) => {
@@ -19,6 +19,21 @@ class Lab extends Component {
     return (
       <div className="main">
         <div className="container">
+          <div className="header">
+            <div className="labApps">
+              {defaults.apps.map((x, i) => (
+                <a
+                  className={
+                    this.state.selectedApp === i ? 'labApp selected' : 'labApp'
+                  }
+                  href="#"
+                  key={i}
+                >
+                  {x}
+                </a>
+              ))}
+            </div>
+          </div>
           <div className="osc">
             <div className="uprising">
               <div className="left">

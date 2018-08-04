@@ -13,6 +13,9 @@ import { demodBPSK } from '../utils/demodulate';
 import { lowPass } from '../utils/filter';
 import threshold from '../utils/threshold';
 import { decHamming } from '../utils/decode';
+import LabInputSection from '../components/LabInputSection';
+import LabInput from '../components/LabInput';
+import LabInputColumn from '../components/LabInputColumn';
 
 export default class SimulatorInput extends Component {
   static propTypes = {
@@ -160,9 +163,9 @@ export default class SimulatorInput extends Component {
 
   render() {
     return (
-      <div className="labInput">
-        <div className="labInputColumn">
-          <div className="labInputSection">
+      <LabInput>
+        <LabInputColumn>
+          <LabInputSection>
             <LabGroup
               title="1. Message input"
               onGrpLaunch={() => this.switchGraph(0)}
@@ -189,8 +192,8 @@ export default class SimulatorInput extends Component {
                 },
               ]}
             />
-          </div>
-          <div className="labInputSection">
+          </LabInputSection>
+          <LabInputSection>
             <LabGroup
               title="4. Channel"
               onGrpLaunch={() => this.switchGraph(3)}
@@ -223,27 +226,27 @@ export default class SimulatorInput extends Component {
                 },
               ]}
             />
-          </div>
-          <div className="labInputSection">
+          </LabInputSection>
+          <LabInputSection>
             <LabGroup
               title="7. Thresholder"
               onGrpLaunch={() => this.switchGraph(6)}
               selected={this.state.currentGraph === 6}
               animated={this.state.currentGraph !== 6}
             />
-          </div>
-          <div className="labInputSection">
+          </LabInputSection>
+          <LabInputSection>
             <LabGroup
               title="8. Decoder"
               onGrpLaunch={() => this.switchGraph(7)}
               selected={this.state.currentGraph === 7}
               animated={this.state.currentGraph !== 7}
             />
-          </div>
-        </div>
+          </LabInputSection>
+        </LabInputColumn>
 
-        <div className="labInputColumn">
-          <div className="labInputSection">
+        <LabInputColumn>
+          <LabInputSection>
             <LabGroup
               title="2. Encoder"
               onGrpLaunch={() => this.switchGraph(1)}
@@ -261,8 +264,8 @@ export default class SimulatorInput extends Component {
                 },
               ]}
             />
-          </div>
-          <div className="labInputSection">
+          </LabInputSection>
+          <LabInputSection>
             <LabGroup
               title="3. Modulator"
               onGrpLaunch={() => this.switchGraph(2)}
@@ -280,16 +283,16 @@ export default class SimulatorInput extends Component {
                 },
               ]}
             />
-          </div>
-          <div className="labInputSection">
+          </LabInputSection>
+          <LabInputSection>
             <LabGroup
               title="5. Demodulator"
               onGrpLaunch={() => this.switchGraph(4)}
               selected={this.state.currentGraph === 4}
               animated={this.state.currentGraph !== 4}
             />
-          </div>
-          <div className="labInputSection">
+          </LabInputSection>
+          <LabInputSection>
             <LabGroup
               title="6. Low pass filter"
               onGrpLaunch={() => this.switchGraph(5)}
@@ -317,9 +320,9 @@ export default class SimulatorInput extends Component {
                 },
               ]}
             />
-          </div>
-        </div>
-      </div>
+          </LabInputSection>
+        </LabInputColumn>
+      </LabInput>
     );
   }
 }

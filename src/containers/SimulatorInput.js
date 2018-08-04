@@ -8,7 +8,7 @@ import { modBPSK } from '../utils/modulate';
 import LabGroup from '../components/LabGroup';
 import ButtonCrement from './ButtonCrement';
 import Bit4Input from './Bit4Input';
-import { doAWGN } from '../utils/impairment';
+import { doAWGN, getAWGN, addAWGN } from '../utils/impairment';
 import { demodBPSK } from '../utils/demodulate';
 import { lowPass } from '../utils/filter';
 import threshold from '../utils/threshold';
@@ -34,10 +34,8 @@ export default class SimulatorInput extends Component {
     taps: defaults.taps,
   };
 
-  handleBitsChange = (val) => {
+  handleBitsChange = (val) =>
     this.setState({ bits: val }, () => this.updateGraphs());
-  };
-
   handleFreqChange = (val) =>
     this.setState({ freq: val }, () => this.updateGraphs());
   handleEncChange = (val) =>
@@ -55,7 +53,7 @@ export default class SimulatorInput extends Component {
 
   doHamming = () => encHamming(this.state.bits, this.state.freq);
   modBPSK = () => modBPSK(this.doHamming());
-  addImp = () => doAWGN(this.modBPSK(), this.state.impPower);
+  addImp = () => addAWGN(this.modBPSK(), this.awgn, this.state.impPower);
   demod = () => demodBPSK(this.doHamming(), this.addImp());
   filter = () => lowPass(this.demod(), this.state.taps, this.state.cutoff);
   thresh = () => threshold(this.filter());
@@ -157,6 +155,7 @@ export default class SimulatorInput extends Component {
   };
 
   componentWillMount() {
+    this.awgn = getAWGN(defaults.allFs[defaults.allFs.length - 1]);
     this.updateGraphs();
   }
 

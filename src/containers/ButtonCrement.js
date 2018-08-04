@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import './ButtonCrement.css';
 import Button from '../components/Button';
+import ButtonDisplay from '../components/ButtonDisplay';
 
 export default class ButtonCrement extends Component {
   static propTypes = {
@@ -46,7 +47,11 @@ export default class ButtonCrement extends Component {
             selected={this.state.selected === 0}
           />
         </div>
-        <div className="display">{this.props.options[this.state.selected]}</div>
+        <div className="bbtn">
+          <ButtonDisplay
+            text={this.props.options[this.state.selected].toString()}
+          />
+        </div>
         <div className="bbtn">
           <Button
             text={'+'}

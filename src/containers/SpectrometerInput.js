@@ -51,12 +51,18 @@ export default class SpectrometerInput extends Component {
         <LabInputColumn>
           <LabInputSection>
             <LabGroup
-              title="Spectrometer"
+              title="1. Signal generator"
               selected
               inputs={[
                 {
                   label: 'Waveshape',
-                  component: <ButtonSelect onChange={this.handleTypeChange} />,
+                  component: (
+                    <ButtonSelect
+                      options={defaults.allWaveshapes}
+                      defaultIndex={defaults.waveshape}
+                      onChange={this.handleTypeChange}
+                    />
+                  ),
                 },
                 {
                   label: 'Signal frequency',
@@ -82,6 +88,7 @@ export default class SpectrometerInput extends Component {
             />
           </LabInputSection>
         </LabInputColumn>
+        <LabInputColumn />
       </LabInput>
     );
   }

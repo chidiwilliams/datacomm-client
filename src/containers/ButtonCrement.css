@@ -5,19 +5,3 @@
 .bbtn {
   flex: 1;
 }
-
-.display {
-  flex: 2;
-  height: 40px;
-  line-height: 40px;
-  width: 100px;
-  background: #101010;
-  color: #c80000;
-  box-shadow: 0 7px 0 #060606, 0 8px 3px -1px rgba(0, 0, 0, 0.2);
-  z-index: 3;
-  font-weight: bold;
-  display: inline-block;
-  text-align: center;
-  text-transform: uppercase;
-  font-size: 14px;
-}

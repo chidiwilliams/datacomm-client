@@ -1,0 +1,15 @@
+.graphs {
+  background-color: #101010;
+  border-radius: 5px;
+  height: 100%;
+  border: 2px solid #666;
+}
+
+.graph {
+  padding: 20px 20px 5px 15px;
+  height: 50%;
+}
+
+.graph:nth-child(1) {
+  border-bottom: 2px solid #666666;
+}

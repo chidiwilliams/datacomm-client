@@ -6,14 +6,19 @@ export default class Button extends Component {
   static propTypes = {
     text: PropTypes.string,
     selected: PropTypes.bool,
+    animated: PropTypes.bool,
     onClick: PropTypes.func,
     style: PropTypes.object,
   };
 
   render() {
+    const classes = ['button'];
+    this.props.selected ? classes.push('selected') : null;
+    this.props.animated ? classes.push('bouncing') : null;
+
     return (
       <button
-        className={this.props.selected ? 'button selected' : 'button'}
+        className={classes.join(' ')}
         onClick={this.props.onClick}
         style={{ ...this.props.style }}
       >

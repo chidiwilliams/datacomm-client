@@ -28,6 +28,37 @@
   background: #cccccc;
 }
 
+.button.bouncing {
+  animation: bounceBig 1.5s infinite;
+}
+
 .button.selected span {
   text-shadow: 0 1px #d6d6d6;
+}
+
+.button.selected.bouncing {
+  animation: bounceSmall 1s infinite;
+}
+
+@keyframes bounceBig {
+  from {
+    box-shadow: 0 7px 0 #777777;
+    z-index: 2;
+  }
+  to {
+    box-shadow: 0 6px 0 #777777;
+    top: 1px;
+    z-index: 1;
+  }
+}
+
+@keyframes bounceSmall {
+  from {
+    box-shadow: 0 2px 0 #777777;
+    top: 5px;
+  }
+  to {
+    box-shadow: 0 0px 0 #777777;
+    top: 7px;
+  }
 }

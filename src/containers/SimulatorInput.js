@@ -168,6 +168,7 @@ export default class SimulatorInput extends Component {
               title="1. Message input"
               onGrpLaunch={() => this.switchGraph(0)}
               selected={this.state.currentGraph === 0}
+              animated={this.state.currentGraph !== 0}
               inputs={[
                 {
                   label: 'Input bits',
@@ -195,6 +196,7 @@ export default class SimulatorInput extends Component {
               title="4. Channel"
               onGrpLaunch={() => this.switchGraph(3)}
               selected={this.state.currentGraph === 3}
+              animated={this.state.currentGraph !== 3}
               inputs={[
                 {
                   label: 'Impairment type',
@@ -228,6 +230,7 @@ export default class SimulatorInput extends Component {
               title="7. Thresholder"
               onGrpLaunch={() => this.switchGraph(6)}
               selected={this.state.currentGraph === 6}
+              animated={this.state.currentGraph !== 6}
             />
           </div>
           <div className="simulatorInputSection">
@@ -235,6 +238,7 @@ export default class SimulatorInput extends Component {
               title="8. Decoder"
               onGrpLaunch={() => this.switchGraph(7)}
               selected={this.state.currentGraph === 7}
+              animated={this.state.currentGraph !== 7}
             />
           </div>
         </div>
@@ -245,6 +249,7 @@ export default class SimulatorInput extends Component {
               title="2. Encoder"
               onGrpLaunch={() => this.switchGraph(1)}
               selected={this.state.currentGraph === 1}
+              animated={this.state.currentGraph !== 1}
               inputs={[
                 {
                   label: 'Scheme',
@@ -263,6 +268,7 @@ export default class SimulatorInput extends Component {
               title="3. Modulator"
               onGrpLaunch={() => this.switchGraph(2)}
               selected={this.state.currentGraph === 2}
+              animated={this.state.currentGraph !== 2}
               inputs={[
                 {
                   label: 'Modulation scheme',
@@ -281,6 +287,7 @@ export default class SimulatorInput extends Component {
               title="5. Demodulator"
               onGrpLaunch={() => this.switchGraph(4)}
               selected={this.state.currentGraph === 4}
+              animated={this.state.currentGraph !== 4}
             />
           </div>
           <div className="simulatorInputSection">
@@ -288,6 +295,7 @@ export default class SimulatorInput extends Component {
               title="6. Low pass filter"
               onGrpLaunch={() => this.switchGraph(5)}
               selected={this.state.currentGraph === 5}
+              animated={this.state.currentGraph !== 5}
               inputs={[
                 {
                   label: 'Number of filter taps',

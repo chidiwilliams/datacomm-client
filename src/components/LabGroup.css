@@ -31,7 +31,7 @@
 
 .specGrpTrigger {
   position: absolute;
-  top: -12px;
+  top: -15px;
   right: 5px;
   border: 0;
   padding: 2px 20px;
@@ -44,12 +44,16 @@
 
 .specGrpTrigger.selected {
   box-shadow: 0 1px #777;
-  top: calc(-12px + 3px);
+  top: calc(-15px + 3px);
 }
 
 .specGrp {
   padding: 12.5px 5px 5px;
   position: relative;
   border-radius: 3px;
-  border: 1px solid #bbbbbb;
+  border: 1px solid #666666;
+}
+
+.specGrp.selected {
+  border: 1px solid #ff0000;
 }

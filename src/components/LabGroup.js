@@ -8,13 +8,14 @@ export default class LabGroup extends Component {
     title: PropTypes.string,
     onGrpLaunch: PropTypes.func,
     selected: PropTypes.bool,
+    animated: PropTypes.bool,
     // TODO: Tighten reqs
     inputs: PropTypes.array,
   };
 
   render() {
     return (
-      <div className="specGrp">
+      <div className={this.props.selected ? 'specGrp selected' : 'specGrp'}>
         <div className="specGrpLabel">{this.props.title}</div>
         <div
           className="trigger"
@@ -24,6 +25,7 @@ export default class LabGroup extends Component {
             text={'>>'}
             style={{ height: 20, width: 60 }}
             selected={this.props.selected}
+            animated={this.props.animated}
             onClick={(evt) => {
               if (this.props.onGrpLaunch) this.props.onGrpLaunch(evt);
             }}

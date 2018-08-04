@@ -7,6 +7,7 @@ export default class Button extends Component {
     text: PropTypes.string,
     selected: PropTypes.bool,
     onClick: PropTypes.func,
+    style: PropTypes.object,
   };
 
   render() {
@@ -14,6 +15,7 @@ export default class Button extends Component {
       <button
         className={this.props.selected ? 'button selected' : 'button'}
         onClick={this.props.onClick}
+        style={{ ...this.props.style }}
       >
         <span>{this.props.text}</span>
       </button>

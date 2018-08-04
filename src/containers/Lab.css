@@ -1,6 +1,6 @@
 .main {
   padding-bottom: 10px;
-  padding-top: 20px;
+  padding-top: 15px;
   background-color: #eeeeee;
 }
 
@@ -20,6 +20,7 @@
 }
 
 .header .labApps button {
+  outline: 0;
   text-decoration: none;
   color: currentColor;
   padding: 0 20px;
@@ -35,10 +36,14 @@
   cursor: pointer;
 }
 
+.header .labApps button:focus {
+  border-bottom: 2px solid #e00000;
+  background: #e6e6e6;
+}
+
 .header .labApps button:hover,
 .header .labApps button:active,
 .header .labApps button.selected {
-  background: #e6e6e6;
   border-bottom: 2px solid #e00000;
 }
 

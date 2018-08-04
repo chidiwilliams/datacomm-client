@@ -1,9 +1,9 @@
 .button {
-  box-shadow: 0 7px 0 #777777;
-  height: 40px;
+  box-shadow: 0 7px 0 #777777, inset 0 4px 0px -2px #d2d2d2;
   transition: 0.15s all;
   font-weight: bold;
   text-transform: uppercase;
+  height: 40px;
   color: #555555;
   background: #bbbbbb;
   width: 100%;

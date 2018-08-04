@@ -47,6 +47,7 @@ export default class SpectrometerInput extends Component {
       <div>
         <LabGroup
           title="Spectrometer"
+          selected
           inputs={[
             {
               label: 'Waveshape',

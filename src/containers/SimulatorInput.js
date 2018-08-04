@@ -13,6 +13,7 @@ import { demodBPSK } from '../utils/demodulate';
 import { lowPass } from '../utils/filter';
 import threshold from '../utils/threshold';
 import { decHamming } from '../utils/decode';
+import './SimulatorInput.css';
 
 export default class SimulatorInput extends Component {
   static propTypes = {
@@ -161,160 +162,155 @@ export default class SimulatorInput extends Component {
 
   render() {
     return (
-      <div>
-        <div
-          style={{
-            display: 'flex',
-            marginLeft: -2.5,
-            marginRight: -2.5,
-            flexWrap: 'wrap',
-          }}
-        >
-          <div style={{ flex: 1, padding: 2.5 }}>
-            <div style={{ marginBottom: 12.5 }}>
-              <LabGroup
-                title="1. Message input"
-                onGrpLaunch={() => this.switchGraph(0)}
-                selected={this.state.currentGraph === 0}
-                inputs={[
-                  {
-                    label: 'Input bits',
-                    component: (
-                      <Bit4Input
-                        onChangeBits={(bits) => this.handleBitsChange(bits)}
-                      />
-                    ),
-                  },
-                  {
-                    label: 'Sampling frequency',
-                    component: (
-                      <ButtonCrement
-                        options={defaults.allFs}
-                        startIndex={defaults.allFs.indexOf(defaults.Fs)}
-                        handleChange={(val) => this.handleFreqChange(val)}
-                      />
-                    ),
-                  },
-                ]}
-              />
-            </div>
-            <div style={{ marginBottom: 12.5 }}>
-              <LabGroup
-                title="4. Channel"
-                onGrpLaunch={() => this.switchGraph(3)}
-                selected={this.state.currentGraph === 3}
-                inputs={[
-                  {
-                    label: 'Impairment type',
-                    component: (
-                      <ButtonCrement
-                        options={defaults.allImpTypes}
-                        handleChange={(val) => this.handleImpTypeChange(val)}
-                      />
-                    ),
-                  },
-                  {
-                    label: 'Impairment power',
-                    component: (
-                      <ButtonCrement
-                        options={Array.apply(null, Array(10)).map(
-                          (x, i) => i / 2
-                        )}
-                        handleChange={(val) => this.handleImpPowerChange(val)}
-                      />
-                    ),
-                  },
-                ]}
-              />
-            </div>
-            <div style={{ marginBottom: 12.5 }}>
-              <LabGroup
-                title="7. Threshold detection"
-                onGrpLaunch={() => this.switchGraph(6)}
-                selected={this.state.currentGraph === 6}
-              />
-            </div>
-            <div style={{ marginBottom: 12.5 }}>
-              <LabGroup
-                title="8. Decoding"
-                onGrpLaunch={() => this.switchGraph(7)}
-                selected={this.state.currentGraph === 7}
-              />
-            </div>
+      <div className="simulatorInput">
+        <div className="simulatorInputColumn">
+          <div className="simulatorInputSection">
+            <LabGroup
+              title="1. Message input"
+              onGrpLaunch={() => this.switchGraph(0)}
+              selected={this.state.currentGraph === 0}
+              inputs={[
+                {
+                  label: 'Input bits',
+                  component: (
+                    <Bit4Input
+                      onChangeBits={(bits) => this.handleBitsChange(bits)}
+                    />
+                  ),
+                },
+                {
+                  label: 'Sampling frequency',
+                  component: (
+                    <ButtonCrement
+                      options={defaults.allFs}
+                      startIndex={defaults.allFs.indexOf(defaults.Fs)}
+                      handleChange={(val) => this.handleFreqChange(val)}
+                    />
+                  ),
+                },
+              ]}
+            />
           </div>
+          <div className="simulatorInputSection">
+            <LabGroup
+              title="4. Channel"
+              onGrpLaunch={() => this.switchGraph(3)}
+              selected={this.state.currentGraph === 3}
+              inputs={[
+                {
+                  label: 'Impairment type',
+                  component: (
+                    <ButtonCrement
+                      startIndex={defaults.allImpTypes.indexOf(
+                        defaults.impType
+                      )}
+                      options={defaults.allImpTypes}
+                      handleChange={(val) => this.handleImpTypeChange(val)}
+                    />
+                  ),
+                },
+                {
+                  label: 'Impairment power',
+                  component: (
+                    <ButtonCrement
+                      startIndex={defaults.allImpPowers.indexOf(
+                        defaults.impPower
+                      )}
+                      options={defaults.allImpPowers}
+                      handleChange={(val) => this.handleImpPowerChange(val)}
+                    />
+                  ),
+                },
+              ]}
+            />
+          </div>
+          <div className="simulatorInputSection">
+            <LabGroup
+              title="7. Thresholder"
+              onGrpLaunch={() => this.switchGraph(6)}
+              selected={this.state.currentGraph === 6}
+            />
+          </div>
+          <div className="simulatorInputSection">
+            <LabGroup
+              title="8. Decoder"
+              onGrpLaunch={() => this.switchGraph(7)}
+              selected={this.state.currentGraph === 7}
+            />
+          </div>
+        </div>
 
-          <div style={{ flex: 1, padding: 2.5 }}>
-            <div style={{ marginBottom: 12.5 }}>
-              <LabGroup
-                title="2. Encoder"
-                onGrpLaunch={() => this.switchGraph(1)}
-                selected={this.state.currentGraph === 1}
-                inputs={[
-                  {
-                    label: 'Scheme',
-                    component: (
-                      <ButtonCrement
-                        options={defaults.allEnc}
-                        handleChange={(val) => this.handleEncChange(val)}
-                      />
-                    ),
-                  },
-                ]}
-              />
-            </div>
-            <div style={{ marginBottom: 12.5 }}>
-              <LabGroup
-                title="3. Modulator"
-                onGrpLaunch={() => this.switchGraph(2)}
-                selected={this.state.currentGraph === 2}
-                inputs={[
-                  {
-                    label: 'Modulation scheme',
-                    component: (
-                      <ButtonCrement
-                        options={defaults.allModTypes}
-                        handleChange={(val) => this.handleModChange(val)}
-                      />
-                    ),
-                  },
-                ]}
-              />
-            </div>
-            <div style={{ marginBottom: 12.5 }}>
-              <LabGroup
-                title="5. Demodulator"
-                onGrpLaunch={() => this.switchGraph(4)}
-                selected={this.state.currentGraph === 4}
-              />
-            </div>
-            <div style={{ marginBottom: 12.5 }}>
-              <LabGroup
-                title="6. Low pass filter"
-                onGrpLaunch={() => this.switchGraph(5)}
-                selected={this.state.currentGraph === 5}
-                inputs={[
-                  {
-                    label: 'Number of filter taps',
-                    component: (
-                      <ButtonCrement
-                        options={defaults.allTaps}
-                        startIndex={defaults.allTaps.indexOf(defaults.taps)}
-                        handleChange={(val) => this.handleTapsChange(val)}
-                      />
-                    ),
-                  },
-                  {
-                    label: 'Cutoff frequency',
-                    component: (
-                      <ButtonCrement
-                        options={defaults.allCutoffs}
-                        handleChange={(val) => this.handleCutOffChange(val)}
-                      />
-                    ),
-                  },
-                ]}
-              />
-            </div>
+        <div className="simulatorInputColumn">
+          <div className="simulatorInputSection">
+            <LabGroup
+              title="2. Encoder"
+              onGrpLaunch={() => this.switchGraph(1)}
+              selected={this.state.currentGraph === 1}
+              inputs={[
+                {
+                  label: 'Scheme',
+                  component: (
+                    <ButtonCrement
+                      options={defaults.allEnc}
+                      handleChange={(val) => this.handleEncChange(val)}
+                    />
+                  ),
+                },
+              ]}
+            />
+          </div>
+          <div className="simulatorInputSection">
+            <LabGroup
+              title="3. Modulator"
+              onGrpLaunch={() => this.switchGraph(2)}
+              selected={this.state.currentGraph === 2}
+              inputs={[
+                {
+                  label: 'Modulation scheme',
+                  component: (
+                    <ButtonCrement
+                      options={defaults.allModTypes}
+                      handleChange={(val) => this.handleModChange(val)}
+                    />
+                  ),
+                },
+              ]}
+            />
+          </div>
+          <div className="simulatorInputSection">
+            <LabGroup
+              title="5. Demodulator"
+              onGrpLaunch={() => this.switchGraph(4)}
+              selected={this.state.currentGraph === 4}
+            />
+          </div>
+          <div className="simulatorInputSection">
+            <LabGroup
+              title="6. Low pass filter"
+              onGrpLaunch={() => this.switchGraph(5)}
+              selected={this.state.currentGraph === 5}
+              inputs={[
+                {
+                  label: 'Number of filter taps',
+                  component: (
+                    <ButtonCrement
+                      options={defaults.allTaps}
+                      startIndex={defaults.allTaps.indexOf(defaults.taps)}
+                      handleChange={(val) => this.handleTapsChange(val)}
+                    />
+                  ),
+                },
+                {
+                  label: 'Cutoff frequency',
+                  component: (
+                    <ButtonCrement
+                      options={defaults.allCutoffs}
+                      handleChange={(val) => this.handleCutOffChange(val)}
+                    />
+                  ),
+                },
+              ]}
+            />
           </div>
         </div>
       </div>

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import './ButtonSelect.css';
-import Button from './Button';
+import Button from '../components/Button';
 
 export default class ButtonSelect extends Component {
   static propTypes = {

@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import SignalGenerator from './SignalGenerator';
 import getGraphParams from '../utils/getGraphParams';
 import generateWave from '../utils/generateWave';
 import defaults from '../config/defaults';
+import LabGroup from '../components/LabGroup.js';
+import ButtonSelect from './ButtonSelect';
+import ButtonCrement from './ButtonCrement';
 
 export default class SpectrometerInput extends Component {
   static propTypes = {
@@ -43,10 +45,34 @@ export default class SpectrometerInput extends Component {
   render() {
     return (
       <div>
-        <SignalGenerator
-          handleTypeChange={this.handleTypeChange}
-          handleFaChange={this.handleFaChange}
-          handleFsChange={this.handleFsChange}
+        <LabGroup
+          title="Spectrometer"
+          inputs={[
+            {
+              label: 'Waveshape',
+              component: <ButtonSelect onChange={this.handleTypeChange} />,
+            },
+            {
+              label: 'Signal frequency',
+              component: (
+                <ButtonCrement
+                  options={defaults.allFa}
+                  startIndex={defaults.allFa.indexOf(defaults.Fa)}
+                  handleChange={this.handleFaChange}
+                />
+              ),
+            },
+            {
+              label: 'Sampling frequency',
+              component: (
+                <ButtonCrement
+                  options={defaults.allFs}
+                  startIndex={defaults.allFs.indexOf(defaults.Fs)}
+                  handleChange={this.handleFsChange}
+                />
+              ),
+            },
+          ]}
         />
       </div>
     );

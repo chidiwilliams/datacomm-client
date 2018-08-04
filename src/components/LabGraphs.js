@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Graph from '../components/Graph';
+import Graph from './Graph';
 import './LabGraphs.css';
 
 export default class LabGraphs extends Component {

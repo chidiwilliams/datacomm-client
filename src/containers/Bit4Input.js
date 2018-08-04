@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import defaults from '../config/defaults';
-import Button from './Button';
+import Button from '../components/Button';
 
 class Bit4Input extends Component {
   static propTypes = {

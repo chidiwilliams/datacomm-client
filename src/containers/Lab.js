@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import LabGraphs from './LabGraphs';
+import LabGraphs from '../components/LabGraphs';
 import './defaults.css';
 import './Lab.css';
-import LabInput from './LabInput';
 import defaults from '../config/defaults';
+import SpectrometerInput from './SpectrometerInput';
+import SimulatorInput from './SimulatorInput';
 
 class Lab extends Component {
   state = {
@@ -13,6 +14,11 @@ class Lab extends Component {
 
   updateGraphs = (graphs) => {
     this.setState({ graphs: graphs });
+  };
+
+  apps = {
+    0: <SimulatorInput updateGraphs={this.updateGraphs} />,
+    1: <SpectrometerInput updateGraphs={this.updateGraphs} />,
   };
 
   render() {
@@ -53,10 +59,7 @@ class Lab extends Component {
               </div>
               <div className="right">
                 <div className="controls">
-                  <LabInput
-                    updateGraphs={this.updateGraphs}
-                    app={this.state.selectedApp}
-                  />
+                  {this.apps[this.state.selectedApp]}
                 </div>
                 <div className="labHeader">DataComm Laboratory</div>
                 <div className="labAppTitle">

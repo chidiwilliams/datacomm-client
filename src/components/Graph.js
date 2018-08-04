@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Chart from 'chart.js';
-import './Graph.css';
 
 class Graph extends Component {
   canvas = null;
@@ -63,7 +62,6 @@ class Graph extends Component {
   render() {
     return (
       <div
-        className="canvasP"
         style={{
           height: this.props.height,
           position: 'relative',

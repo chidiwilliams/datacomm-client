@@ -26,20 +26,24 @@ export default class LabGraphs extends Component {
 
     return (
       <div className="graphs">
-        <div className="graph" id="graph-body-t">
+        <div className="graph">
           <div className="graphLabel">Time response</div>
+          <div className="graphYLabel">V</div>
+          <div className="graphXLabel">sec</div>
           <Graph
             id={this.getRandomChartId()}
-            height={'calc(100% - 24px)'}
+            height="100%"
             xinput={tGraph.x}
             yinput={tGraph.y}
           />
         </div>
         <div className="graph">
-          <div className="graphLabel">Frequency magnitude response (Hz)</div>
+          <div className="graphLabel">Frequency magnitude response</div>
+          <div className="graphYLabel">Mag</div>
+          <div className="graphXLabel">Hz</div>
           <Graph
             id={this.getRandomChartId()}
-            height={'calc(100% - 24px)'}
+            height="100%"
             xinput={fGraph.x}
             yinput={fGraph.y}
             xmax={fGraph.xmax}

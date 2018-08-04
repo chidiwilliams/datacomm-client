@@ -9,18 +9,35 @@
 }
 
 .graph {
-  padding: 10px 20px 0 15px;
+  padding: 24px 20px 0 15px;
   flex: 1;
-  /* height: 50%; */
+  position: relative;
 }
 
 .graph:nth-child(1) {
   border-bottom: 2px solid #666666;
 }
+.graphLabel,
+.graphYLabel,
+.graphXLabel {
+  color: #666666;
+  font-size: 12px;
+  position: absolute;
+}
 
 .graphLabel {
-  text-align: center;
-  color: #e00000;
-  font-size: 14px;
   margin-bottom: 8px;
+  font-style: italic;
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.graphYLabel {
+  top: 8px;
+}
+
+.graphXLabel {
+  bottom: 12px;
+  right: 10px;
 }

@@ -6,6 +6,9 @@ import defaults from '../config/defaults';
 import LabGroup from '../components/LabGroup.js';
 import ButtonSelect from './ButtonSelect';
 import ButtonCrement from './ButtonCrement';
+import LabInput from '../components/LabInput';
+import LabInputColumn from '../components/LabInputColumn';
+import LabInputSection from '../components/LabInputSection';
 
 export default class SpectrometerInput extends Component {
   static propTypes = {
@@ -44,38 +47,49 @@ export default class SpectrometerInput extends Component {
 
   render() {
     return (
-      <div>
-        <LabGroup
-          title="Spectrometer"
-          selected
-          inputs={[
-            {
-              label: 'Waveshape',
-              component: <ButtonSelect onChange={this.handleTypeChange} />,
-            },
-            {
-              label: 'Signal frequency',
-              component: (
-                <ButtonCrement
-                  options={defaults.allFa}
-                  startIndex={defaults.allFa.indexOf(defaults.Fa)}
-                  handleChange={this.handleFaChange}
-                />
-              ),
-            },
-            {
-              label: 'Sampling frequency',
-              component: (
-                <ButtonCrement
-                  options={defaults.allFs}
-                  startIndex={defaults.allFs.indexOf(defaults.Fs)}
-                  handleChange={this.handleFsChange}
-                />
-              ),
-            },
-          ]}
-        />
-      </div>
+      <LabInput>
+        <LabInputColumn>
+          <LabInputSection>
+            <LabGroup
+              title="1. Signal generator"
+              selected
+              inputs={[
+                {
+                  label: 'Waveshape',
+                  component: (
+                    <ButtonSelect
+                      options={defaults.allWaveshapes}
+                      defaultIndex={defaults.waveshape}
+                      onChange={this.handleTypeChange}
+                    />
+                  ),
+                },
+                {
+                  label: 'Signal frequency',
+                  component: (
+                    <ButtonCrement
+                      options={defaults.allFa}
+                      startIndex={defaults.allFa.indexOf(defaults.Fa)}
+                      handleChange={this.handleFaChange}
+                    />
+                  ),
+                },
+                {
+                  label: 'Sampling frequency',
+                  component: (
+                    <ButtonCrement
+                      options={defaults.allFs}
+                      startIndex={defaults.allFs.indexOf(defaults.Fs)}
+                      handleChange={this.handleFsChange}
+                    />
+                  ),
+                },
+              ]}
+            />
+          </LabInputSection>
+        </LabInputColumn>
+        <LabInputColumn />
+      </LabInput>
     );
   }
 }

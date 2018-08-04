@@ -19,7 +19,8 @@
   margin-bottom: 5px;
   text-shadow: 0 1px #f0f0f0;
   font-weight: bold;
-  top: -9px;
+  top: 5px;
+  left: 5px;
   position: absolute;
   background: #dddddd;
   padding: 0 2px;
@@ -31,29 +32,21 @@
 
 .specGrpTrigger {
   position: absolute;
-  top: -15px;
+  top: 0;
   right: 5px;
-  border: 0;
-  padding: 2px 20px;
-  box-shadow: 0 5px #777;
-  background: #bbbbbb;
-  font-weight: bold;
-  color: #555555;
-  cursor: pointer;
-}
-
-.specGrpTrigger.selected {
-  box-shadow: 0 1px #777;
-  top: calc(-15px + 3px);
 }
 
 .specGrp {
-  padding: 12.5px 5px 5px;
   position: relative;
+  padding-top: 14px;
+}
+
+.specGrpBox {
+  padding: 10px 5px 5px;
   border-radius: 3px;
   border: 1px solid #666666;
 }
 
-.specGrp.selected {
+.specGrpBox.selected {
   border: 1px solid #ff0000;
 }

@@ -15,12 +15,9 @@ export default class LabGroup extends Component {
 
   render() {
     return (
-      <div className={this.props.selected ? 'specGrp selected' : 'specGrp'}>
+      <div className="specGrp">
         <div className="specGrpLabel">{this.props.title}</div>
-        <div
-          className="trigger"
-          style={{ position: 'absolute', top: -12, right: 5 }}
-        >
+        <div className="specGrpTrigger">
           <Button
             text={'>>'}
             style={{ height: 20, width: 60 }}
@@ -31,14 +28,18 @@ export default class LabGroup extends Component {
             }}
           />
         </div>
-        {this.props.inputs
-          ? this.props.inputs.map((x, i) => (
-              <div className="specInput" key={i}>
-                <div className="specLabel">{x.label}</div>
-                {x.component}
-              </div>
-            ))
-          : null}
+        <div
+          className={this.props.selected ? 'specGrpBox selected' : 'specGrpBox'}
+        >
+          {this.props.inputs
+            ? this.props.inputs.map((x, i) => (
+                <div className="specInput" key={i}>
+                  <div className="specLabel">{x.label}</div>
+                  {x.component}
+                </div>
+              ))
+            : null}
+        </div>
       </div>
     );
   }

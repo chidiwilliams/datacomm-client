@@ -10,15 +10,14 @@ html {
 .header {
   height: 30px;
   line-height: 30px;
-  margin-bottom: 30px;
+  margin-bottom: 35px;
   display: flex;
 }
 
 .header .labName {
   font-weight: bold;
   text-transform: uppercase;
-  color: transparent;
-  text-shadow: -1px 0px #ff0000, 0 0px #00ff00, 1px 0 #0000ff;
+  color: #e00000;
   padding: 0 20px;
   margin: 0 5px;
   font-style: italic;

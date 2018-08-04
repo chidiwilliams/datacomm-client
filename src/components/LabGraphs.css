@@ -1,15 +1,26 @@
 .graphs {
   background-color: #101010;
   border-radius: 5px;
+  display: flex;
+  flex-direction: column;
   height: 100%;
+  max-height: 100%;
   border: 2px solid #666;
 }
 
 .graph {
-  padding: 20px 20px 5px 15px;
-  height: 50%;
+  padding: 10px 20px 0 15px;
+  flex: 1;
+  /* height: 50%; */
 }
 
 .graph:nth-child(1) {
   border-bottom: 2px solid #666666;
+}
+
+.graphLabel {
+  text-align: center;
+  color: #e00000;
+  font-size: 14px;
+  margin-bottom: 8px;
 }

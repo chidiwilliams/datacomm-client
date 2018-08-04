@@ -66,7 +66,6 @@ class Graph extends Component {
         className="canvasP"
         style={{
           height: this.props.height,
-          width: this.props.width,
           position: 'relative',
           margin: 'auto',
         }}

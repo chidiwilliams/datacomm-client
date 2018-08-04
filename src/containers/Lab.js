@@ -21,7 +21,6 @@ class Lab extends Component {
   };
 
   render() {
-    // TODO: Add default graph
     const graphs = this.state.graphs || defaults.graph;
 
     return (

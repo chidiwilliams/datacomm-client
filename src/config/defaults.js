@@ -16,10 +16,12 @@ export default {
   allModTypes: ['bpsk'],
   allImpTypes: ['awgn'],
   allImpPowers: Array.apply(null, Array(10)).map((x, i) => i / 2),
-  allTaps: Array.apply(null, Array(6)).map((x, i) => 40 * i + 20),
+  allTaps: [10, 20, 40, 60, 80, 100, 120, 140, 160],
   allCutoffs: Array.apply(null, Array(16)).map((x, i) => 8 * (i + 1)),
   encLength: 8,
   apps: ['simulator', 'spectrometer'],
   appIndex: 0,
   graph: { t: { x: [0], y: [0] }, f: { x: [0], y: [0] } },
+  allColors: ['#e00000', '#00e000', '#0000e0'],
+  color: '#e00000',
 };

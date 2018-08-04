@@ -18,7 +18,7 @@ class Graph extends Component {
           {
             borderColor: 'rgba(255, 0, 0, 1)',
             backgroundColor: 'rgba(255, 0, 0, 0.15)',
-            borderWidth: 2,
+            borderWidth: 1,
             pointRadius: 0,
             data: this.props.yinput,
           },

@@ -33,10 +33,9 @@ class Bit4Input extends Component {
     return (
       <div className="bit4inputs" style={{ display: 'flex', flexWrap: 'wrap' }}>
         {Array.apply(null, Array(4)).map((x, i) => (
-          <div style={{ flex: '1' }}>
+          <div style={{ flex: '1' }} key={i}>
             <Button
-              key={i}
-              text={i}
+              text={i.toString()}
               // Check corresponding bit value in state
               // Convert to opp. boolean
               selected={!this.state[`bit${i}`]}

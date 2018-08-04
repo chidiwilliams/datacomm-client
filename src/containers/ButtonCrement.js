@@ -21,6 +21,8 @@ export default class ButtonCrement extends Component {
   };
 
   increment = () => {
+    // TODO: Shift click jumps 2 steps, ctrl click jumps 5
+    // Hold to skip to end
     const newSel =
       this.state.selected < this.props.options.length - 1
         ? this.state.selected + 1

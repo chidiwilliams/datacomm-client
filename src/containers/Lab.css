@@ -98,6 +98,26 @@
 
 @media (min-width: 768px) {
   .osc {
+    height: 920px;
+  }
+
+  .uprising {
+    background: #dddddd;
+  }
+
+  .left {
+    width: 60%;
+    height: 470px;
+  }
+
+  .right {
+    width: 40%;
+    height: 100%;
+  }
+}
+
+@media (min-width: 992px) {
+  .osc {
     height: 500px;
   }
 

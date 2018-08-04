@@ -5,7 +5,7 @@ import Button from '../components/Button';
 
 class Bit4Input extends Component {
   static propTypes = {
-        onChangeBits: PropTypes.func,
+    onChangeBits: PropTypes.func,
     initBits: PropTypes.string,
   };
 

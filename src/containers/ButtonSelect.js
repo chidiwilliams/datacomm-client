@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import './ButtonSelect.css';
 import Button from '../components/Button';
 
 export default class ButtonSelect extends Component {
@@ -22,9 +21,9 @@ export default class ButtonSelect extends Component {
 
   render() {
     return (
-      <div className="selectMain">
+      <div style={{ display: 'flex', flexWrap: 'wrap' }}>
         {this.props.options.map((x, i) => (
-          <div className="btnP" key={i}>
+          <div style={{ flex: 1 }} key={i}>
             <Button
               text={x}
               onClick={() => this.onChange(i)}

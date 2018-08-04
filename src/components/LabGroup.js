@@ -6,6 +6,7 @@ export default class LabGroup extends Component {
   static propTypes = {
     title: PropTypes.string,
     onGrpLaunch: PropTypes.func,
+    selected: PropTypes.bool,
     // TODO: Tighten reqs
     inputs: PropTypes.array,
   };
@@ -15,7 +16,9 @@ export default class LabGroup extends Component {
       <div className="specGrp">
         <div className="specGrpLabel">{this.props.title}</div>
         <button
-          className="specGrpTrigger"
+          className={
+            this.props.selected ? 'specGrpTrigger selected' : 'specGrpTrigger'
+          }
           onClick={(evt) => {
             if (this.props.onGrpLaunch) this.props.onGrpLaunch(evt);
           }}

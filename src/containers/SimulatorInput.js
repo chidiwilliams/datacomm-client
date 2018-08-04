@@ -6,6 +6,10 @@ import getGraphParams from '../utils/getGraphParams';
 import sampleMsg from '../utils/sampleMsg';
 import Encoder from './Encoder';
 import { encHamming } from '../utils/encode';
+import Modulator from './Modulator';
+import { modBPSK } from '../utils/modulate';
+import LabGroup from '../components/LabGroup';
+import ButtonCrement from './ButtonCrement';
 
 export default class SimulatorInput extends Component {
   static propTypes = {
@@ -38,7 +42,12 @@ export default class SimulatorInput extends Component {
     this.setState({ encType: val }, () => this.updateGraphs());
   };
 
+  handleModChange = (val) => {
+    this.setState({ modType: val }, () => this.updateGraphs());
+  };
+
   doHamming = () => encHamming(this.state.bits, this.state.freq);
+  modBPSK = () => modBPSK(this.doHamming());
 
   getMsgGraphs = () => {
     const samped = sampleMsg(this.state.bits, this.state.freq);
@@ -54,6 +63,16 @@ export default class SimulatorInput extends Component {
     const enc = this.doHamming();
     this.setState({ enc: enc });
     return getGraphParams(enc, 'Encoded');
+  };
+
+  getModGraphs = () => {
+    if (this.state.modType !== 'bpsk') {
+      throw new Error('Invalid modulation type given.');
+    }
+
+    const mod = this.modBPSK();
+    this.setState({ mod: mod });
+    return getGraphParams(mod, 'Modulated');
   };
 
   updateGraphs = () => {
@@ -100,13 +119,50 @@ export default class SimulatorInput extends Component {
               updateFreq={this.handleFreqChange}
               updateBits={this.handleBitsChange}
               onGrpLaunch={() => this.switchGraph(0)}
+              selected={this.state.currentGraph === 0}
             />
           </div>
           <div style={{ flex: 1, padding: 2.5 }}>
-            <Encoder
-              onGrpLaunch={() => this.switchGraph(1)}
-              handleEncChange={this.handleEncChange}
-            />
+            <div style={{ marginBottom: 12.5 }}>
+              <LabGroup
+                title="Encoder"
+                onGrpLaunch={() => this.switchGraph(1)}
+                selected={this.state.currentGraph === 1}
+                inputs={[
+                  {
+                    label: 'Scheme',
+                    component: (
+                      <ButtonCrement
+                        options={defaults.allEnc}
+                        handleChange={(idx) =>
+                          this.handleEncChange(defaults.allEnc[idx])
+                        }
+                      />
+                    ),
+                  },
+                ]}
+              />
+            </div>
+            <div style={{ marginBottom: 12.5 }}>
+              <LabGroup
+                title="Modulator"
+                onGrpLaunch={() => this.switchGraph(2)}
+                selected={this.state.currentGraph === 2}
+                inputs={[
+                  {
+                    label: 'Modulation scheme',
+                    component: (
+                      <ButtonCrement
+                        options={defaults.allModTypes}
+                        handleChange={(idx) =>
+                          this.handleModChange(defaults.allEnc[idx])
+                        }
+                      />
+                    ),
+                  },
+                ]}
+              />
+            </div>
           </div>
         </div>
       </div>

@@ -67,7 +67,7 @@ class Simulator extends React.Component {
     this.setState({ [key]: val }, () => this.computeGraphs());
   };
 
-  doHamming = () => encHamming(this.state.bits, this.state.freq);
+  doHamming = () => encHamming(this.sgetmtate.bits, this.state.freq);
   modBPSK = () => modBPSK(this.doHamming());
   addImp = () => doAWGN(this.modBPSK(), this.state.impPower);
   demod = () => demodBPSK(this.doHamming(), this.addImp());

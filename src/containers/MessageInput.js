@@ -10,6 +10,7 @@ class MessageInput extends Component {
     updateBits: PropTypes.func,
     updateFreq: PropTypes.func,
     onGrpLaunch: PropTypes.func,
+    selected: PropTypes.bool,
   };
 
   state = {
@@ -30,6 +31,7 @@ class MessageInput extends Component {
         <LabGroup
           title="Message input"
           onGrpLaunch={this.props.onGrpLaunch}
+          selected={this.props.selected}
           inputs={[
             {
               label: 'Input bits',

@@ -27,14 +27,20 @@
 
 .specGrpTrigger {
   position: absolute;
-  top: -9px;
+  top: -12px;
   right: 5px;
   border: 0;
-  padding: 2px 6px;
-  box-shadow: 0 2px #777;
+  padding: 2px 20px;
+  box-shadow: 0 5px #777;
   background: #bbbbbb;
   font-weight: bold;
   color: #555555;
+  cursor: pointer;
+}
+
+.specGrpTrigger.selected {
+  box-shadow: 0 1px #777;
+  top: calc(-12px + 3px);
 }
 
 .specGrp {

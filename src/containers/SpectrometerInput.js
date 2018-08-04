@@ -59,7 +59,7 @@ export default class SpectrometerInput extends Component {
                   component: (
                     <ButtonSelect
                       options={defaults.allWaveshapes}
-                      defaultIndex={defaults.waveshape}
+                      defaultIndex={defaults.allWaveshapes.indexOf(defaults.waveshape)}
                       onChange={this.handleTypeChange}
                     />
                   ),

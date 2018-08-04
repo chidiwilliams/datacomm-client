@@ -28,6 +28,7 @@ class Lab extends Component {
       <div className="main">
         <div className="container">
           <div className="header">
+            <div className="labName">DataComm Laboratory</div>
             <div className="labApps">
               {defaults.apps.map((x, i) => (
                 <button
@@ -60,7 +61,12 @@ class Lab extends Component {
                 <div className="controls">
                   {this.apps[this.state.selectedApp]}
                 </div>
-                <div className="labHeader">DataComm Laboratory</div>
+                <div className="labFooter">
+                  <span style={{ marginRight: 3 }}>by</span>
+                  <a href="https://www.github.com/chidiwilliams/">
+                    Chidi Williams
+                  </a>
+                </div>
                 <div className="labAppTitle">
                   {defaults.apps[this.state.selectedApp]}
                 </div>

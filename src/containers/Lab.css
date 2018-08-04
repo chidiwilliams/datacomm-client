@@ -11,6 +11,17 @@ html {
   height: 30px;
   line-height: 30px;
   margin-bottom: 30px;
+  display: flex;
+}
+
+.header .labName {
+  font-weight: bold;
+  text-transform: uppercase;
+  color: transparent;
+  text-shadow: -1px 0px #ff0000, 0 0px #00ff00, 1px 0 #0000ff;
+  padding: 0 20px;
+  margin: 0 5px;
+  font-style: italic;
 }
 
 .header .labApps {
@@ -29,7 +40,6 @@ html {
   padding: 0 20px;
   margin: 0 5px;
   transition: 0.1s all;
-  font-style: italic;
   border: 0;
   background: transparent;
   height: 32px;
@@ -87,33 +97,38 @@ html {
 
 .right {
   flex: 4;
-  padding: 5px 5px 25px;
+  padding: 5px 5px 30px;
   border-left: 1px solid #444444;
   background-color: #dddddd;
   border-radius: 0 5px 5px 0;
   position: relative;
 }
 
-.labHeader,
+.labFooter,
 .labAppTitle {
   bottom: 0;
   position: absolute;
-  color: #777777;
+  color: #202020;
   padding: 5px 15px;
   font-size: 14px;
-  text-shadow: 0 1px #ffffff;
+  text-shadow: 0 1px #f0f0f0;
 }
 
-.labHeader {
+.labFooter {
   text-align: right;
-  right: 0;
+  left: 0;
+  font-style: italic;
+}
+
+.labFooter a {
+  color: currentColor;
 }
 
 .labAppTitle {
   text-transform: uppercase;
   font-style: italic;
+  right: 0;
   font-weight: 600;
-  left: 0;
 }
 
 @media (min-width: 768px) {

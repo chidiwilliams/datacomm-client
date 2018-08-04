@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import LabGraphs from '../components/LabGraphs';
-import './defaults.css';
 import './Lab.css';
 import defaults from '../config/defaults';
 import SpectrometerInput from './SpectrometerInput';

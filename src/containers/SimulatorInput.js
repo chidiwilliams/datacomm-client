@@ -8,7 +8,7 @@ import { modBPSK } from '../utils/modulate';
 import LabGroup from '../components/LabGroup';
 import ButtonCrement from './ButtonCrement';
 import Bit4Input from './Bit4Input';
-import { doAWGN, getAWGN, addAWGN } from '../utils/impairment';
+import { getAWGN, addAWGN } from '../utils/impairment';
 import { demodBPSK } from '../utils/demodulate';
 import { lowPass } from '../utils/filter';
 import threshold from '../utils/threshold';

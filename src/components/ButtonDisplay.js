@@ -13,7 +13,7 @@ export default class ButtonDisplay extends Component {
           flex: 2,
           height: 40,
           lineHeight: '40px',
-          width: 100,
+          width: '100%',
           background: '#101010',
           color: '#c80000',
           boxShadow: '0 7px 0 #060606, 0 8px 3px -1px rgba(0, 0, 0, 0.2)',

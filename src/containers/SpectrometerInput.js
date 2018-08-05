@@ -88,7 +88,6 @@ export default class SpectrometerInput extends Component {
             />
           </LabInputSection>
         </LabInputColumn>
-        <LabInputColumn />
       </LabInput>
     );
   }

@@ -93,6 +93,7 @@ html {
   padding: 10px;
   border-radius: 5px 0 0 5px;
   border-right: 1px solid #444444;
+  max-width: 100%;
 }
 
 .right {

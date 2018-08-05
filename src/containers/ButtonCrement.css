@@ -3,5 +3,5 @@
 }
 
 .bbtn {
-  flex: 1;
+  flex: 1 auto;
 }

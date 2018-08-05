@@ -39,20 +39,20 @@ export default class ButtonCrement extends Component {
 
   render() {
     return (
-      <div className="wrapper">
-        <div className="bbtn">
+      <div className="wrapper" style={{ display: 'flex' }}>
+        <div style={{ flex: 1 }}>
           <Button
             text={'-'}
             onClick={this.decrement}
             selected={this.state.selected === 0}
           />
         </div>
-        <div className="bbtn">
+        <div style={{ flex: 2 }}>
           <ButtonDisplay
             text={this.props.options[this.state.selected].toString()}
           />
         </div>
-        <div className="bbtn">
+        <div style={{ flex: 1 }}>
           <Button
             text={'+'}
             onClick={this.increment}

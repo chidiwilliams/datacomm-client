@@ -1,0 +1,64 @@
+.button {
+  box-shadow: 0 7px 0 #777777, inset 0 4px 0px -2px #d2d2d2;
+  transition: 0.15s all;
+  font-weight: bold;
+  text-transform: uppercase;
+  height: 40px;
+  color: #555555;
+  background: #bbbbbb;
+  width: 100%;
+  position: relative;
+  cursor: pointer;
+  outline: none;
+  border: 0;
+  z-index: 2;
+  margin-bottom: 8px;
+}
+
+.button:active,
+.button.selected {
+  box-shadow: 0 2px 0 #777777;
+  top: 5px;
+  z-index: 1;
+  color: #888888;
+}
+
+.button:focus,
+.button:hover {
+  background: #cccccc;
+}
+
+.button.bouncing {
+  animation: bounceBig 1.5s infinite;
+}
+
+.button.selected span {
+  text-shadow: 0 1px #d6d6d6;
+}
+
+.button.selected.bouncing {
+  animation: bounceSmall 1s infinite;
+}
+
+@keyframes bounceBig {
+  from {
+    box-shadow: 0 7px 0 #777777;
+    z-index: 2;
+  }
+  to {
+    box-shadow: 0 6px 0 #777777;
+    top: 1px;
+    z-index: 1;
+  }
+}
+
+@keyframes bounceSmall {
+  from {
+    box-shadow: 0 2px 0 #777777;
+    top: 5px;
+  }
+  to {
+    box-shadow: 0 0px 0 #777777;
+    top: 7px;
+  }
+}

@@ -1,24 +1,187 @@
-.container {
-  padding-right: 15px;
-  padding-left: 15px;
-  margin-right: auto;
-  margin-left: auto;
+html {
+  background-color: #eeeeee;
+}
+
+.main {
+  padding-top: 15px;
+  padding-bottom: 5px;
+}
+
+.header {
+  font-size: 14px;
+  line-height: 30px;
+  margin-bottom: 20px;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 @media (min-width: 768px) {
-  .container {
-    width: 750px;
+  .header {
+    margin-bottom: 30px;
+  }
+}
+
+.header .labName {
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #e00000;
+  text-shadow: 0 1px #f0f0f0;
+  padding: 0 20px;
+  margin: 0 5px;
+  font-style: italic;
+}
+
+.header .labApps {
+  display: flex;
+  flex-wrap: wrap;
+  float: right;
+  text-transform: uppercase;
+  font-weight: bold;
+  color: #555555;
+  font-size: 14px;
+}
+
+.header .labApps button {
+  outline: 0;
+  text-decoration: none;
+  color: currentColor;
+  padding: 0 20px;
+  margin: 0 5px;
+  transition: 0.1s all;
+  border: 0;
+  background: transparent;
+  height: 32px;
+  text-transform: uppercase;
+  font-weight: bold;
+  text-shadow: 0 1px #f0f0f0;
+  cursor: pointer;
+}
+
+.header .labApps button:focus {
+  border-bottom: 2px solid #e00000;
+  background: #e6e6e6;
+}
+
+.header .labApps button:hover,
+.header .labApps button:active,
+.header .labApps button.selected {
+  border-bottom: 2px solid #e00000;
+}
+
+.osc {
+  background-color: #f7f7f7;
+  border-radius: 5px;
+  box-shadow: none;
+  margin-left: -15px;
+  margin-right: -15px;
+}
+
+@media (min-width: 768px) {
+  .osc {
+    margin: 20px;
+    box-shadow: 0 0 0 2px #888, 0 0 0 11px #666, 0 0 0 13px #444,
+      0 0 0 17px #888, 0 0 0 20px #cccccc;
+    padding: 15px;
+  }
+}
+
+.oscShadow {
+  height: 20px;
+  background-color: #333;
+  margin-top: -35px;
+  margin-bottom: 60px;
+  border-radius: 100%;
+  box-shadow: 0 50px 34px #3337;
+  background-color: transparent;
+}
+
+.uprising {
+  box-shadow: 0 2px 3px #0006;
+  border-radius: 5px;
+  border: 2px solid #444444;
+  display: flex;
+  flex-wrap: wrap;
+  background: #ddd;
+}
+
+.left {
+  flex: 5;
+  background-color: #ddd;
+  max-width: 100%;
+  padding: 0;
+  position: sticky;
+  top: 0;
+  border: solid #444444;
+  border-width: 1px 0;
+  left: 0;
+  z-index: 5;
+  border-right: 0;
+  border-radius: 0;
+  box-shadow: 0 3px 3px #22222240;
+  margin-bottom: 5px;
+  max-height: 400px;
+}
+
+@media (min-width: 768px) {
+  .left {
+    padding: 10px;
+    position: relative;
+    border-width: 0 1px 0 0;
+    border-radius: 5px 0 0 5px;
+    box-shadow: 0;
+    margin-bottom: 0;
+    max-height: 460px;
+  }
+
+  .right {
+    border-radius: 0 5px 5px 0;
+  }
+}
+
+.right {
+  flex: 4;
+  padding: 5px 5px 30px;
+  border-left: 1px solid #444444;
+  background-color: #dddddd;
+  position: relative;
+  border-radius: 0;
+}
+
+.labFooter,
+.labAppTitle {
+  bottom: 0;
+  position: absolute;
+  color: #202020;
+  padding: 5px 15px;
+  font-size: 14px;
+  text-shadow: 0 1px #f0f0f0;
+}
+
+.labFooter {
+  text-align: right;
+  left: 0;
+  font-style: italic;
+}
+
+.labFooter a {
+  color: currentColor;
+}
+
+.labAppTitle {
+  text-transform: uppercase;
+  font-style: italic;
+  right: 0;
+  font-weight: 600;
+}
+
+@media (min-width: 768px) {
+  .labAppTitle {
+    display: none;
   }
 }
 
 @media (min-width: 992px) {
-  .container {
-    width: 970px;
-  }
-}
-
-@media (min-width: 1200px) {
-  .container {
-    width: 1170px;
+  .labAppTitle {
+    display: block;
   }
 }

@@ -1,0 +1,53 @@
+.specLabel {
+  color: #555555;
+  font-size: 13px;
+  margin-bottom: 3px;
+  text-shadow: 0 1px #f0f0f0;
+}
+
+.specInput {
+  margin-bottom: 8px;
+}
+
+.specInput:nth-last-of-type(1) {
+  margin-bottom: 0;
+}
+
+.specGrpLabel {
+  color: #444444;
+  font-size: 14px;
+  margin-bottom: 5px;
+  text-shadow: 0 1px #f0f0f0;
+  font-weight: bold;
+  top: 5px;
+  left: 5px;
+  position: absolute;
+  background: #dddddd;
+  padding: 0 2px;
+  max-width: calc(100% - 65px);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.specGrpTrigger {
+  position: absolute;
+  top: 0;
+  right: 5px;
+}
+
+.specGrp {
+  position: relative;
+  padding-top: 14px;
+  min-width: 180px;
+}
+
+.specGrpBox {
+  padding: 10px 5px 5px;
+  border-radius: 3px;
+  border: 1px solid #666666;
+}
+
+.specGrpBox.selected {
+  border: 1px solid #ff0000;
+}

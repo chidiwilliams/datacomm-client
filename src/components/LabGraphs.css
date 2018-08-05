@@ -1,0 +1,46 @@
+.graphs {
+  background-color: #101010;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  max-height: 100%;
+  border: 2px solid #666;
+  overflow: hidden;
+}
+
+.graph {
+  padding: 24px 20px 0 15px;
+  flex: 1;
+  position: relative;
+}
+
+.graph:nth-child(1) {
+  border-bottom: 2px solid #666666;
+}
+.graphLabel,
+.graphYLabel,
+.graphXLabel {
+  color: #666666;
+  font-size: 12px;
+  position: absolute;
+}
+
+.graphLabel {
+  margin-bottom: 8px;
+  font-style: italic;
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  width: 75%;
+}
+
+.graphYLabel {
+  top: 8px;
+}
+
+.graphXLabel {
+  bottom: 12px;
+  right: 10px;
+}

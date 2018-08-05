@@ -20,7 +20,7 @@ export default {
   allCutoffs: Array.apply(null, Array(16)).map((x, i) => 8 * (i + 1)),
   encLength: 8,
   apps: ['simulator', 'spectrometer'],
-  appIndex: 0,
+  appIndex: 1,
   graph: { t: { x: [0], y: [0] }, f: { x: [0], y: [0] } },
   allColors: ['#e00000', '#00e000', '#0000e0'],
   color: '#e00000',

@@ -5,8 +5,8 @@ export default class LabInputSection extends Component {
     return (
       <div
         style={{
-          marginTop: 5,
-          marginBottom: 5,
+          marginTop: 3,
+          marginBottom: 3,
         }}
       >
         {this.props.children}

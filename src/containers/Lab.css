@@ -3,11 +3,12 @@ html {
 }
 
 .main {
-  padding-top: 20px;
-  padding-bottom: 15px;
+  padding-top: 10px;
+  padding-bottom: 5px;
 }
 
 .header {
+  font-size: 14px;
   line-height: 30px;
   margin-bottom: 15px;
   display: flex;
@@ -16,7 +17,7 @@ html {
 
 @media (min-width: 768px) {
   .header {
-    margin-bottom: 35px;
+    margin-bottom: 30px;
   }
 }
 
@@ -87,7 +88,7 @@ html {
 .oscShadow {
   height: 20px;
   background-color: #333;
-  margin-top: -20px;
+  margin-top: -35px;
   margin-bottom: 60px;
   border-radius: 100%;
   box-shadow: 0 50px 34px #3337;

@@ -193,60 +193,7 @@ export default class SimulatorInput extends Component {
               ]}
             />
           </LabInputSection>
-          <LabInputSection>
-            <LabGroup
-              title="4. Channel"
-              onGrpLaunch={() => this.switchGraph(3)}
-              selected={this.state.currentGraph === 3}
-              animated={this.state.currentGraph !== 3}
-              inputs={[
-                {
-                  label: 'Impairment type',
-                  component: (
-                    <ButtonCrement
-                      startIndex={defaults.allImpTypes.indexOf(
-                        defaults.impType
-                      )}
-                      options={defaults.allImpTypes}
-                      handleChange={(val) => this.handleImpTypeChange(val)}
-                    />
-                  ),
-                },
-                {
-                  label: 'Impairment power',
-                  component: (
-                    <ButtonCrement
-                      startIndex={defaults.allImpPowers.indexOf(
-                        defaults.impPower
-                      )}
-                      options={defaults.allImpPowers}
-                      handleChange={(val) => this.handleImpPowerChange(val)}
-                    />
-                  ),
-                },
-              ]}
-            />
-          </LabInputSection>
-          <LabInputSection>
-            <LabGroup
-              title="7. Thresholder"
-              onGrpLaunch={() => this.switchGraph(6)}
-              selected={this.state.currentGraph === 6}
-              animated={this.state.currentGraph !== 6}
-            />
-          </LabInputSection>
-          <LabInputSection>
-            <LabGroup
-              title="8. Decoder"
-              onGrpLaunch={() => this.switchGraph(7)}
-              selected={this.state.currentGraph === 7}
-              animated={this.state.currentGraph !== 7}
-            />
-          </LabInputSection>
-        </LabInputColumn>
-
-        <LabInputColumn>
-          <LabInputSection>
+                    <LabInputSection>
             <LabGroup
               title="2. Encoder"
               onGrpLaunch={() => this.switchGraph(1)}
@@ -278,6 +225,45 @@ export default class SimulatorInput extends Component {
                     <ButtonCrement
                       options={defaults.allModTypes}
                       handleChange={(val) => this.handleModChange(val)}
+                    />
+                  ),
+                },
+              ]}
+            />
+          </LabInputSection>
+
+        </LabInputColumn>
+
+        <LabInputColumn>
+
+          <LabInputSection>
+            <LabGroup
+              title="4. Channel"
+              onGrpLaunch={() => this.switchGraph(3)}
+              selected={this.state.currentGraph === 3}
+              animated={this.state.currentGraph !== 3}
+              inputs={[
+                {
+                  label: 'Impairment type',
+                  component: (
+                    <ButtonCrement
+                      startIndex={defaults.allImpTypes.indexOf(
+                        defaults.impType
+                      )}
+                      options={defaults.allImpTypes}
+                      handleChange={(val) => this.handleImpTypeChange(val)}
+                    />
+                  ),
+                },
+                {
+                  label: 'Impairment power',
+                  component: (
+                    <ButtonCrement
+                      startIndex={defaults.allImpPowers.indexOf(
+                        defaults.impPower
+                      )}
+                      options={defaults.allImpPowers}
+                      handleChange={(val) => this.handleImpPowerChange(val)}
                     />
                   ),
                 },
@@ -319,6 +305,23 @@ export default class SimulatorInput extends Component {
                   ),
                 },
               ]}
+            />
+          </LabInputSection>
+
+          <LabInputSection>
+            <LabGroup
+              title="7. Thresholder"
+              onGrpLaunch={() => this.switchGraph(6)}
+              selected={this.state.currentGraph === 6}
+              animated={this.state.currentGraph !== 6}
+            />
+          </LabInputSection>
+          <LabInputSection>
+            <LabGroup
+              title="8. Decoder"
+              onGrpLaunch={() => this.switchGraph(7)}
+              selected={this.state.currentGraph === 7}
+              animated={this.state.currentGraph !== 7}
             />
           </LabInputSection>
         </LabInputColumn>

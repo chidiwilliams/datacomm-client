@@ -10,6 +10,9 @@ export default class LabInputColumn extends Component {
           paddingRight: 5,
           marginTop: -5,
           marginBottom: -5,
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
         }}
       >
         {this.props.children}

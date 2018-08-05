@@ -3,14 +3,14 @@ html {
 }
 
 .main {
-  padding-top: 10px;
+  padding-top: 15px;
   padding-bottom: 5px;
 }
 
 .header {
   font-size: 14px;
   line-height: 30px;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
   display: flex;
   flex-wrap: wrap;
 }

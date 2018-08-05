@@ -111,9 +111,8 @@ html {
 .left {
   flex: 5;
   background-color: #ddd;
-  padding: 10px;
   max-width: 100%;
-  max-height: 460px;
+  padding: 0;
   position: sticky;
   top: 0;
   border: solid #444444;
@@ -124,15 +123,18 @@ html {
   border-radius: 0;
   box-shadow: 0 3px 3px #22222240;
   margin-bottom: 5px;
+  max-height: 400px;
 }
 
 @media (min-width: 768px) {
   .left {
+    padding: 10px;
     position: relative;
     border-width: 0 1px 0 0;
     border-radius: 5px 0 0 5px;
     box-shadow: 0;
     margin-bottom: 0;
+    max-height: 460px;
   }
 
   .right {

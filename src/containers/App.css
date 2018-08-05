@@ -26,3 +26,15 @@
     width: 1170px;
   }
 }
+
+img.github-ribbon {
+  position: absolute;
+  top: 0;
+  right: 0;
+  border: 0;
+  display: none;
+}
+
+@media (min-width: 768px) {
+  display: block;
+}

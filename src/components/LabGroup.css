@@ -39,6 +39,7 @@
 .specGrp {
   position: relative;
   padding-top: 14px;
+  min-width: 150px;
 }
 
 .specGrpBox {

@@ -10,8 +10,14 @@ html {
 .header {
   height: 30px;
   line-height: 30px;
-  margin-bottom: 35px;
+  margin-bottom: 15px;
   display: flex;
+}
+
+@media (min-width: 768px) {
+  .header {
+    margin-bottom: 35px;
+  }
 }
 
 .header .labName {
@@ -31,6 +37,12 @@ html {
   font-weight: bold;
   color: #555555;
   font-size: 14px;
+}
+
+@media (max-width: 768px) {
+  .header .labApps {
+    display: none;
+  }
 }
 
 .header .labApps button {
@@ -63,10 +75,18 @@ html {
 .osc {
   background-color: #f7f7f7;
   border-radius: 5px;
-  margin: 20px;
-  box-shadow: 0 0 0 2px #888, 0 0 0 11px #666, 0 0 0 13px #444, 0 0 0 17px #888,
-    0 0 0 20px #cccccc;
-  padding: 15px;
+  box-shadow: none;
+  margin-left: -15px;
+  margin-right: -15px;
+}
+
+@media (min-width: 768px) {
+  .osc {
+    margin: 20px;
+    box-shadow: 0 0 0 2px #888, 0 0 0 11px #666, 0 0 0 13px #444,
+      0 0 0 17px #888, 0 0 0 20px #cccccc;
+    padding: 15px;
+  }
 }
 
 .oscShadow {
@@ -85,15 +105,39 @@ html {
   border: 2px solid #444444;
   display: flex;
   flex-wrap: wrap;
+  background: #ddd;
 }
 
 .left {
   flex: 5;
   background-color: #ddd;
   padding: 10px;
-  border-radius: 5px 0 0 5px;
-  border-right: 1px solid #444444;
   max-width: 100%;
+  max-height: 460px;
+  position: sticky;
+  top: 0;
+  border: solid #444444;
+  border-width: 1px 0;
+  left: 0;
+  z-index: 5;
+  border-right: 0;
+  border-radius: 0;
+  box-shadow: 0 3px 3px #22222240;
+  margin-bottom: 5px;
+}
+
+@media (min-width: 768px) {
+  .left {
+    position: relative;
+    border-width: 0 1px 0 0;
+    border-radius: 5px 0 0 5px;
+    box-shadow: 0;
+    margin-bottom: 0;
+  }
+
+  .right {
+    border-radius: 0 5px 5px 0;
+  }
 }
 
 .right {
@@ -101,8 +145,8 @@ html {
   padding: 5px 5px 30px;
   border-left: 1px solid #444444;
   background-color: #dddddd;
-  border-radius: 0 5px 5px 0;
   position: relative;
+  border-radius: 0;
 }
 
 .labFooter,

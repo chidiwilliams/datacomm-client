@@ -6,7 +6,7 @@ import sampleMsg from '../utils/sampleMsg';
 import { encHamming } from '../utils/encode';
 import { modBPSK } from '../utils/modulate';
 import LabGroup from '../components/LabGroup';
-import ButtonCrement from './ButtonCrement';
+import ButtonCrement from '../components/ButtonCrement';
 import Bit4Input from './Bit4Input';
 import { getAWGN, addAWGN } from '../utils/impairment';
 import { demodBPSK } from '../utils/demodulate';

@@ -4,8 +4,8 @@ import getGraphParams from '../utils/getGraphParams';
 import generateWave from '../utils/generateWave';
 import defaults from '../config/defaults';
 import LabGroup from '../components/LabGroup.js';
-import ButtonSelect from './ButtonSelect';
-import ButtonCrement from './ButtonCrement';
+import ButtonSelect from '../components/ButtonSelect';
+import ButtonCrement from '../components/ButtonCrement';
 import LabInput from '../components/LabInput';
 import LabInputColumn from '../components/LabInputColumn';
 import LabInputSection from '../components/LabInputSection';
@@ -59,7 +59,9 @@ export default class SpectrometerInput extends Component {
                   component: (
                     <ButtonSelect
                       options={defaults.allWaveshapes}
-                      defaultIndex={defaults.allWaveshapes.indexOf(defaults.waveshape)}
+                      defaultIndex={defaults.allWaveshapes.indexOf(
+                        defaults.waveshape
+                      )}
                       onChange={this.handleTypeChange}
                     />
                   ),

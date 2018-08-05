@@ -31,6 +31,8 @@
   top: 8px;
   left: 50%;
   transform: translateX(-50%);
+  text-align: center;
+  width: 75%;
 }
 
 .graphYLabel {

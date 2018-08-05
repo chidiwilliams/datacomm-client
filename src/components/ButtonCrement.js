@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import './ButtonCrement.css';
-import Button from '../components/Button';
-import ButtonDisplay from '../components/ButtonDisplay';
+import Button from './Button';
+import ButtonDisplay from './ButtonDisplay';
 
 export default class ButtonCrement extends Component {
   static propTypes = {

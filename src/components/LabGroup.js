@@ -19,8 +19,12 @@ export default class LabGroup extends Component {
         <div className="specGrpLabel">{this.props.title}</div>
         <div className="specGrpTrigger">
           <Button
-            text={'>>'}
-            style={{ height: 20, width: 60 }}
+            text={'<<'}
+            style={{
+              height: 20,
+              width: 60,
+              color: this.props.selected ? '#e00000' : null,
+            }}
             selected={this.props.selected}
             animated={this.props.animated}
             onClick={(evt) => {

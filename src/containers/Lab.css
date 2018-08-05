@@ -8,10 +8,10 @@ html {
 }
 
 .header {
-  height: 30px;
   line-height: 30px;
   margin-bottom: 15px;
   display: flex;
+  flex-wrap: wrap;
 }
 
 @media (min-width: 768px) {
@@ -32,17 +32,12 @@ html {
 
 .header .labApps {
   display: flex;
+  flex-wrap: wrap;
   float: right;
   text-transform: uppercase;
   font-weight: bold;
   color: #555555;
   font-size: 14px;
-}
-
-@media (max-width: 768px) {
-  .header .labApps {
-    display: none;
-  }
 }
 
 .header .labApps button {

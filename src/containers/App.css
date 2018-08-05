@@ -36,5 +36,7 @@ img.github-ribbon {
 }
 
 @media (min-width: 768px) {
-  display: block;
+  img.github-ribbon {
+    display: block;
+  }
 }

@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import LabGraphs from '../components/LabGraphs';
-import './Lab.css';
 import defaults from '../config/defaults';
-import SpectrometerInput from './SpectrometerInput';
+import './Lab.css';
 import SimulatorInput from './SimulatorInput';
+import SpectrometerInput from './SpectrometerInput';
 
 class Lab extends Component {
   state = {
@@ -41,7 +41,7 @@ class Lab extends Component {
                     this.setState({
                       selectedApp: parseInt(
                         evt.currentTarget.id.split('lab-app-')[1],
-                        10
+                        10,
                       ),
                     });
                   }}
@@ -61,10 +61,12 @@ class Lab extends Component {
                   {this.apps[this.state.selectedApp]}
                 </div>
                 <div className="labFooter">
-                  <span style={{ marginRight: 3 }}>by</span>
-                  <a href="https://www.github.com/chidiwilliams/">
-                    Chidi Williams
-                  </a>
+                  <span style={{ marginRight: 3 }}>By Chidi Williams | </span>
+                  <span>
+                    <a href="https://www.github.com/chidiwilliams/datacomm-client">
+                      Source
+                    </a>
+                  </span>
                 </div>
                 <div className="labAppTitle">
                   {defaults.apps[this.state.selectedApp]}

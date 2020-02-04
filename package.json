@@ -6,7 +6,7 @@
     "chart.js": "^2.7.2",
     "datacomm-lab": "1.2.0",
     "react": "^16.4.1",
-    "react-dom": "^16.4.1",
+    "react-dom": "^16.4.2",
     "react-scripts": "1.1.4"
   },
   "scripts": {
